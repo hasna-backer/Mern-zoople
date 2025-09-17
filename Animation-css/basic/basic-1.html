@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		/* 1. Define the animation */
+		@keyframes colorChange {
+			from {
+				color: red;
+			}
+
+			to {
+				color: blue;
+			}
+		}
+
+		/* 2. Apply animation to element */
+		h1 {
+			animation-name: colorChange;
+			/* link to keyframes */
+			animation-duration: 3s;
+			/* time for one cycle */
+			animation-iteration-count: infinite;
+			/* repeat forever */
+			animation-direction: alternate;
+			/* go forward then backward */
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Hello CSS Animations!</h1>
+</body>
+
+</html>

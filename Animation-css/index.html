@@ -1,0 +1,39 @@
+<!-- transitions vs animations -->
+<div style="font-family:sans-serif;padding:20px;">
+	<div class="trans">Hover me (transition)</div>
+	<div class="anim">Auto animate (keyframes)</div>
+</div>
+<style>
+	.trans {
+		width: 150px;
+		height: 50px;
+		background: #f99;
+		line-height: 50px;
+		text-align: center;
+		transition: transform .4s;
+	}
+
+	.trans:hover {
+		transform: scale(1.12);
+	}
+
+	.anim {
+		width: 150px;
+		height: 50px;
+		background: #9cf;
+		margin-top: 10px;
+		line-height: 50px;
+		text-align: center;
+		animation: slide 1s ease-in-out infinite alternate;
+	}
+
+	@keyframes slide {
+		from {
+			transform: translateX(0)
+		}
+
+		to {
+			transform: translateX(30px)
+		}
+	}
+</style>
