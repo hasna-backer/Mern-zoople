@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JavaScript Variables Example</title>
+</head>
+
+<body>
+	<h2>JavaScript Variables Demo</h2>
+
+	<p id="str"></p>
+	<p id="num"></p>
+	<p id="big"></p>
+	<p id="bool"></p>
+	<p id="obj"></p>
+	<p id="arr"></p>
+
+	<script>
+		// Strings
+		let color = "Yellow";
+		let lastName = "Johnson";
+
+		// Numbers
+		let length = 16;
+		let weight = 7.5;
+
+		// Bigint
+		let big1 = 1234567890123456789012345n;
+
+		// Booleans
+		let isHappy = true;
+		let isSad = false;
+
+		// Object
+		const person = {firstName: "John", lastName: "Doe"};
+
+		// Array object
+		const cars = ["Saab", "Volvo", "BMW"];
+
+		// Displaying using getElementById
+		document.getElementById("str").innerHTML = "Strings: " + color + ", " + lastName;
+		document.getElementById("num").innerHTML = "Numbers: " + length + " and " + weight;
+		document.getElementById("big").innerHTML = "BigInt: " + big1;
+		document.getElementById("bool").innerHTML = "Booleans: " + isHappy + ", " + isSad;
+		document.getElementById("obj").innerHTML = "Object: " + person.firstName + " " + person.lastName;
+		document.getElementById("arr").innerHTML = "Cars: " + cars.join(", ");
+	</script>
+</body>
+
+</html>

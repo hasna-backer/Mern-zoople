@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Type Conversion Example</title>
+</head>
+
+<body>
+	<h2>Type Conversion Example</h2>
+
+	<script>
+		// Implicit Conversion
+		document.write("<b>Implicit Conversion:</b><br>");
+		document.write('"5" + 2 = ' + ("5" + 2) + "<br>");
+		document.write('"5" - 2 = ' + ("5" - 2) + "<br>");
+		document.write('"10" * "2" = ' + ("10" * "2") + "<br>");
+		document.write('"10" / 2 = ' + ("10" / 2) + "<br><br>");
+
+		// Explicit Conversion
+		document.write("<b>Explicit Conversion:</b><br>");
+		document.write("Number('123') = " + Number("123") + "<br>");
+		document.write("parseInt('123.45') = " + parseInt("123.45") + "<br>");
+		document.write("parseFloat('123.45') = " + parseFloat("123.45") + "<br>");
+		document.write("String(100) = " + String(100) + "<br>");
+		document.write("(100).toString() = " + (100).toString() + "<br><br>");
+
+		// Boolean Conversion
+		document.write("<b>Boolean Conversion:</b><br>");
+		document.write("Boolean(1) = " + Boolean(1) + "<br>");
+		document.write("Boolean(0) = " + Boolean(0) + "<br>");
+		document.write("Boolean('') = " + Boolean("") + "<br>");
+		document.write("Boolean('Hello') = " + Boolean("Hello") + "<br>");
+	</script>
+</body>
+
+</html>
