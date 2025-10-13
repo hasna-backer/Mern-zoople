@@ -14,7 +14,7 @@ console.log("a ** b =", a ** b); // 1000 (10^3)
 // 2. Assignment Operators
 let x = 5;
 console.log("\nAssignment Operators:");
-x += 2; // x = x + 2
+x += 2;  // x = x + 2
 console.log("x += 2 →", x); // 7
 x -= 2; // x = x - 2
 console.log("x -= 2 →", x); // 5
@@ -43,7 +43,9 @@ console.log("p && q →", p && q); // false
 console.log("p || q →", p || q); // true
 console.log("!p →", !p);         // false
 
-// 5. Unary Operators
+// 5. Unary Operators 
+
+
 let num = 5;
 console.log("\nUnary Operators:");
 console.log("+num →", +num); // 5

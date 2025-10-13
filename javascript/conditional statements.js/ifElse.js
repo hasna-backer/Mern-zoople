@@ -5,3 +5,11 @@ if (age >= 18) {
 } else {
   console.log("You cannot vote");
 }
+
+if(condition){
+  true
+}else{
+  kfjhsldkfhsdk
+  fjkhsbdfkjsgd
+  dfkjsdkfjds
+}

@@ -1,7 +1,7 @@
 let fruits = ["apple", "banana", "mango"];
 
-for (let fruit of fruits) {
-  console.log(fruit);
+for (let i of fruits) {
+  console.log(i);
 }
 
 //for in
