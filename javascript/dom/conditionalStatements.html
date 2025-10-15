@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>JS Basics in HTML</title>
+</head>
+
+<body>
+	<h1>JavaScript Basics Demo</h1>
+
+	<!-- Output areas -->
+
+	<p id="operatorOutput"></p>
+	<p id="conditionOutput"></p>
+
+	<script>
+
+		let num1 = 10;
+		let num2 = 5;
+		let sum = num1 + num2;
+		let product = num1 * num2;
+		let isGreater = num1 > num2;
+
+		document.getElementById("operatorOutput").innerText =
+			"Sum = " + sum + ", Product = " + product + ", Is num1 > num2? " + isGreater;
+
+		// -----------------------------
+		// 3️⃣ CONDITIONAL STATEMENTS
+		// -----------------------------
+		let marks = 75;
+		let result = "";
+
+		if (marks >= 80) {
+			result = "Excellent!";
+		} else if (marks >= 50) {
+			result = "Good job!";
+		} else {
+			result = "Needs improvement.";
+		}
+
+		document.getElementById("conditionOutput").innerText =
+			"Your marks: " + marks + " → " + result;
+	</script>
+</body>
+
+</html>

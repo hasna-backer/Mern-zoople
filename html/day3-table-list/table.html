@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tables</title>
+</head>
+
+<body>
+	<h1> Tables</h1>
+
+
+
+	<!-- ===== Tables ===== -->
+	<h2>Table Example: Favorite Books</h2>
+	<table border="1" cellpadding="8" cellspacing="2">
+		<caption>My Favorite Books</caption>
+		<tr>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Year</th>
+		</tr>
+		<tr>
+			<td>The Alchemist</td>
+			<td>Paulo Coelho</td>
+			<td>1988</td>
+		</tr>
+		<tr>
+			<td>1984</td>
+			<td>George Orwell</td>
+			<td>1949</td>
+		</tr>
+		<tr>
+			<td>Harry Potter Series</td>
+			<td>J.K. Rowling</td>
+			<td>1997-2007</td>
+		</tr>
+	</table>
+
+	<h2>Table Rowspan</h2>
+	<table border="1" cellpadding="10">
+		<tr>
+			<th>Name</th>
+			<th>Age</th>
+		</tr>
+		<tr>
+			<td>Ajay</td>
+			<!-- This cell will take up space on 
+                    two rows -->
+			<td rowspan="2">24</td>
+		</tr>
+		<tr>
+			<td>Priya</td>
+		</tr>
+	</table>
+
+	<h2>Table with Colspan</h2>
+	<table border="1" cellpadding="10">
+		<tr>
+			<th>Name</th>
+			<th>Expense</th>
+		</tr>
+		<tr>
+			<td>Arun</td>
+			<td>$10</td>
+		</tr>
+		<tr>
+			<td>Priya</td>
+			<td>$8</td>
+		</tr>
+
+		<tr>
+
+			<td colspan="2">Sum: $18</td>
+		</tr>
+	</table>
+</body>
+
+</html>
