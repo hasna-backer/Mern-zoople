@@ -1,0 +1,25 @@
+/* External CSS example */
+
+body {
+	font-family: Arial, sans-serif;
+	background-color: #faf8fa;
+	padding: 20px;
+	color: #333;
+  }
+  
+  h1 {
+	color: darkgreen;
+	text-align: center;
+	text-decoration: underline;
+  }
+  
+  /* Targeting class "external" */
+  .external {
+	color: white;
+	background-color: #007bff;
+	padding: 10px;
+	border-radius: 5px;
+	font-weight: bold;
+	text-align: center;
+  }
+  

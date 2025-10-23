@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contact Us Form - Complete</title>
+</head>
+
+<body>
+	<h1>📞 Contact Us Form</h1>
+	<form action="#" method="post">
+		<fieldset>
+			<legend>Contact Us</legend>
+
+			<!-- Text Input -->
+			<label for="contactname">Full Name:</label><br>
+			<input type="text" id="contactname" placeholder="Enter your name" required>
+			<br><br>
+
+			<!-- Email Input -->
+			<label for="contactemail">Email:</label><br>
+			<input type="email" id="contactemail" placeholder="your@email.com" required>
+			<br><br>
+
+			<!-- Password Input -->
+			<label for="password">Password (for registered users):</label><br>
+			<input type="password" id="password" placeholder="Enter your password">
+			<br><br>
+
+			<!-- Number Input -->
+			<label for="contactphone">Phone Number:</label><br>
+			<input type="number" id="contactphone" placeholder="Enter your phone number">
+			<br><br>
+
+			<!-- Date Input -->
+			<label for="dob">Preferred Contact Date:</label><br>
+			<input type="date" id="dob">
+			<br><br>
+
+			<!-- Radio Buttons -->
+			<p>How did you hear about us?</p>
+			<input type="radio" id="social" name="source" value="Social Media">
+			<label for="social">Social Media</label><br>
+			<input type="radio" id="friend" name="source" value="Friend">
+			<label for="friend">Friend</label><br>
+			<input type="radio" id="ad" name="source" value="Advertisement">
+			<label for="ad">Advertisement</label><br><br>
+
+			<!-- Checkboxes -->
+			<p>Topics you are interested in:</p>
+			<input type="checkbox" id="web" name="topics" value="Web Development">
+			<label for="web">Web Development</label><br>
+
+			<input type="checkbox" id="design" name="topics" value="Design">
+			<label for="design">Design</label><br>
+
+			<input type="checkbox" id="marketing" name="topics" value="Marketing">
+			<label for="marketing">Marketing</label><br><br>
+
+			<!-- File Upload -->
+			<label for="attachment">Attach a file (optional):</label><br>
+			<input type="file" id="attachment">
+			<br><br>
+
+			<!-- Dropdown Menu -->
+			<label for="reason">Reason for Contact:</label><br>
+			<select id="reason" required>
+				<option value="">-- Select Reason --</option>
+				<option>Feedback</option>
+				<option>Support</option>
+				<option>General Inquiry</option>
+				<option>Partnership</option>
+			</select>
+			<br><br>
+
+			<!-- Textarea -->
+			<label for="message">Your Message:</label><br>
+			<textarea id="message" rows="5" cols="40" placeholder="Write your message here..." required></textarea>
+			<br><br>
+
+			<!-- Terms Checkbox -->
+			<label>
+				<input type="checkbox" required> I agree to the terms and conditions.
+			</label>
+			<br><br>
+
+			<!-- Submit Button -->
+			<input type="submit" value="Send Message">
+		</fieldset>
+	</form>
+</body>
+
+</html>

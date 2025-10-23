@@ -1,0 +1,14 @@
+/* 🔹 External CSS - applies to the whole page */
+
+body {
+	background-color: #faf3e0;
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	color: #333;
+	padding: 20px;
+	line-height: 1.6;
+  }
+  
+  p {
+	font-size: 18px;
+  }
+  

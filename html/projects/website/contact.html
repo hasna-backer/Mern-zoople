@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact | My Website</title>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+</head>
+
+<body>
+  <header>
+    <h1>Contact Us</h1>
+    <nav>
+      <a href="index.html">Home</a> |
+      <a href="about.html">About</a> |
+      <a href="gallery.html">Gallery</a> |
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  <main>
+    <h2>Get in Touch</h2>
+    <form action="#" method="post">
+      <fieldset>
+        <legend>Contact Form</legend>
+        <label for="name">Full Name:</label><br>
+        <input type="text" id="name" placeholder="Enter your name" required><br><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" placeholder="you@example.com" required><br><br>
+        <label for="phone">Phone:</label><br>
+        <input type="number" id="phone" placeholder="Your phone number"><br><br>
+        <p>Contact Reason:</p>
+        <input type="radio" id="feedback" name="reason" value="Feedback">
+        <label for="feedback">Feedback</label>
+        <input type="radio" id="support" name="reason" value="Support">
+        <label for="support">Support</label>
+        <br><br>
+        <p>Subscribe to updates:</p>
+        <input type="checkbox" id="subscribe" value="Yes">
+        <label for="subscribe">Yes, send me updates</label><br><br>
+        <label for="message">Message:</label><br>
+        <textarea id="message" rows="5" cols="40" placeholder="Write your message..."></textarea><br><br>
+        <input type="submit" value="Send">
+      </fieldset>
+    </form>
+  </main>
+  <footer>
+    <p>&copy; 2025 My Website</p>
+  </footer>
+</body>
+
+</html>

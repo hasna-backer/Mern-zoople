@@ -1,0 +1,43 @@
+/* =========================
+   BASIC CSS SELECTORS DEMO
+   ========================= */
+
+/* 1️⃣ Universal Selector */
+* {
+	font-family: Arial, sans-serif;
+	margin: 5px;
+	padding: 5px;
+	box-sizing: border-box;
+  }
+  
+  /* 2️⃣ Type (Element) Selector */
+  p {
+	color: darkslategray;
+	font-size: 16px;
+	background-color: #f0f0f0;
+	border-left: 4px solid #aaa;
+	padding: 8px;
+  }
+  
+  /* 3️⃣ Class Selector */
+  .highlight {
+	background-color: #fff3cd;   /* Light yellow background */
+	border-left: 4px solid #ffca28;
+	color: #856404;
+	font-weight: bold;
+  }
+  
+  /* 4️⃣ ID Selector */
+  #unique {
+	background-color: #e3f2fd;   /* Light blue background */
+	border-left: 4px solid #2196f3;
+	color: #0d47a1;
+	font-style: italic;
+  }
+  
+  /* 5️⃣ Group Selector */
+  h1, h2 ,p{
+	color: #2c3e50;
+	text-align: center;
+  }
+  

@@ -30,23 +30,32 @@
 	<h3>Schedule Table</h3>
 	<table border="1" cellpadding="6" cellspacing="2">
 		<caption>Weekly Routine</caption>
+
 		<tr>
 			<th>Day</th>
 			<th>Morning</th>
 			<th>Afternoon</th>
 			<th>Evening</th>
 		</tr>
+
 		<tr>
-			<td>Monday</td>
+			<td rowspan="2">Monday & Tuesday</td>
 			<td><a href="https://www.youtube.com/watch?v=123456">Math</a></td>
 			<td>English</td>
 			<td>Basketball</td>
 		</tr>
+
 		<tr>
-			<td>Tuesday</td>
+			<!-- The first cell is merged with the one above using rowspan -->
 			<td>Science</td>
 			<td>Art</td>
 			<td>Music</td>
+		</tr>
+
+		<tr>
+			<td>Wednesday</td>
+			<td colspan="2">Project Work (Morning + Afternoon)</td>
+			<td>Dance</td>
 		</tr>
 	</table>
 </body>

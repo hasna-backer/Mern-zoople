@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Display Numbers</title>
+</head>
+
+<body>
+	<h2>Display Numbers from 1 to N</h2>
+	<input id="num" type="number" placeholder="Enter N">
+	<button onclick="showNumbers()">Show</button>
+	<p id="output"></p>
+
+	<script>
+		function showNumbers() {
+			let n = Number(document.getElementById("num").value);
+			let result = "";
+			for (let i = 1; i <= n; i++) {
+				result += i + " ";
+			}
+			document.getElementById("output").innerText = result;
+		}
+	</script>
+</body>
+
+</html>

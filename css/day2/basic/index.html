@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>CSS Day 1 - Basics</title>
+
+	<!-- 🔹 External CSS link -->
+	<link rel="stylesheet" href="style.css">
+
+	<!-- 🔹 Internal CSS -->
+	<style>
+		/* Internal CSS example */
+		h2 {
+			color: teal;
+			text-align: center;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Welcome to CSS Basics</h1>
+	<h2>How CSS Works</h2>
+
+	<p style="color: orange; font-size: 18px;">
+		<!-- 🔹 Inline CSS -->
+		This paragraph uses <strong>inline CSS</strong>.
+	</p>
+
+	<p class="intro">
+		CSS (Cascading Style Sheets) controls the <em>presentation</em> and
+		<em>style</em> of your HTML elements.
+	</p>
+
+	<hr>
+
+	<h3>🎨 Colors in CSS</h3>
+	<div class="color-demo named">Named Color (red)</div>
+	<div class="color-demo hex">HEX Color (#3498db)</div>
+	<div class="color-demo rgb">RGB Color (rgb(46, 204, 113))</div>
+	<div class="color-demo rgba">RGBA Color (rgba(231, 76, 60, 0.6))</div>
+	<div class="color-demo hsl">HSL Color (hsl(45, 100%, 50%))</div>
+
+	<hr>
+
+	<h3>📏 CSS Units Demo</h3>
+	<div class="unit-demo px">Width: 200px</div>
+	<div class="unit-demo percent">Width: 50%</div>
+	<div class="unit-demo em">Font-size: 2em</div>
+	<div class="unit-demo rem">Font-size: 2rem</div>
+	<div class="unit-demo vh">Height: 20vh</div>
+	<div class="unit-demo vw">Width: 40vw</div>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Sum of Array</title>
+</head>
+
+<body>
+	<h2>Sum of Numbers in an Array</h2>
+	<button onclick="sumArray()">Calculate Sum</button>
+	<p id="output"></p>
+
+	<script>
+		let numbers = [5, 10, 15, 20]; // predefined array
+
+		function sumArray() {
+			let sum = 0;
+			for (let i = 0; i < numbers.length; i++) {
+				sum += numbers[i];
+			}
+			document.getElementById("output").innerText = "Sum = " + sum;
+		}
+	</script>
+</body>
+
+</html>

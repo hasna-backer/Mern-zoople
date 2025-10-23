@@ -1,0 +1,47 @@
+/* General page style */
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f5f7fa;
+	text-align: center;
+	padding: 50px;
+  }
+  
+  /* Headline */
+  h1 {
+	color: #333;
+	margin-bottom: 40px;
+  }
+  
+  /* Card styling */
+  .card {
+	width: 300px;
+	min-height: 150px;
+	max-width: 90%;
+	background-color: white;
+	margin: 0 auto; /* centers horizontally */
+	padding: 20px;
+  
+	border-width: 3px;
+	border-style: solid;
+	border-color: #007bff;
+	border-radius: 15px;
+  
+	box-sizing: border-box; /* includes padding + border in total width */
+  
+	outline: 3px dashed #ff9f43; /* temporary visual aid */
+	outline-offset: 5px; /* gap between outline and border */
+  
+	box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  
+  /* Optional text inside card */
+  .card h2 {
+	margin-bottom: 10px;
+	color: #007bff;
+  }
+  
+  .card p {
+	color: #444;
+	line-height: 1.5;
+  }
+  

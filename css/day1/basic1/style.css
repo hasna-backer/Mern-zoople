@@ -1,0 +1,52 @@
+/* 1. Page base styles */
+body {
+	font-family: 'Poppins', sans-serif;
+	background-color: #fdfdfd;
+	color: #333;
+	line-height: 1.6;
+	margin: 40px;
+	text-align: left;
+  }
+  
+  /* 2. Headings */
+  h1 {
+	color: #2b4eff;
+	font-size: 40px;
+	font-weight: 700;
+	text-align: center;
+	text-transform: uppercase;
+	text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  }
+  
+  h2 {
+	color: #555;
+	font-size: 28px;
+	font-style: italic;
+	letter-spacing: 2px;
+	text-decoration: underline;
+	text-align: center;
+  }
+  
+  /* 3. Paragraph styles */
+  .intro {
+	font-size: 18px;
+	color: #444;
+	letter-spacing: 0.5px;
+	line-height: 1.8;
+  }
+  
+  .quote {
+	font-style: italic;
+	color: #0066cc;
+	text-align: center;
+	font-weight: 500;
+	text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+  }
+  
+  .content {
+	font-size: 17px;
+	color: #222;
+	text-transform: capitalize;
+	text-align: justify;
+  }
+  
