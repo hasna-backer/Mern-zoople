@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1" />
+	<title>CSS Box Model — Interactive Lesson</title>
+	<style>
+		:root {
+			--bg: #f7fafc;
+			--card: #fff;
+			--muted: #6b7280;
+			--accent: #2563eb
+		}
+
+		body {
+			font-family: system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial;
+			margin: 0;
+			background: var(--bg);
+			color: #111
+		}
+
+		.wrap {
+			max-width: 900px;
+			margin: 30px auto;
+			padding: 20px
+		}
+
+		header {
+			display: flex;
+			align-items: center;
+			gap: 18px
+		}
+
+		h1 {
+			margin: 0;
+			font-size: 26px
+		}
+
+		p.lead {
+			margin: 6px 0 18px;
+			color: var(--muted)
+		}
+
+		.grid {
+			display: grid;
+			grid-template-columns: 1fr 360px;
+			gap: 18px
+		}
+
+		.card {
+			background: var(--card);
+			padding: 16px;
+			border-radius: 12px;
+			box-shadow: 0 6px 18px rgba(15, 23, 42, 0.06)
+		}
+
+		/* Demo box area */
+		.stage {
+			min-height: 260px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background: linear-gradient(0deg, #ffffff 0%, #fbfdff 100%);
+			border-radius: 8px
+		}
+
+		/* the box we manipulate */
+		.demo-box {
+			background: #fee2e2;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			transition: all .2s ease
+		}
+
+		.demo-label {
+			font-weight: 700;
+			margin-bottom: 6px
+		}
+
+		.hint {
+			font-size: 12px;
+			color: var(--muted)
+		}
+
+		/* overlay visual helpers for padding/border/margin */
+		.overlay {
+			position: relative
+		}
+
+		.overlay::before {
+			content: 'margin';
+			position: absolute;
+			left: -100%;
+			top: -100%;
+			width: 100%;
+			height: 100%;
+			display: none
+		}
+
+		/* controls */
+		.controls label {
+			display: block;
+			font-size: 13px;
+			color: var(--muted);
+			margin-top: 10px
+		}
+
+		.controls input[type=range] {
+			width: 100%
+		}
+
+		.controls select,
+		.controls input[type=number] {
+			width: 100%;
+			padding: 6px;
+			border-radius: 6px;
+			border: 1px solid #e6edf3;
+			margin-top: 6px
+		}
+
+		.computed {
+			font-family: monospace;
+			background: #0f172a;
+			color: #fff;
+			padding: 8px;
+			border-radius: 6px;
+			margin-top: 12px
+		}
+
+		footer {
+			margin-top: 18px;
+			font-size: 13px;
+			color: var(--muted)
+		}
+
+		/* small responsive */
+		@media (max-width:980px) {
+			.grid {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="wrap">
+		<header>
+			<div>
+				<h1>CSS Box Model — Interactive Lesson</h1>
+				<p class="lead">Visualize content, padding, border and margin. Change values and toggle
+					<code>box-sizing</code>.</p>
+			</div>
+		</header>
+
+		<div class="grid">
+			<!-- left: live demo -->
+			<section class="card">
+				<h2 style="margin:0 0 10px">Live demo</h2>
+				<div class="stage" id="stage">
+					<div id="marginWrap" style="padding:20px;background:transparent">
+						<div id="borderWrap" style="border:6px dashed rgba(37,99,235,0.18);padding:0">
+							<div id="paddingWrap" style="padding:20px;background:transparent">
+								<div id="demo" class="demo-box"
+									style="width:160px;height:100px;box-sizing:content-box;">
+									<div class="demo-label">Content</div>
+									<div class="hint">Change controls on the right</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div style="margin-top:12px;font-size:14px">
+					<strong>What you see:</strong>
+					<ul style="margin:8px 0 0;padding-left:18px;color:var(--muted)">
+						<li><strong>Content</strong> — the area for text/children (the red rectangle).</li>
+						<li><strong>Padding</strong> — space inside the border between content and border.</li>
+						<li><strong>Border</strong> — the line surrounding padding + content.</li>
+						<li><strong>Margin</strong> — the transparent space around the border.</li>
+					</ul>
+				</div>
+
+				<div class="computed" id="computed">Computed: width: -- px · padding-left: -- px · border-left-width: --
+					px · margin-left: -- px</div>
+
+				<footer>
+					Tip: switch <code>box-sizing</code> to <code>border-box</code> to make the width include padding &
+					border.
+				</footer>
+			</section>
+
+			<!-- right: controls -->
+			<aside class="card controls">
+				<h3 style="margin:0 0 8px">Controls</h3>
+
+				<label>Content width (px)
+					<input id="width" type="range" min="40" max="600" value="160">
+				</label>
+				<label>Content height (px)
+					<input id="height" type="range" min="20" max="400" value="100">
+				</label>
+
+				<label>Padding (px)
+					<input id="padding" type="range" min="0" max="80" value="20">
+				</label>
+
+				<label>Border width (px)
+					<input id="border" type="range" min="0" max="40" value="6">
+				</label>
+
+				<label>Margin (px)
+					<input id="margin" type="range" min="0" max="120" value="20">
+				</label>
+
+				<label>Box-sizing
+					<select id="boxSizing">
+						<option value="content-box">content-box</option>
+						<option value="border-box">border-box</option>
+					</select>
+				</label>
+
+				<label>Border style
+					<select id="borderStyle">
+						<option>solid</option>
+						<option>dashed</option>
+						<option>dotted</option>
+						<option>double</option>
+						<option>none</option>
+					</select>
+				</label>
+
+				<label>Border color
+					<input id="borderColor" type="color" value="#2563eb" style="margin-top:6px">
+				</label>
+
+				<div style="margin-top:12px">
+					<button id="reset"
+						style="padding:8px 12px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer">Reset</button>
+				</div>
+
+				<div style="margin-top:14px">
+					<strong>Exercises</strong>
+					<ol style="padding-left:18px;color:var(--muted)">
+						<li>Set width to 200, padding 20, border 10. What is total width with <code>content-box</code>?
+						</li>
+						<li>Toggle to <code>border-box</code>. How does the total width change?</li>
+						<li>Set margin to 40 and observe spacing from nearby elements.</li>
+					</ol>
+					<button id="showAnswers"
+						style="margin-top:8px;padding:6px 10px;border-radius:8px;border:1px solid #e6edf3;background:transparent;cursor:pointer">Show
+						answers</button>
+					<div id="answers" style="display:none;margin-top:8px;color:var(--muted);font-size:13px">
+						<strong>Answers:</strong>
+						<ul>
+							<li>content-box: total width = content width + 2×padding + 2×border = 200 + 40 + 20 = 260px.
+							</li>
+							<li>border-box: total width = 200px — padding and border are included inside the 200px.
+							</li>
+							<li>Margin does not affect the element's box but adds space outside it (separates from
+								neighbours).</li>
+						</ul>
+					</div>
+				</div>
+
+			</aside>
+		</div>
+
+		<section style="margin-top:18px" class="card">
+			<h3 style="margin:0 0 10px">Lesson notes (for instructors)</h3>
+			<ul style="color:var(--muted)">
+				<li>Start by showing the red "Content" area and explain the content box.</li>
+				<li>Increase padding: ask students what happens to visual space inside the border.</li>
+				<li>Change border width/style and show how it sits around padding/content.</li>
+				<li>Switch <code>box-sizing</code> and explain the difference in how width is interpreted.</li>
+				<li>Give the exercises in the control column and ask students to compute expected total widths before
+					verifying with the demo.</li>
+			</ul>
+		</section>
+
+	</div>
+
+	<script>
+		// quick helpers
+		const el = id => document.getElementById(id);
+		const demo = el('demo');
+		const widthIn = el('width');
+		const heightIn = el('height');
+		const paddingIn = el('padding');
+		const borderIn = el('border');
+		const marginIn = el('margin');
+		const boxSizingSel = el('boxSizing');
+		const borderStyleSel = el('borderStyle');
+		const borderColorInp = el('borderColor');
+		const borderWrap = el('borderWrap');
+		const paddingWrap = el('paddingWrap');
+		const marginWrap = el('marginWrap');
+		const computed = el('computed');
+
+		function update() {
+			const w = +widthIn.value;
+			const h = +heightIn.value;
+			const p = +paddingIn.value;
+			const b = +borderIn.value;
+			const m = +marginIn.value;
+			const bs = boxSizingSel.value;
+			const bstyle = borderStyleSel.value;
+			const bcolor = borderColorInp.value;
+
+			demo.style.boxSizing = bs;
+			// set content size directly on demo (this represents 'width' css)
+			demo.style.width = w + 'px';
+			demo.style.height = h + 'px';
+
+			paddingWrap.style.padding = p + 'px';
+			borderWrap.style.borderWidth = b + 'px';
+			borderWrap.style.borderStyle = bstyle;
+			borderWrap.style.borderColor = bcolor;
+			marginWrap.style.padding = m + 'px'; // using padding on wrapper to visualize margin
+
+			// compute values from getComputedStyle to show realistic numbers
+			const cs = getComputedStyle(demo);
+			const mc = getComputedStyle(borderWrap);
+			const out = `Computed: width: ${Math.round(parseFloat(cs.width))}px · padding-left: ${Math.round(parseFloat(cs.paddingLeft))}px · border-left-width: ${Math.round(parseFloat(mc.borderLeftWidth))}px · margin-left (visual): ${m}px`;
+			computed.textContent = out;
+		}
+
+		// wire events
+		[widthIn, heightIn, paddingIn, borderIn, marginIn, boxSizingSel, borderStyleSel, borderColorInp].forEach(i => i.addEventListener('input', update));
+		document.getElementById('reset').addEventListener('click', () => {
+			widthIn.value = 160; heightIn.value = 100; paddingIn.value = 20; borderIn.value = 6; marginIn.value = 20; boxSizingSel.value = 'content-box'; borderStyleSel.value = 'dashed'; borderColorInp.value = '#2563eb'; update();
+		});
+
+		document.getElementById('showAnswers').addEventListener('click', () => {
+			const a = document.getElementById('answers');
+			a.style.display = a.style.display === 'none' ? 'block' : 'none';
+		});
+
+		update();
+	</script>
+</body>
+
+</html>
