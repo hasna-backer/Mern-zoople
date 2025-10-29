@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Inline CSS - Backgrounds, Gradients & Shadows</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 20px; line-height: 1.6;">
+
+	<h1 style="text-align:center; color:#2c3e50; margin-bottom:30px;">
+		🌈 CSS Backgrounds, Gradients & Shadows (Inline CSS)
+	</h1>
+
+	<!-- 1️⃣ Background Properties -->
+	<section>
+		<h2>Background Properties</h2>
+
+		<div
+			style="background-color:#3498db; padding:30px; margin:15px 0; color:white; text-align:center; border-radius:8px;">
+			Background Color
+		</div>
+
+		<div
+			style="background-image:url('https://picsum.photos/300/200'); background-size:cover; background-position:center; padding:30px; margin:15px 0; color:white; text-align:center; border-radius:8px;">
+			Background Image
+		</div>
+
+		<div
+			style="background-image:url('https://picsum.photos/100/100'); background-repeat:repeat; background-size:100px; color:black; padding:30px; margin:15px 0; text-align:center; border-radius:8px;">
+			Background Repeat
+		</div>
+
+		<div
+			style="background-image:url('https://picsum.photos/300/200'); background-repeat:no-repeat; background-size:contain; background-position:right center; padding:30px; margin:15px 0; color:black; border-radius:8px; text-align:center;">
+			Background Position & Size
+		</div>
+
+		<div
+			style="background-image:url('https://picsum.photos/400/300'); background-attachment:fixed; background-size:cover; background-position:center; color:white; padding:30px; margin:15px 0; text-align:center; border-radius:8px;">
+			Background Attachment (Fixed)
+		</div>
+	</section>
+
+	<!-- 2️⃣ Gradients -->
+	<section>
+		<h2>Gradients</h2>
+
+		<div
+			style="background:linear-gradient(45deg, #ff7e5f, #feb47b); padding:40px; margin:15px 0; color:white; font-weight:bold; text-align:center; border-radius:8px;">
+			Linear Gradient
+		</div>
+
+		<div
+			style="background:radial-gradient(circle, #6a11cb, #2575fc); padding:40px; margin:15px 0; color:white; font-weight:bold; text-align:center; border-radius:8px;">
+			Radial Gradient
+		</div>
+	</section>
+
+	<!-- 3️⃣ Shadows -->
+	<section>
+		<h2>Shadows</h2>
+
+		<div
+			style="background-color:#fff; color:#333; padding:30px; text-align:center; border-radius:10px; box-shadow:0 8px 15px rgba(0,0,0,0.3); width:250px; margin:20px auto;">
+			Box Shadow Example
+		</div>
+
+		<p
+			style="text-align:center; font-size:24px; font-weight:bold; color:#2c3e50; text-shadow:2px 2px 5px rgba(255,0,0,0.5);">
+			Text Shadow Example
+		</p>
+	</section>
+
+	<!-- 4️⃣ Opacity & Transparency -->
+	<section>
+		<h2>Opacity & Transparency</h2>
+
+		<div
+			style="background-color:rgba(255,99,71,0.7); color:white; padding:40px; text-align:center; border-radius:8px; opacity:0.5;">
+			Opacity 0.5
+		</div>
+	</section>
+
+	<!-- 5️⃣ CSS Filters -->
+	<section>
+		<h2>CSS Filters</h2>
+
+		<img src="https://picsum.photos/300/200" alt="Example Image" style="display:block; margin:20px auto; width:300px; border-radius:10px; 
+                filter:brightness(90%) contrast(120%) saturate(120%) drop-shadow(5px 5px 10px rgba(0,0,0,0.3));">
+	</section>
+
+</body>
+
+</html>

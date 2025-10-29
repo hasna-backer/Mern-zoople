@@ -1,0 +1,129 @@
+/* ---------- General Page Styles ---------- */
+body {
+	font-family: Arial, sans-serif;
+	background-color: #f9f9f9;
+	margin: 20px;
+	line-height: 1.6;
+  }
+  
+  h1 {
+	text-align: center;
+	color: #2c3e50;
+	margin-bottom: 30px;
+  }
+  
+  section {
+	margin-bottom: 50px;
+  }
+  
+  /* ---------- 1️⃣ Background Properties ---------- */
+  .background-section div {
+	padding: 50px;
+	margin: 15px 0;
+	color: white;
+	text-align: center;
+	border-radius: 8px;
+	font-weight: bold;
+  }
+  
+  /* Background color */
+  .bg-color {
+	background-color: #3498db;
+  }
+  
+  /* Background image */
+  .bg-image {
+	background-image: url('bg.png');
+	/* background-size: cover;
+	background-position: center; */
+  }
+  
+  /* Background repeat */
+  .bg-repeat {
+	background-image: url('bg.png');
+	background-repeat: repeat;
+	color: black;
+	background-size: 100px;
+  }
+  
+  /* Background position & size */
+  .bg-position {
+	background-image: url('bg.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: right center;
+  }
+  
+  /* Background attachment: fixed */
+  .bg-fixed {
+	background-image: url('bg.png');
+	background-attachment: fixed;
+	background-size: cover;
+	background-position: center;
+  }
+  
+  /* ---------- 2️⃣ Gradients ---------- */
+  .gradient-section div {
+	padding: 40px;
+	margin: 15px 0;
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	border-radius: 8px;
+  }
+  
+  /* Linear Gradient */
+  .linear-gradient {
+	background: linear-gradient(90deg, #f34013, #1846df);
+  }
+  
+  /* Radial Gradient */
+  .radial-gradient {
+	background: radial-gradient(circle, #b3069b, #085ae7);
+  }
+  
+  /* ---------- 3️⃣ Shadows ---------- */
+  .box-shadow {
+	background-color: #ffffff;
+	color: #333;
+	padding: 30px;
+	text-align: center;
+	border-radius: 10px;
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+	width: 250px;
+	margin: auto;
+  }
+  
+  .text-shadow {
+	text-align: center;
+	font-size: 24px;
+	font-weight: bold;
+	color: #2c3e50;
+	text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.5);
+  }
+  
+  /* ---------- 4️⃣ Opacity & Transparency ---------- */
+  .opacity-demo {
+	background-color: rgba(243, 58, 26, 0.7); /* tomato with transparency */
+	color: white;
+	padding: 40px;
+	text-align: center;
+	border-radius: 8px;
+	opacity: 0.3;
+  }
+  
+  /* ---------- 5️⃣ CSS Filters ---------- */
+  /* .filter-demo {
+	display: block;
+	margin: 20px auto;
+	width: 300px;
+	border-radius: 10px;
+	filter: brightness(90%) contrast(120%) saturate(120%) drop-shadow(5px 5px 10px rgba(0,0,0,0.3));
+	transition: filter 0.5s;
+  }
+  
+  /* Hover effect for interactivity */
+  .filter-demo:hover {
+	filter: blur(2px) brightness(110%);
+  } */
+  

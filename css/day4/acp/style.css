@@ -1,0 +1,81 @@
+/* 🍩 My Favorite Food Card Project */
+
+body {
+	font-family: 'Poppins', sans-serif;
+	background: linear-gradient(135deg, #f6d365, #fda085);
+	/* margin: 0; */
+	height: 900px;
+	padding: 40px;
+	text-align: center;
+  }
+  
+  h1 {
+	color: #2c3e50;
+	text-shadow: 2px 2px 5px rgba(255, 255, 255, 0.7);
+	margin-bottom: 40px;
+  }
+  
+  /* ----- Food Card ----- */
+  .food-card {
+	width: 320px;
+	margin: auto;
+	border-radius: 15px;
+	overflow: hidden;
+	background-color: white;
+	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  /* Hover effect */
+  .food-card:hover {
+	transform: translateY(-8px);
+	box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* ----- Food Image ----- */
+  .food-image {
+	background-image: url('food.jpg');
+	background-size: cover;
+	background-position: center;
+	height: 200px;
+	filter: brightness(90%) contrast(110%);
+	transition: filter 0.5s;
+  }
+  
+  .food-image:hover {
+	filter: brightness(110%) saturate(130%) blur(1px);
+  }
+  
+  /* ----- Info Section ----- */
+  .food-info {
+	padding: 20px;
+  }
+  
+  .food-info h2 {
+	color: #e67e22;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .food-info p {
+	color: #555;
+	opacity: 0.9;
+	margin: 10px 0 20px;
+  }
+  
+  /* ----- Button ----- */
+  button {
+	background: linear-gradient(45deg, #e67e22, #f39c12);
+	border: none;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 20px;
+	cursor: pointer;
+	box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+	transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  button:hover {
+	transform: scale(1.05);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+  }
+  

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Block vs Inline vs Inline-block</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background: #f9f9f9;
+			text-align: center;
+			padding: 30px;
+		}
+
+		h2 {
+			color: #333;
+			margin-top: 40px;
+		}
+
+		/* Common box styles */
+		.box {
+			border: 2px solid black;
+			background-color: lightblue;
+			margin: 5px;
+			padding: 10px;
+		}
+
+		/* Different display types */
+		.block {
+			display: block;
+		}
+
+		.inline {
+			display: inline;
+			background-color: lightcoral;
+		}
+
+		inline-block;
+		inline-block;
+
+		.inline-block {
+			display: inline-block;
+			width: 100px;
+			height: 60px;
+			background-color: lightgreen;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>Block, Inline & Inline-block Elements</h1>
+
+	<h2>1️⃣ Block Elements</h2>
+	<div class="box block">Block 1</div>
+	<div class="box block">Block 2</div>
+	<div class="box block">Block 3</div>
+	<p>👉 Each block starts on a new line and takes full width.</p>
+
+	<h2>2️⃣ Inline Elements</h2>
+	<span class="box inline">Inline 1</span>
+	<span class="box inline">Inline 2</span>
+	<span class="box inline">Inline 3</span>
+	<p>👉 Inline elements stay on the same line and only take space of their content.</p>
+
+	<h2>3️⃣ Inline-block Elements</h2>
+	<div class="box inline-block">Box 1</div>
+	<div class="box inline-block">Box 2</div>
+	<div class="box inline-block">Box 3</div>
+	<p>👉 Inline-block elements stay on the same line but allow width and height like block elements.</p>
+
+</body>
+
+</html>

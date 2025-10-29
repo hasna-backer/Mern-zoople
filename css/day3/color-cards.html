@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Color Cards Gallery</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			text-align: center;
+			background-color: #f4f4f4;
+			padding: 30px;
+		}
+
+		h1 {
+			color: #333;
+		}
+
+		/* Common card style */
+		.card {
+			border: 2px solid black;
+			padding: 15px;
+			margin: 10px;
+			color: white;
+			font-weight: bold;
+		}
+
+		/* Display types */
+		.block {
+			display: block;
+		}
+
+		.inline {
+			display: inline;
+		}
+
+		.inline-block {
+			display: inline-block;
+			width: 100px;
+			height: 80px;
+		}
+
+		/* Color classes */
+		.red {
+			background-color: crimson;
+		}
+
+		.blue {
+			background-color: royalblue;
+		}
+
+		.green {
+			background-color: seagreen;
+		}
+
+		.purple {
+			background-color: rebeccapurple;
+		}
+
+		.orange {
+			background-color: darkorange;
+		}
+
+		/* Extra styling */
+		.rounded {
+			border-radius: 10px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<h1>🎨 Color Cards Gallery</h1>
+
+	<h2>Block Elements</h2>
+	<div class="card red block">Red Block</div>
+	<div class="card blue block">Blue Block</div>
+
+	<h2>Inline Elements</h2>
+	<span class="card green inline">Green Inline</span>
+	<span class="card orange inline">Orange Inline</span>
+
+	<h2>Inline-block Elements</h2>
+	<div class="card purple inline-block rounded">Purple Box</div>
+	<div class="card blue inline-block rounded">Blue Box</div>
+
+</body>
+
+</html>
