@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Responsive Page with Media Queries</title>
+
+	<style>
+		/* ---------- Base (Desktop) Styles ---------- */
+		body {
+			font-family: Arial, sans-serif;
+			margin: 0;
+			padding: 0;
+			background-color: #f3f4f6;
+			text-align: center;
+		}
+
+		header {
+			background-color: #2563eb;
+			color: white;
+			padding: 20px;
+			font-size: 2rem;
+		}
+
+		.container {
+			display: flex;
+			justify-content: space-around;
+			margin: 40px;
+		}
+
+		.card {
+			background-color: white;
+			border: 2px solid #2563eb;
+			border-radius: 10px;
+			width: 30%;
+			padding: 20px;
+			box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+		}
+
+		.card h2 {
+			color: #2563eb;
+		}
+
+		footer {
+			background-color: #2563eb;
+			color: white;
+			padding: 10px;
+			font-size: 1rem;
+		}
+
+		/* ---------- Tablet (max-width: 900px) ---------- */
+		@media (max-width: 900px) {
+			header {
+				font-size: 1.8rem;
+				background-color: #d81d4f;
+			}
+
+			.container {
+				flex-direction: column;
+				align-items: center;
+			}
+
+			.card {
+				width: 70%;
+				margin-bottom: 20px;
+				background-color: #f5afbd;
+			}
+
+			footer {
+				font-size: 0.9rem;
+			}
+		}
+
+		/* ---------- Mobile (max-width: 600px) ---------- */
+		@media (max-width: 600px) {
+			header {
+				font-size: 1.5rem;
+				background-color: #14781b;
+			}
+
+			.card {
+				width: 90%;
+				border-color: #079f65;
+				background-color: #dbfef3;
+			}
+
+			.card h2 {
+				font-size: 1.2rem;
+			}
+
+			footer {
+				font-size: 0.8rem;
+			}
+		}
+	</style>
+</head>
+
+<body>
+
+	<header>🌐 Responsive Website Example</header>
+
+	<div class="container">
+		<div class="card">
+			<h2>HTML</h2>
+			<p>Structure your webpage using HTML elements.</p>
+		</div>
+
+		<div class="card">
+			<h2>CSS</h2>
+			<p>Style your webpage with colors, layouts, and fonts.</p>
+		</div>
+
+		<div class="card">
+			<h2>JavaScript</h2>
+			<p>Add interactivity and logic to your website.</p>
+		</div>
+	</div>
+
+	<footer>© 2025 Learn Web Development</footer>
+
+</body>
+
+</html>
