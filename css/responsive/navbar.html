@@ -23,6 +23,14 @@
 			padding: 15px 40px;
 		}
 
+		.nav-top {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			width: 100%;
+			/* keeps logo & menu-btn in one row */
+		}
+
 		.logo {
 			font-size: 1.5rem;
 			font-weight: bold;
@@ -60,6 +68,7 @@
 				align-items: flex-start;
 			}
 
+
 			.menu-btn {
 				display: block;
 				align-self: flex-end;
@@ -89,8 +98,10 @@
 <body>
 
 	<nav>
-		<div class="logo">MyWebsite</div>
-		<div class="menu-btn">☰</div>
+		<div class="nav-top">
+			<div class="logo">MyWebsite</div>
+			<div class="menu-btn">☰</div>
+		</div>
 		<ul class="menu">
 			<li><a href="#">Home</a></li>
 			<li><a href="#">About</a></li>

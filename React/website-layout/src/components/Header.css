@@ -1,0 +1,13 @@
+.header {
+  background-color: #6a0dad;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.subtitle {
+  font-size: 1rem;
+  margin-top: 8px;
+  opacity: 0.8;
+}

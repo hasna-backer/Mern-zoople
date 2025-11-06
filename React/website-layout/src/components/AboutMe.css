@@ -1,0 +1,14 @@
+.about {
+  background-color: #f8f5ff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px auto;
+  width: 70%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.about h2 {
+  color: #6a0dad;
+  margin-bottom: 15px;
+}
