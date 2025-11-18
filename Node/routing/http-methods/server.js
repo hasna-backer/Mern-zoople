@@ -1,5 +1,4 @@
 import http from "http";
-
 const server = http.createServer((req, res) => {
   if (req.url === "/users") {
     if (req.method === "GET") {
@@ -13,11 +12,7 @@ const server = http.createServer((req, res) => {
     else if (req.method === "PUT") {
       res.writeHead(200, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ message: "Updating user (replace data) 🔄" }));
-    } 
-    else if (req.method === "DELETE") {
-      res.writeHead(200, { "Content-Type": "application/json" });
-      res.end(JSON.stringify({ message: "Deleting user ❌" }));
-    } 
+    }  
     else {
       res.writeHead(405, { "Content-Type": "application/json" });
       res.end(JSON.stringify({ error: "Method Not Allowed 🚫" }));

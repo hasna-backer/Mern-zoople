@@ -5,6 +5,6 @@ const server = http.createServer((req, res) => {
   res.end("MERN  ");
 });
 
-server.listen(3000, () => {
-  console.log("Server is listening on http://localhost:3000");
+server.listen(5000, () => {
+  console.log("Server is listening on http://localhost:5000");
 });

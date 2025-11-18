@@ -4,6 +4,7 @@ import url from "url";
 const server = http.createServer((req, res) => {
   // Step 1: Parse the URL
   const parsedUrl = url.parse(req.url, true);
+//    url= /greet?name=Hasna
 //   {
 // 	pathname: "/greet",       // just the path
 // 	query: { name: "Hasna" }, // query params as object
@@ -27,6 +28,6 @@ const server = http.createServer((req, res) => {
   }
 });
 
-server.listen(3000, () => {
-  console.log("✅ Server running at http://localhost:3000");
+server.listen(5000, () => {
+  console.log("✅ Server running at http://localhost:5000");
 });
