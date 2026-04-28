@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Mini Products</title>
+</head>
+
+<body>
+
+	<h2>Products</h2>
+	<div id="container"></div>
+
+	<script>
+
+		let products = [
+			{name: "Shoes", price: 2500},
+			{name: "Bag", price: 1500},
+			{name: "Watch", price: 4000}
+		];
+		let container = document.getElementById("container");
+		products.forEach(function (product) {
+			let card = document.createElement("div");
+			card.style.border = "1px solid black";
+			card.style.margin = "10px";
+			card.style.padding = "10px";
+
+			let title = document.createElement("h3");
+			title.textContent = product.name;
+
+			let price = document.createElement("p");
+			price.textContent = "Price: ₹ " + product.price;
+
+			card.appendChild(title);
+			card.appendChild(price);
+
+			container.appendChild(card);
+
+		});
+
+	</script>
+
+</body>
+
+</html>

@@ -25,8 +25,13 @@ console.log("Name from object:", mixed[3].name);
 console.log("Second number in nested array:", mixed[4][1]);
 
 // Practice challenge
-let arr = ["a", "b", "c"];
-arr.pop();            // remove "c"
-arr.push("d");        // add "d"
-console.log("Final arr:", arr);
-console.log("Length of arr:", arr.length);
+let arr = ["z","a", "b", "c","e"];
+
+//add "e" at the end
+//add "z" at the start
+//add "y" at index 2
+//add "x" at index 3
+// remove "z" from start
+// remove "y" from index 2
+// remove "x" from index 3
+//slice "b" and "c"

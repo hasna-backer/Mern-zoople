@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0%;
+			box-sizing: border-box;
+			font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+		}
+
+		.container {
+			width: 100%;
+			min-height: 100vh;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			background: radial-gradient(circle, rgb(27, 172, 175), #0b4059);
+
+		}
+
+		#right,
+		#left {
+			width: 300px;
+			border: 2px dashed #fff;
+			min-height: 400px;
+			margin: 20px;
+
+		}
+
+		.list {
+			background-color: red;
+			height: 70px;
+			width: 250px;
+			margin: 25px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: grab;
+			color: white;
+
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<div id="left">
+			<div class="list" draggable="true">list item 1</div>
+			<div class="list" draggable="true">list item 2</div>
+			<div class="list" draggable="true">list item 3</div>
+			<div class="list" draggable="true">list item 4</div>
+		</div>
+
+		<div id="right"></div>
+	</div>
+
+	<script>
+		let lists = document.getElementsByClassName("list");
+		let rightBox = document.getElementById("right");
+		let leftBox = document.getElementById("left");
+		for (list of lists) {
+			list.addEventListener("dragstart", function (hi) {
+				let selected = hi.target;
+				rightBox.addEventListener("dragover", function (hi) {
+					hi.preventDefault();
+				})
+				rightBox.addEventListener("drop", function (hi) {
+					rightBox.appendChild(selected);
+					selected = null;
+				})
+			})
+		}
+
+	</script>
+</body>
+
+</html>

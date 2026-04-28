@@ -1,0 +1,601 @@
+<style>
+  :root {
+    --font-sans: Arial, sans-serif;
+
+    --color-text-primary: #222;
+    --color-text-secondary: #050404;
+    --color-text-info: #0b5ed7;
+
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f5;
+    --color-background-info: #e7f1ff;
+    --color-background-warning: #fff3cd;
+
+    --color-border-primary: #8f2a2a;
+    --color-border-secondary: #ccc;
+    --color-border-tertiary: #121010;
+    --color-border-info: #133f81;
+
+    --border-radius-md: 6px;
+  }
+
+  .container {
+    padding: 1.5rem 0;
+  }
+
+  .level-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    padding: 6px 16px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-sans);
+  }
+
+  .tab.active {
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    border-color: transparent;
+    font-weight: 500;
+  }
+
+  .ops-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1.5rem;
+  }
+
+  .op-badge {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: var(--font-mono);
+  }
+
+  .q-card {
+    background: var(--color-background-primary);
+    border: 1px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 10px;
+  }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer;
+  }
+
+  .q-num {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    min-width: 22px;
+    margin-top: 2px;
+  }
+
+  .q-text {
+    font-size: 15px;
+    color: var(--color-text-primary);
+    flex: 1;
+    line-height: 1.5;
+  }
+
+  .q-body {
+    display: none;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 0.5px solid var(--color-border-tertiary);
+  }
+
+  .q-body.open {
+    display: block;
+  }
+
+  .hint-label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+  }
+
+  pre {
+    background: var(--color-background-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 12px;
+    font-size: 12.5px;
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+    overflow-x: auto;
+    margin: 0;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  .chevron {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    transition: transform 0.2s;
+    margin-top: 3px;
+  }
+
+  .chevron.open {
+    transform: rotate(180deg);
+  }
+
+  .try-btn {
+    margin-top: 10px;
+    padding: 5px 12px;
+    font-size: 13px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: transparent;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    font-family: var(--font-sans);
+  }
+
+  .try-btn:hover {
+    background: var(--color-background-secondary);
+  }
+
+  .section-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 12px;
+  }
+</style>
+
+<div class="container">
+  <div class="level-tabs" id="tabs"></div>
+  <div class="ops-bar" id="opsBar"></div>
+  <div class="section-title" id="sectionTitle"></div>
+  <div id="questions"></div>
+</div>
+
+<script>
+  const data = {
+    1: {
+      label: "Level 1 – Basic",
+      ops: ["$match", "$group", "$project", "$limit", "$skip", "$count", "$sort"],
+      questions: [
+        {
+          text: "Find the total number of products in each category.",
+          hint: "Use $group with $sum: 1 to count documents per category.",
+          code: `db.products.aggregate([
+  {
+    $group: {
+      _id: "$category",
+      totalProducts: { $sum: 1 }
+    }
+  }
+])`
+        },
+        {
+          text: "Display only the product name and price (hide _id).",
+          hint: "Use $project to include/exclude fields.",
+          code: `db.products.aggregate([
+  {
+    $project: {
+      _id: 0,
+      name: 1,
+      price: 1
+    }
+  }
+])`
+        },
+        {
+          text: "Sort all products by price in descending order.",
+          hint: "Use $sort with -1 for descending.",
+          code: `db.products.aggregate([
+  { $sort: { price: -1 } }
+])`
+        },
+        {
+          text: "Show only the top 3 most expensive products.",
+          hint: "Sort descending first, then $limit to 3.",
+          code: `db.products.aggregate([
+  { $sort: { price: -1 } },
+  { $limit: 3 }
+])`
+        },
+        {
+          text: "Skip the most expensive product and show the rest sorted by price.",
+          hint: "Sort descending, then $skip: 1.",
+          code: `db.products.aggregate([
+  { $sort: { price: -1 } },
+  { $skip: 1 }
+])`
+        },
+        {
+          text: "Count the total number of products in the dataset.",
+          hint: "Use $count to get a single number.",
+          code: `db.products.aggregate([
+  { $count: "totalProducts" }
+])`
+        },
+        {
+          text: "Find all products in the 'mobile' category.",
+          hint: "Use $match to filter by category field.",
+          code: `db.products.aggregate([
+  { $match: { category: "mobile" } }
+])`
+        },
+        {
+          text: "Show product name and category, sorted alphabetically by name.",
+          hint: "Use $project to pick fields, then $sort with 1.",
+          code: `db.products.aggregate([
+  { $project: { _id: 0, name: 1, category: 1 } },
+  { $sort: { name: 1 } }
+])`
+        }
+      ]
+    },
+    2: {
+      label: "Level 2 – Intermediate",
+      ops: ["$sum", "$avg", "$min", "$max", "$multiply", "$cond", "$concat", "$addToSet"],
+      questions: [
+        {
+          text: "Find the average price of products in each category.",
+          hint: "Use $group with $avg on the price field.",
+          code: `db.products.aggregate([
+  {
+    $group: {
+      _id: "$category",
+      avgPrice: { $avg: "$price" }
+    }
+  }
+])`
+        },
+        {
+          text: "Find the most expensive and cheapest product in each category.",
+          hint: "Use $max and $min inside $group.",
+          code: `db.products.aggregate([
+  {
+    $group: {
+      _id: "$category",
+      maxPrice: { $max: "$price" },
+      minPrice: { $min: "$price" }
+    }
+  }
+])`
+        },
+        {
+          text: "Calculate a 10% discounted price for every product.",
+          hint: "Use $multiply inside $project: price * 0.9.",
+          code: `db.products.aggregate([
+  {
+    $project: {
+      name: 1,
+      price: 1,
+      discountedPrice: { $multiply: ["$price", 0.9] }
+    }
+  }
+])`
+        },
+        {
+          text: "Find all products that cost more than ₹50,000.",
+          hint: "Use $match with $gt operator.",
+          code: `db.products.aggregate([
+  { $match: { price: { $gt: 50000 } } }
+])`
+        },
+        {
+          text: "Label each product as 'Premium' if price > 50000, else 'Budget'.",
+          hint: "Use $cond inside $project with an if/then/else structure.",
+          code: `db.products.aggregate([
+  {
+    $project: {
+      name: 1,
+      price: 1,
+      tier: {
+        $cond: {
+          if: { $gt: ["$price", 50000] },
+          then: "Premium",
+          else: "Budget"
+        }
+      }
+    }
+  }
+])`
+        },
+        {
+          text: "Create a display field combining name and category (e.g. 'Apple iPhone 14 [mobile]').",
+          hint: "Use $concat inside $project.",
+          code: `db.products.aggregate([
+  {
+    $project: {
+      display: {
+        $concat: ["$name", " [", "$category", "]"]
+      }
+    }
+  }
+])`
+        },
+        {
+          text: "Get the total value of all products (sum of all prices).",
+          hint: "Group all docs with _id: null and use $sum.",
+          code: `db.products.aggregate([
+  {
+    $group: {
+      _id: null,
+      totalValue: { $sum: "$price" }
+    }
+  }
+])`
+        },
+        {
+          text: "Collect all unique categories into a single array.",
+          hint: "Use $group with $addToSet on the category field.",
+          code: `db.products.aggregate([
+  {
+    $group: {
+      _id: null,
+      categories: { $addToSet: "$category" }
+    }
+  }
+])`
+        },
+        {
+          text: "For each category, collect all product names into an array.",
+          hint: "Use $group with $push to gather names.",
+          code: `db.products.aggregate([
+  {
+    $group: {
+      _id: "$category",
+      productNames: { $push: "$name" }
+    }
+  }
+])`
+        },
+        {
+          text: "Find categories where the average price is above ₹50,000.",
+          hint: "Group by category with $avg, then $match on that result.",
+          code: `db.products.aggregate([
+  {
+    $group: {
+      _id: "$category",
+      avgPrice: { $avg: "$price" }
+    }
+  },
+  { $match: { avgPrice: { $gt: 50000 } } }
+])`
+        }
+      ]
+    },
+    3: {
+      label: "Level 3 – Advanced",
+      ops: ["$bucket", "$bucketAuto", "$facet", "$sortByCount", "$replaceRoot", "$expr", "$reduce"],
+      questions: [
+        {
+          text: "Group products into price buckets: 0-10k, 10k-50k, 50k-100k, 100k+.",
+          hint: "Use $bucket with boundaries array and a default label.",
+          code: `db.products.aggregate([
+  {
+    $bucket: {
+      groupBy: "$price",
+      boundaries: [0, 10000, 50000, 100000],
+      default: "100k+",
+      output: {
+        count: { $sum: 1 },
+        products: { $push: "$name" }
+      }
+    }
+  }
+])`
+        },
+        {
+          text: "Automatically divide products into 3 price-based groups.",
+          hint: "Use $bucketAuto with buckets: 3.",
+          code: `db.products.aggregate([
+  {
+    $bucketAuto: {
+      groupBy: "$price",
+      buckets: 3,
+      output: { count: { $sum: 1 } }
+    }
+  }
+])`
+        },
+        {
+          text: "In a single query, get: count per category AND average price per category.",
+          hint: "Use $facet to run two sub-pipelines in parallel.",
+          code: `db.products.aggregate([
+  {
+    $facet: {
+      countByCategory: [
+        { $group: { _id: "$category", count: { $sum: 1 } } }
+      ],
+      avgPriceByCategory: [
+        { $group: { _id: "$category", avgPrice: { $avg: "$price" } } }
+      ]
+    }
+  }
+])`
+        },
+        {
+          text: "Find which category appears most often in the dataset.",
+          hint: "Use $sortByCount on the category field.",
+          code: `db.products.aggregate([
+  { $sortByCount: "$category" }
+])`
+        },
+        {
+          text: "Find products whose price is above the overall average price (using $expr).",
+          hint: "Use $expr with $gt comparing $price to a computed $avg.",
+          code: `db.products.aggregate([
+  {
+    $group: {
+      _id: null,
+      avgPrice: { $avg: "$price" },
+      products: { $push: "$$ROOT" }
+    }
+  },
+  { $unwind: "$products" },
+  {
+    $match: {
+      $expr: { $gt: ["$products.price", "$avgPrice"] }
+    }
+  },
+  {
+    $replaceRoot: { newRoot: "$products" }
+  }
+])`
+        },
+        {
+          text: "Calculate the total combined price of all products using $reduce.",
+          hint: "First $group all into an array, then $reduce to sum the price field.",
+          code: `db.products.aggregate([
+  {
+    $group: {
+      _id: null,
+      allPrices: { $push: "$price" }
+    }
+  },
+  {
+    $project: {
+      totalPrice: {
+        $reduce: {
+          input: "$allPrices",
+          initialValue: 0,
+          in: { $add: ["$$value", "$$this"] }
+        }
+      }
+    }
+  }
+])`
+        },
+        {
+          text: "Reshape each document so the root becomes a new object with name and priceInUSD (price / 84).",
+          hint: "Use $project to compute priceInUSD, then $replaceRoot with $$ROOT or a new object.",
+          code: `db.products.aggregate([
+  {
+    $project: {
+      name: 1,
+      category: 1,
+      priceInUSD: { $round: [{ $divide: ["$price", 84] }, 2] }
+    }
+  },
+  {
+    $replaceRoot: {
+      newRoot: {
+        name: "$name",
+        category: "$category",
+        priceInUSD: "$priceInUSD"
+      }
+    }
+  }
+])`
+        },
+        {
+          text: "Get count per category AND overall total product count in one query using $facet.",
+          hint: "Use two $facet sub-pipelines: one with $group, one with $count.",
+          code: `db.products.aggregate([
+  {
+    $facet: {
+      byCategory: [
+        { $group: { _id: "$category", count: { $sum: 1 } } }
+      ],
+      totalCount: [
+        { $count: "total" }
+      ]
+    }
+  }
+])`
+        }
+      ]
+    }
+  };
+
+  let activeLevel = 1;
+  let openCard = null;
+
+  function renderTabs() {
+    const tabs = document.getElementById('tabs');
+    tabs.innerHTML = '';
+    [1, 2, 3].forEach(l => {
+      const btn = document.createElement('button');
+      btn.className = 'tab' + (l === activeLevel ? ' active' : '');
+      btn.textContent = data[l].label;
+      btn.onclick = () => {activeLevel = l; openCard = null; render();};
+      tabs.appendChild(btn);
+    });
+  }
+
+  function renderOps() {
+    const bar = document.getElementById('opsBar');
+    const lvl = data[activeLevel];
+    const colors = {1: '#185FA5', 2: '#0F6E56', 3: '#993C1D'};
+    const bgs = {1: '#E6F1FB', 2: '#E1F5EE', 3: '#FAECE7'};
+    bar.innerHTML = lvl.ops.map(op =>
+      `<span class="op-badge" style="background:${bgs[activeLevel]};color:${colors[activeLevel]}">${op}</span>`
+    ).join('');
+  }
+
+  function renderQuestions() {
+    const container = document.getElementById('questions');
+    const lvl = data[activeLevel];
+    document.getElementById('sectionTitle').textContent = lvl.questions.length + ' practice questions';
+    container.innerHTML = '';
+    lvl.questions.forEach((q, i) => {
+      const card = document.createElement('div');
+      card.className = 'q-card';
+      const isOpen = openCard === i;
+      card.innerHTML = `
+      <div class="q-header" onclick="toggle(${i})">
+        <span class="q-num">Q${i + 1}</span>
+        <span class="q-text">${q.text}</span>
+        <span class="chevron${isOpen ? ' open' : ''}">▼</span>
+      </div>
+      <div class="q-body${isOpen ? ' open' : ''}">
+        <p class="hint-label">Hint: ${q.hint}</p>
+        <p class="hint-label" style="margin-top:10px">Solution:</p>
+        <pre>${q.code}</pre>
+        <button class="try-btn" onclick="askClaude(${i})">Ask Claude to explain this ↗</button>
+      </div>
+    `;
+      container.appendChild(card);
+    });
+  }
+
+  function toggle(i) {
+    openCard = openCard === i ? null : i;
+    renderQuestions();
+  }
+
+  function askClaude(i) {
+    const q = data[activeLevel].questions[i];
+    sendPrompt('Explain this MongoDB aggregation query step by step:\n\n' + q.code);
+  }
+
+  function render() {
+    renderTabs();
+    renderOps();
+    renderQuestions();
+  }
+
+  render();
+</script>
+
+
+
+
+<!-- db.products.insertMany([
+ { name: "Apple iPhone 14", price: 80000, category: "mobile" },
+ { name: "Samsung Galaxy S23", price: 75000, category: "mobile" },
+ { name: "Apple MacBook Air", price: 120000, category: "laptop" },
+ { name: "Asus ZenBook", price: 90000, category: "laptop" },
+ { name: "Boat Headphones", price: 2500, category: "accessory" },
+ { name: "Apple Watch", price: 35000, category: "wearable" }
+]) -->

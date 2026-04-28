@@ -1,0 +1,73 @@
+body {
+	font-family: Arial, sans-serif;
+  }
+  
+  /* NAVIGATION INTERACTION */
+  nav a {
+	margin-right: 15px;
+	text-decoration: none;
+	color: black;
+  }
+  
+  nav a:hover {
+	color: blue;
+  }
+  
+  nav a:active {
+	color: red;
+  }
+  
+  /* BLOG POST POSITION */
+  .posts article:first-child {
+	border-left: 5px solid green;
+  }
+  
+  .posts article:last-child {
+	border-left: 5px solid purple;
+  }
+  
+  .posts article:nth-child(even) {
+	background-color: #f2f2f2;
+  }
+  
+  .posts article:nth-child(odd) {
+	background-color: #e0e0e0;
+  }
+  
+  /* FORM STATES */
+  input:focus,
+  textarea:focus {
+	outline: 2px solid blue;
+  }
+  
+  input:required {
+	background-color: #fff9c4;
+  }
+  
+  input:valid {
+	border: 2px solid green;
+  }
+  
+  input:invalid {
+	border: 2px solid red;
+  }
+  
+  input:checked {
+	accent-color: teal;
+  }
+  
+  input[type="checkbox"]:not(:checked) {
+	outline: 2px solid orange;
+  }
+ 
+  button:disabled {
+	background-color: gray;
+	color: white;
+  }
+  
+  /* EMPTY FOOTER MESSAGE */
+  .footer-msg:empty {
+	height: 40px;
+	background-color: lightgray;
+  }
+  

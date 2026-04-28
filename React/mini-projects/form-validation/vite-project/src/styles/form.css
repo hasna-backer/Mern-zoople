@@ -1,0 +1,68 @@
+.form-container {
+	width: 350px;
+	margin: 50px auto;
+	padding: 20px;
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	font-family: Arial, sans-serif;
+  }
+  
+  input {
+	width: 100%;
+	padding: 8px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+  }
+  
+  .input-group {
+	margin-bottom: 15px;
+  }
+  
+  .error {
+	color: red;
+	font-size: 12px;
+  }
+  
+  button {
+	width: 100%;
+	padding: 10px;
+	font-weight: bold;
+	cursor: pointer;
+  }
+  
+  button:disabled {
+	background-color: #ccc;
+	cursor: not-allowed;
+  }
+  
+  .strength-container {
+	margin-bottom: 15px;
+  }
+  
+  .strength-bar {
+	height: 6px;
+	margin-bottom: 5px;
+	transition: 0.3s ease;
+  }
+  
+  /* Strength levels */
+  .strength-1 {
+	width: 25%;
+	background: red;
+  }
+  
+  .strength-2 {
+	width: 50%;
+	background: orange;
+  }
+  
+  .strength-3 {
+	width: 75%;
+	background: blue;
+  }
+  
+  .strength-4 {
+	width: 100%;
+	background: green;
+  }
+  

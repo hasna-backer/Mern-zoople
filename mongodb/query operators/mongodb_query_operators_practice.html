@@ -1,0 +1,530 @@
+<style>
+  :root {
+    --font-sans: Arial, sans-serif;
+
+    --color-text-primary: #222;
+    --color-text-secondary: #050404;
+    --color-text-info: #0b5ed7;
+
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f5;
+    --color-background-info: #e7f1ff;
+    --color-background-warning: #fff3cd;
+
+    --color-border-primary: #333;
+    --color-border-secondary: #ccc;
+    --color-border-tertiary: #100f0f;
+    --color-border-info: #0b5ed7;
+
+    --border-radius-md: 6px;
+  }
+
+  .wrap {
+    padding: 1.5rem 0
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap
+  }
+
+  .tab {
+    padding: 6px 16px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    font-family: var(--font-sans)
+  }
+
+  .tab.active {
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    border-color: transparent;
+    font-weight: 500
+  }
+
+  .ops {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 1rem
+  }
+
+  .badge {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-family: var(--font-mono)
+  }
+
+  .meta {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 1rem
+  }
+
+  .card {
+    background: var(--color-background-primary);
+    border: 1px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 10px
+  }
+
+  .qhead {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    cursor: pointer
+  }
+
+  .qnum {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    min-width: 22px;
+    margin-top: 2px
+  }
+
+  .qtxt {
+    font-size: 15px;
+    color: var(--color-text-primary);
+    flex: 1;
+    line-height: 1.5
+  }
+
+  .qbody {
+    display: none;
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 0.5px solid var(--color-border-tertiary)
+  }
+
+  .qbody.open {
+    display: block
+  }
+
+  .lbl {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px
+  }
+
+  pre {
+    background: var(--color-background-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 12px;
+    font-size: 12.5px;
+    font-family: var(--font-mono);
+    color: var(--color-text-primary);
+    overflow-x: auto;
+    margin: 0 0 10px;
+    white-space: pre-wrap;
+    line-height: 1.6
+  }
+
+  .chev {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    margin-top: 4px;
+    transition: transform .2s
+  }
+
+  .chev.open {
+    transform: rotate(180deg)
+  }
+
+  .trybtn {
+    padding: 5px 12px;
+    font-size: 13px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: transparent;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    font-family: var(--font-sans)
+  }
+
+  .trybtn:hover {
+    background: var(--color-background-secondary)
+  }
+
+  .op-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-family: var(--font-mono);
+    display: inline-block;
+    margin-bottom: 8px
+  }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">Practice questions based on students collection</h2>
+  <div class="tabs" id="tabs"></div>
+  <div class="ops" id="ops"></div>
+  <div class="meta" id="meta"></div>
+  <div id="qs"></div>
+</div>
+
+<script>
+  const levels = [
+    {
+      label: "Level 1 – Comparison",
+      ops: ["$eq", "$ne", "$gt", "$gte", "$lt", "$lte", "$in", "$nin"],
+      bgColor: "#E6F1FB", textColor: "#0C447C",
+      qs: [
+        {
+          text: "Find the student whose name is exactly 'Ali'.",
+          op: "$eq",
+          hint: "Use $eq on the name field.",
+          code: `db.students.find({ name: { $eq: "Ali" } })`
+        },
+        {
+          text: "Find all students who are NOT in the 'Math' course.",
+          op: "$ne",
+          hint: "Use $ne on the course field.",
+          code: `db.students.find({ course: { $ne: "Math" } })`
+        },
+        {
+          text: "Find students older than 21.",
+          op: "$gt",
+          hint: "Use $gt on the age field.",
+          code: `db.students.find({ age: { $gt: 21 } })`
+        },
+        {
+          text: "Find students aged 22 or older.",
+          op: "$gte",
+          hint: "Use $gte on the age field.",
+          code: `db.students.find({ age: { $gte: 22 } })`
+        },
+        {
+          text: "Find students younger than 23.",
+          op: "$lt",
+          hint: "Use $lt on the age field.",
+          code: `db.students.find({ age: { $lt: 23 } })`
+        },
+        {
+          text: "Find students aged 22 or below.",
+          op: "$lte",
+          hint: "Use $lte on the age field.",
+          code: `db.students.find({ age: { $lte: 22 } })`
+        },
+        {
+          text: "Find students who are in either 'CS' or 'Physics' course.",
+          op: "$in",
+          hint: "Use $in with an array of values on the course field.",
+          code: `db.students.find({ course: { $in: ["CS", "Physics"] } })`
+        },
+        {
+          text: "Find students whose grade is NOT 'A' or 'B'.",
+          op: "$nin",
+          hint: "Use $nin with ['A','B'] on the grade field.",
+          code: `db.students.find({ grade: { $nin: ["A", "B"] } })`
+        },
+        {
+          text: "Find all students between age 21 and 23 (inclusive).",
+          op: "$gte,$lte",
+          hint: "Combine $gte and $lte on the age field in one query.",
+          code: `db.students.find({ age: { $gte: 21, $lte: 23 } })`
+        }
+      ]
+    },
+    {
+      label: "Level 2 – Logical",
+      ops: ["$and", "$or", "$not", "$nor"],
+      bgColor: "#E1F5EE", textColor: "#085041",
+      qs: [
+        {
+          text: "Find students who study 'Math' AND have grade 'A'.",
+          op: "$and",
+          hint: "Use $and with two condition objects in an array.",
+          code: `db.students.find({
+  $and: [
+    { course: "Math" },
+    { grade: "A" }
+  ]
+})`
+        },
+        {
+          text: "Find students who study 'CS' OR are from 'Delhi'.",
+          op: "$or",
+          hint: "Use $or with course and city conditions.",
+          code: `db.students.find({
+  $or: [
+    { course: "CS" },
+    { city: "Delhi" }
+  ]
+})`
+        },
+        {
+          text: "Find students who are NOT in the 'Physics' course.",
+          op: "$not",
+          hint: "Use $not with a regex or $eq inside.",
+          code: `db.students.find({
+  course: { $not: { $eq: "Physics" } }
+})`
+        },
+        {
+          text: "Find students who are NEITHER from 'Delhi' NOR have grade 'C'.",
+          op: "$nor",
+          hint: "Use $nor with city and grade conditions.",
+          code: `db.students.find({
+  $nor: [
+    { city: "Delhi" },
+    { grade: "C" }
+  ]
+})`
+        },
+        {
+          text: "Find students who study 'CS' AND are older than 21.",
+          op: "$and",
+          hint: "Use $and combining course and age with $gt.",
+          code: `db.students.find({
+  $and: [
+    { course: "CS" },
+    { age: { $gt: 21 } }
+  ]
+})`
+        },
+        {
+          text: "Find students who have grade 'A' OR age less than 21.",
+          op: "$or",
+          hint: "Use $or with grade and age $lt conditions.",
+          code: `db.students.find({
+  $or: [
+    { grade: "A" },
+    { age: { $lt: 21 } }
+  ]
+})`
+        },
+        {
+          text: "Find students who are NOT aged below 22.",
+          op: "$not",
+          hint: "Use $not with $lt: 22 on the age field.",
+          code: `db.students.find({
+  age: { $not: { $lt: 22 } }
+})`
+        },
+        {
+          text: "Find students who are neither in 'Math' nor in 'CS'.",
+          op: "$nor",
+          hint: "Use $nor with two course conditions.",
+          code: `db.students.find({
+  $nor: [
+    { course: "Math" },
+    { course: "CS" }
+  ]
+})`
+        }
+      ]
+    },
+    {
+      label: "Level 3 – Element & Evaluation",
+      ops: ["$exists", "$type", "$regex", "$expr", "$where"],
+      bgColor: "#FAECE7", textColor: "#712B13",
+      qs: [
+        {
+          text: "Find students who have a 'city' field in their document.",
+          op: "$exists",
+          hint: "Use $exists: true on the city field.",
+          code: `db.students.find({ city: { $exists: true } })`
+        },
+        {
+          text: "Find students who do NOT have a 'city' field.",
+          op: "$exists",
+          hint: "Use $exists: false on the city field.",
+          code: `db.students.find({ city: { $exists: false } })`
+        },
+        {
+          text: "Find students whose name is stored as a string type.",
+          op: "$type",
+          hint: "Use $type: 'string' on the name field.",
+          code: `db.students.find({ name: { $type: "string" } })`
+        },
+        {
+          text: "Find students whose name starts with the letter 'A' or 'E'.",
+          op: "$regex",
+          hint: "Use $regex with ^[AE] pattern.",
+          code: `db.students.find({ name: { $regex: /^[AE]/ } })`
+        },
+        {
+          text: "Find students whose name contains the letter 'a' (case-insensitive).",
+          op: "$regex",
+          hint: "Use $regex with 'a' and $options: 'i'.",
+          code: `db.students.find({
+  name: { $regex: "a", $options: "i" }
+})`
+        },
+        {
+          text: "Find students whose course name has more than 4 characters.",
+          op: "$expr",
+          hint: "Use $expr with $gt and $strLenCP to measure string length.",
+          code: `db.students.find({
+  $expr: {
+    $gt: [{ $strLenCP: "$course" }, 4]
+  }
+})`
+        },
+        {
+          text: "Find students where age field is of type 'number' (double).",
+          op: "$type",
+          hint: "Use $type: 'double' or $type: 1 on the age field.",
+          code: `db.students.find({ age: { $type: "double" } })`
+        },
+        {
+          text: "Find students whose grade is 'A' using $expr and $eq.",
+          op: "$expr",
+          hint: "Use $expr with $eq operator comparing field to a literal string.",
+          code: `db.students.find({
+  $expr: { $eq: ["$grade", "A"] }
+})`
+        }
+      ]
+    },
+    {
+      label: "Level 4 – Mixed Challenges",
+      ops: ["$and", "$or", "$in", "$exists", "$regex", "$gt", "$lt"],
+      bgColor: "#EEEDFE", textColor: "#3C3489",
+      qs: [
+        {
+          text: "Find students from 'Delhi' who have grade 'A'.",
+          op: "$and",
+          hint: "Combine city and grade conditions — can be done with implicit AND.",
+          code: `db.students.find({ city: "Delhi", grade: "A" })`
+        },
+        {
+          text: "Find students aged between 20 and 22 (inclusive) who are in 'CS' or 'Math'.",
+          op: "$gte,$lte,$in",
+          hint: "Use age range with $gte/$lte and $in for course array.",
+          code: `db.students.find({
+  age: { $gte: 20, $lte: 22 },
+  course: { $in: ["CS", "Math"] }
+})`
+        },
+        {
+          text: "Find students who have a city field AND whose grade is NOT 'C'.",
+          op: "$exists,$ne",
+          hint: "Use $exists: true on city and $ne on grade.",
+          code: `db.students.find({
+  city: { $exists: true },
+  grade: { $ne: "C" }
+})`
+        },
+        {
+          text: "Find students whose name ends with 'a' (case-insensitive).",
+          op: "$regex",
+          hint: "Use $regex with 'a$' and options 'i'.",
+          code: `db.students.find({
+  name: { $regex: "a$", $options: "i" }
+})`
+        },
+        {
+          text: "Find students who are from 'Mumbai' OR have grade 'A' AND age > 20.",
+          op: "$or,$and,$gt",
+          hint: "Use $or — one branch for city, other for $and combining grade and age.",
+          code: `db.students.find({
+  $or: [
+    { city: "Mumbai" },
+    { $and: [{ grade: "A" }, { age: { $gt: 20 } }] }
+  ]
+})`
+        },
+        {
+          text: "Find students who have no city field OR have grade 'B'.",
+          op: "$or,$exists",
+          hint: "Use $or with $exists: false and grade condition.",
+          code: `db.students.find({
+  $or: [
+    { city: { $exists: false } },
+    { grade: "B" }
+  ]
+})`
+        },
+        {
+          text: "Find the names of students in 'Physics' who are older than 21 (only show name, hide _id).",
+          op: "$gt,projection",
+          hint: "Use find() with a query and a projection object as second argument.",
+          code: `db.students.find(
+  { course: "Physics", age: { $gt: 21 } },
+  { _id: 0, name: 1 }
+)`
+        },
+        {
+          text: "Find all students NOT from Delhi and NOT in Math, sorted by age ascending.",
+          op: "$nor,.sort()",
+          hint: "Use $nor for city and course, chain .sort({age:1}).",
+          code: `db.students.find({
+  $nor: [
+    { city: "Delhi" },
+    { course: "Math" }
+  ]
+}).sort({ age: 1 })`
+        }
+      ]
+    }
+  ];
+
+  let active = 0;
+  let openIdx = null;
+
+  function renderTabs() {
+    const el = document.getElementById('tabs');
+    el.innerHTML = '';
+    levels.forEach((l, i) => {
+      const b = document.createElement('button');
+      b.className = 'tab' + (i === active ? ' active' : '');
+      b.textContent = l.label;
+      b.onclick = () => {active = i; openIdx = null; render()};
+      el.appendChild(b);
+    });
+  }
+
+  function renderOps() {
+    const lvl = levels[active];
+    document.getElementById('ops').innerHTML = lvl.ops.map(op =>
+      `<span class="badge" style="background:${lvl.bgColor};color:${lvl.textColor}">${op}</span>`
+    ).join('');
+  }
+
+  function renderQs() {
+    const lvl = levels[active];
+    document.getElementById('meta').textContent = lvl.qs.length + ' practice questions';
+    const el = document.getElementById('qs');
+    el.innerHTML = '';
+    lvl.qs.forEach((q, i) => {
+      const isOpen = openIdx === i;
+      const div = document.createElement('div');
+      div.className = 'card';
+      div.innerHTML = `
+      <div class="qhead" onclick="tog(${i})">
+        <span class="qnum">Q${i + 1}</span>
+        <div style="flex:1">
+          <span class="op-tag" style="background:${lvl.bgColor};color:${lvl.textColor}">${q.op}</span>
+          <div class="qtxt">${q.text}</div>
+        </div>
+        <span class="chev${isOpen ? ' open' : ''}">▼</span>
+      </div>
+      <div class="qbody${isOpen ? ' open' : ''}">
+        <p class="lbl">Hint: ${q.hint}</p>
+        <p class="lbl" style="margin-top:10px">Solution:</p>
+        <pre>${q.code}</pre>
+        <button class="trybtn" onclick="ask(${i})">Ask Claude to explain ↗</button>
+      </div>`;
+      el.appendChild(div);
+    });
+  }
+
+  function tog(i) {openIdx = openIdx === i ? null : i; renderQs();}
+  function ask(i) {
+    const q = levels[active].qs[i];
+    sendPrompt('Explain this MongoDB query step by step:\n\n' + q.code);
+  }
+  function render() {renderTabs(); renderOps(); renderQs();}
+  render();
+</script>

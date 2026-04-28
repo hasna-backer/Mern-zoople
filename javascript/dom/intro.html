@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+	<h1 id="heading">Welcome</h1>
+	<button id="btn">Change Text</button>
+
+	<script>
+		// Select heading
+		let heading = document.getElementById("heading");
+
+		// Select button
+		let button = document.getElementById("btn");
+
+		// Add event listener
+		button.addEventListener("click", function () {
+			heading.textContent = "Text Changed!";
+			console.log("Heading changed");
+		});
+	</script>
+
+
+
+</body>
+
+</html>

@@ -3,7 +3,10 @@ let users = [
   { id: 2, name: 'Bob' }
 ];
 
-export const getAllUsers = () => users;
+export const getAllUsers = () => {
+  console.log("getAllUsers", users);
+  
+  return users;}
 
 export const addUser = (name) => {
   const newUser = { id: users.length + 1, name };

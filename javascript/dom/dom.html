@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>DOM Example</title>
+</head>
+
+<body>
+
+	<h1 id="heading">Welcome</h1>
+
+	<div id="box" style="width:200px; height:100px; background-color: lightgray;">
+		This is a box
+	</div>
+
+	<br><br>
+
+	<button id="btn">Click Me</button>
+
+	<script>
+		// 1️⃣ READ content
+		let heading = document.getElementById("heading");
+		console.log(heading.textContent); // Welcome
+
+		// 2️⃣ CHANGE content
+		heading.innerText = "Hi";
+
+		// 3️⃣ CHANGE styles
+		let box = document.getElementById("box");
+		box.style.backgroundColor = "red";
+
+
+		document.getElementById("box").style.border = "blue solid 5px";
+
+		// 4️⃣ CLICK event
+		let button = document.getElementById("btn");
+		button.onclick = function () {
+			alert("Clicked");
+		};
+	</script>
+
+</body>
+
+</html>

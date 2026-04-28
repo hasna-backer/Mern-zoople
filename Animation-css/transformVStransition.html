@@ -1,0 +1,38 @@
+<div class="box box1">TRANSFORM ONLY</div>
+
+<style>
+	.box {
+		width: 180px;
+		height: 80px;
+		background: #1e40af;
+		margin: 20px 0;
+		color: white;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-weight: bold;
+		cursor: pointer;
+	}
+
+	/* Transform only */
+	.box1:hover {
+		transform: scale(1.4) rotate(180deg);
+	}
+</style>
+
+
+
+
+
+<div class="box box2">TRANSFORM + TRANSITION</div>
+
+<style>
+	/* Transition added */
+	.box2 {
+		transition: transform 0.5s ease;
+	}
+
+	.box2:hover {
+		transform: scale(1.4) rotate(180deg);
+	}
+</style>

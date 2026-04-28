@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+  <div id="container" style="padding:20px; border:1px solid gray;">
+
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="Username"><br><br>
+      <input type="password" id="password" placeholder="Password"><br><br>
+      <button type="submit">Login</button>
+    </form>
+
+    <p id="message"></p>
+
+  </div>
+
+  <script>
+    // Select elements
+    let form = document.getElementById("loginForm");
+    let username = document.getElementById("username");
+    let password = document.getElementById("password");
+    let message = document.getElementById("message");
+    let container = document.getElementById("container");
+
+    // Submit event
+    form.addEventListener("submit", function (event) {
+      event.preventDefault(); // Stop reload
+
+      if (username.value === "" || password.value === "") {
+        message.textContent = "Fields cannot be empty!";
+        console.log("Validation failed");
+      } else {
+        message.textContent = "Login Successful!";
+        console.log("Login successful");
+      }
+    });
+
+    // Keydown tracking
+    username.addEventListener("keydown", function (event) {
+      console.log("Key pressed:", event.key);
+    });
+
+    // Bubbling demonstration
+    container.addEventListener("click", function () {
+      console.log("Container clicked");
+    });
+  </script>
+
+</body>
+
+</html>

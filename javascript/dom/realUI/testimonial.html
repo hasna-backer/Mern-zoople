@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Testimonials</title>
+</head>
+
+<body>
+
+	<h2>Testimonials</h2>
+	<div id="testimonialContainer"></div>
+
+	<script>
+
+		// Array of objects
+		let testimonials = [
+			{name: "Aisha", message: "This course changed my career.", rating: 5},
+			{name: "Rahul", message: "Very clear explanation and practice.", rating: 4},
+			{name: "Sara", message: "Best learning experience ever.", rating: 5}
+		];
+
+		let container = document.getElementById("testimonialContainer");
+
+		// Loop through array
+		testimonials.forEach(function (item) {
+
+			// Create card
+			let card = document.createElement("div");
+			card.style.border = "1px solid gray";
+			card.style.padding = "10px";
+			card.style.margin = "10px";
+			card.style.width = "250px";
+
+			// Name
+			let name = document.createElement("h4");
+			name.textContent = item.name;
+
+			// Message
+			let message = document.createElement("p");
+			message.textContent = item.message;
+
+			// Rating
+			let rating = document.createElement("p");
+			rating.textContent = "Rating: " + item.rating + " ⭐";
+
+			// Append everything
+			card.appendChild(name);
+			card.appendChild(message);
+			card.appendChild(rating);
+
+			container.appendChild(card);
+
+		});
+
+	</script>
+
+</body>
+
+</html>

@@ -1,0 +1,774 @@
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  body {
+    font-family: var(--font-sans)
+  }
+
+  .wrap {
+    padding: 1rem 0
+  }
+
+  .level-tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap
+  }
+
+  .ltab {
+    padding: 7px 18px;
+    font-size: 13px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary);
+    font-weight: 500
+  }
+
+  .ltab.easy.active {
+    background: #EAF3DE;
+    color: #27500A;
+    border-color: #3B6D11
+  }
+
+  .ltab.inter.active {
+    background: #FAEEDA;
+    color: #633806;
+    border-color: #854F0B
+  }
+
+  .ltab.tough.active {
+    background: #FAECE7;
+    color: #712B13;
+    border-color: #993C1D
+  }
+
+  .panel {
+    display: none
+  }
+
+  .panel.active {
+    display: block
+  }
+
+  .db-strip {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 12px
+  }
+
+  .db-title {
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+    font-size: 11px;
+    letter-spacing: .04em;
+    text-transform: uppercase
+  }
+
+  .db-scroll {
+    overflow-x: auto
+  }
+
+  .db-table {
+    border-collapse: collapse;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    width: 100%;
+    min-width: 500px
+  }
+
+  .db-table th {
+    background: var(--color-background-secondary);
+    color: var(--color-text-secondary);
+    padding: 4px 8px;
+    text-align: left;
+    border: 0.5px solid var(--color-border-tertiary);
+    font-weight: 500
+  }
+
+  .db-table td {
+    padding: 4px 8px;
+    border: 0.5px solid var(--color-border-tertiary);
+    color: var(--color-text-primary);
+    vertical-align: top
+  }
+
+  .q-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 14px 16px;
+    margin-bottom: 12px
+  }
+
+  .q-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px
+  }
+
+  .q-num {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: var(--border-radius-md);
+    flex-shrink: 0;
+    margin-top: 1px
+  }
+
+  .easy-badge {
+    background: #EAF3DE;
+    color: #27500A
+  }
+
+  .inter-badge {
+    background: #FAEEDA;
+    color: #633806
+  }
+
+  .tough-badge {
+    background: #FAECE7;
+    color: #712B13
+  }
+
+  .q-text {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    line-height: 1.6
+  }
+
+  .q-hint {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: 6px;
+    font-style: italic
+  }
+
+  .ops-used {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+    margin-top: 8px
+  }
+
+  .op-pill {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: var(--border-radius-md);
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    font-family: var(--font-mono)
+  }
+
+  textarea {
+    width: 100%;
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    padding: 10px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    resize: vertical;
+    min-height: 80px;
+    line-height: 1.6
+  }
+
+  .btn-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+    flex-wrap: wrap
+  }
+
+  .check-btn {
+    padding: 6px 16px;
+    font-size: 12px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-primary)
+  }
+
+  .check-btn:hover {
+    background: var(--color-background-secondary)
+  }
+
+  .show-btn {
+    padding: 6px 16px;
+    font-size: 12px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary)
+  }
+
+  .answer-box {
+    margin-top: 10px;
+    display: none
+  }
+
+  .answer-box.visible {
+    display: block
+  }
+
+  .answer-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 4px;
+    letter-spacing: .03em;
+    text-transform: uppercase
+  }
+
+  .answer-code {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    white-space: pre-wrap;
+    line-height: 1.7;
+    color: var(--color-text-primary)
+  }
+
+  .kw {
+    color: #7F77DD
+  }
+
+  .str {
+    color: #0F6E56
+  }
+
+  .num {
+    color: #BA7517
+  }
+
+  .op {
+    color: #993C1D
+  }
+
+  .fn {
+    color: #185FA5
+  }
+
+  .cmt {
+    color: var(--color-text-tertiary)
+  }
+
+  .feedback {
+    font-size: 12px;
+    margin-top: 6px;
+    padding: 6px 10px;
+    border-radius: var(--border-radius-md)
+  }
+
+  .fb-ok {
+    background: var(--color-background-success);
+    color: var(--color-text-success)
+  }
+
+  .fb-no {
+    background: var(--color-background-danger);
+    color: var(--color-text-danger)
+  }
+
+  .section-head {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+    color: var(--color-text-secondary);
+    margin: 16px 0 8px
+  }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">MongoDB Practice Questions — Easy, Intermediate, Tough</h2>
+
+  <div class="level-tabs">
+    <button class="ltab easy active" onclick="switchLevel('easy',this)">Easy</button>
+    <button class="ltab inter" onclick="switchLevel('inter',this)">Intermediate</button>
+    <button class="ltab tough" onclick="switchLevel('tough',this)">Tough</button>
+  </div>
+
+  <div class="panel active" id="panel-easy">
+    <div class="db-strip">
+      <div class="db-title">collection: students</div>
+      <div class="db-scroll">
+        <table class="db-table">
+          <tr>
+            <th>name</th>
+            <th>age</th>
+            <th>course</th>
+            <th>grade</th>
+            <th>city</th>
+          </tr>
+          <tr>
+            <td>Ali</td>
+            <td>20</td>
+            <td>Math</td>
+            <td>A</td>
+            <td>Delhi</td>
+          </tr>
+          <tr>
+            <td>Sara</td>
+            <td>22</td>
+            <td>Physics</td>
+            <td>B</td>
+            <td>Mumbai</td>
+          </tr>
+          <tr>
+            <td>John</td>
+            <td>21</td>
+            <td>CS</td>
+            <td>A</td>
+            <td>Delhi</td>
+          </tr>
+          <tr>
+            <td>Emma</td>
+            <td>23</td>
+            <td>Math</td>
+            <td>C</td>
+            <td>Chennai</td>
+          </tr>
+          <tr>
+            <td>David</td>
+            <td>22</td>
+            <td>CS</td>
+            <td>B</td>
+            <td>Mumbai</td>
+          </tr>
+          <tr>
+            <td>Lina</td>
+            <td>24</td>
+            <td>Physics</td>
+            <td>A</td>
+            <td>Delhi</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="easy-qs"></div>
+  </div>
+
+  <div class="panel" id="panel-inter">
+    <div class="db-strip">
+      <div class="db-title">collection: products (e-commerce)</div>
+      <div class="db-scroll">
+        <table class="db-table">
+          <tr>
+            <th>name</th>
+            <th>category</th>
+            <th>price</th>
+            <th>stock</th>
+            <th>rating</th>
+            <th>brand</th>
+            <th>tags</th>
+          </tr>
+          <tr>
+            <td>iPhone 15</td>
+            <td>Electronics</td>
+            <td>79999</td>
+            <td>50</td>
+            <td>4.8</td>
+            <td>Apple</td>
+            <td>["flagship","5g"]</td>
+          </tr>
+          <tr>
+            <td>Galaxy S24</td>
+            <td>Electronics</td>
+            <td>64999</td>
+            <td>30</td>
+            <td>4.5</td>
+            <td>Samsung</td>
+            <td>["flagship","5g"]</td>
+          </tr>
+          <tr>
+            <td>Realme 11</td>
+            <td>Electronics</td>
+            <td>15999</td>
+            <td>120</td>
+            <td>4.1</td>
+            <td>Realme</td>
+            <td>["budget"]</td>
+          </tr>
+          <tr>
+            <td>Boat Earbuds</td>
+            <td>Accessories</td>
+            <td>1999</td>
+            <td>200</td>
+            <td>4.3</td>
+            <td>Boat</td>
+            <td>["wireless","budget"]</td>
+          </tr>
+          <tr>
+            <td>Nike Shoes</td>
+            <td>Footwear</td>
+            <td>4999</td>
+            <td>0</td>
+            <td>4.6</td>
+            <td>Nike</td>
+            <td>["sports"]</td>
+          </tr>
+          <tr>
+            <td>Levi Jeans</td>
+            <td>Clothing</td>
+            <td>2499</td>
+            <td>80</td>
+            <td>4.2</td>
+            <td>Levi</td>
+            <td>["casual"]</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="db-strip" style="margin-top:8px">
+      <div class="db-title">collection: orders</div>
+      <div class="db-scroll">
+        <table class="db-table">
+          <tr>
+            <th>orderId</th>
+            <th>customer</th>
+            <th>product</th>
+            <th>qty</th>
+            <th>status</th>
+            <th>city</th>
+            <th>total</th>
+          </tr>
+          <tr>
+            <td>ORD001</td>
+            <td>Ali</td>
+            <td>iPhone 15</td>
+            <td>1</td>
+            <td>delivered</td>
+            <td>Delhi</td>
+            <td>79999</td>
+          </tr>
+          <tr>
+            <td>ORD002</td>
+            <td>Sara</td>
+            <td>Boat Earbuds</td>
+            <td>2</td>
+            <td>pending</td>
+            <td>Mumbai</td>
+            <td>3998</td>
+          </tr>
+          <tr>
+            <td>ORD003</td>
+            <td>John</td>
+            <td>Nike Shoes</td>
+            <td>1</td>
+            <td>cancelled</td>
+            <td>Delhi</td>
+            <td>4999</td>
+          </tr>
+          <tr>
+            <td>ORD004</td>
+            <td>Emma</td>
+            <td>Levi Jeans</td>
+            <td>3</td>
+            <td>delivered</td>
+            <td>Chennai</td>
+            <td>7497</td>
+          </tr>
+          <tr>
+            <td>ORD005</td>
+            <td>David</td>
+            <td>Galaxy S24</td>
+            <td>1</td>
+            <td>pending</td>
+            <td>Mumbai</td>
+            <td>64999</td>
+          </tr>
+          <tr>
+            <td>ORD006</td>
+            <td>Lina</td>
+            <td>Realme 11</td>
+            <td>2</td>
+            <td>delivered</td>
+            <td>Delhi</td>
+            <td>31998</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="inter-qs"></div>
+  </div>
+
+  <div class="panel" id="panel-tough">
+    <div class="db-strip">
+      <div class="db-title">collection: users (e-commerce accounts)</div>
+      <div class="db-scroll">
+        <table class="db-table">
+          <tr>
+            <th>username</th>
+            <th>email</th>
+            <th>isPremium</th>
+            <th>wallet</th>
+            <th>city</th>
+            <th>orders (array)</th>
+            <th>address (nested)</th>
+          </tr>
+          <tr>
+            <td>ali99</td>
+            <td>ali@shop.com</td>
+            <td>true</td>
+            <td>500</td>
+            <td>Delhi</td>
+            <td>["ORD001","ORD007"]</td>
+            <td>{pin:110001, state:"DL"}</td>
+          </tr>
+          <tr>
+            <td>sara22</td>
+            <td>sara@shop.com</td>
+            <td>false</td>
+            <td>120</td>
+            <td>Mumbai</td>
+            <td>["ORD002"]</td>
+            <td>{pin:400001, state:"MH"}</td>
+          </tr>
+          <tr>
+            <td>john_d</td>
+            <td>john@shop.com</td>
+            <td>true</td>
+            <td>0</td>
+            <td>Delhi</td>
+            <td>["ORD003","ORD008"]</td>
+            <td>{pin:110002, state:"DL"}</td>
+          </tr>
+          <tr>
+            <td>emma_x</td>
+            <td>emma@shop.com</td>
+            <td>false</td>
+            <td>750</td>
+            <td>Chennai</td>
+            <td>["ORD004"]</td>
+            <td>{pin:600001, state:"TN"}</td>
+          </tr>
+          <tr>
+            <td>david_m</td>
+            <td>david@shop.com</td>
+            <td>true</td>
+            <td>300</td>
+            <td>Mumbai</td>
+            <td>["ORD005","ORD009"]</td>
+            <td>{pin:400002, state:"MH"}</td>
+          </tr>
+          <tr>
+            <td>lina_k</td>
+            <td>lina@shop.com</td>
+            <td>false</td>
+            <td>50</td>
+            <td>Delhi</td>
+            <td>["ORD006"]</td>
+            <td>{pin:110003, state:"DL"}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div id="tough-qs"></div>
+  </div>
+</div>
+
+<script>
+  const easyQs = [
+    {
+      n: 1, text: "Find all students who got grade A.",
+      hint: "Use a simple equality match on the grade field.",
+      ops: ["find", "$eq"],
+      answer: `<span class="fn">db.students</span>.<span class="fn">find</span>({ grade: <span class="str">"A"</span> })`
+    },
+    {
+      n: 2, text: "Find students whose age is greater than 21.",
+      hint: "Use a comparison operator on a numeric field.",
+      ops: ["find", "$gt"],
+      answer: `<span class="fn">db.students</span>.<span class="fn">find</span>({ age: { <span class="op">$gt</span>: <span class="num">21</span> } })`
+    },
+    {
+      n: 3, text: "Update John's city from Delhi to Bangalore.",
+      hint: "Use updateOne with a $set operator.",
+      ops: ["updateOne", "$set"],
+      answer: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"John"</span> },\n  { <span class="op">$set</span>: { city: <span class="str">"Bangalore"</span> } }\n)`
+    },
+    {
+      n: 4, text: "Increase Emma's age by 1.",
+      hint: "Use $inc — no need to know the current value.",
+      ops: ["updateOne", "$inc"],
+      answer: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"Emma"</span> },\n  { <span class="op">$inc</span>: { age: <span class="num">1</span> } }\n)`
+    },
+    {
+      n: 5, text: "Find all students NOT from Delhi.",
+      hint: "Use $ne to exclude a specific value.",
+      ops: ["find", "$ne"],
+      answer: `<span class="fn">db.students</span>.<span class="fn">find</span>({ city: { <span class="op">$ne</span>: <span class="str">"Delhi"</span> } })`
+    },
+    {
+      n: 6, text: "Remove the 'grade' field from Sara's document.",
+      hint: "Use $unset — pass an empty string as the value.",
+      ops: ["updateOne", "$unset"],
+      answer: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"Sara"</span> },\n  { <span class="op">$unset</span>: { grade: <span class="str">""</span> } }\n)`
+    }
+  ];
+
+  const interQs = [
+    {
+      n: 1, text: "Find all products that are either out of stock OR have a price below 2000. (Real use: 'Show items needing attention')",
+      hint: "$or can combine conditions on different fields.",
+      ops: ["find", "$or", "$lte"],
+      answer: `<span class="fn">db.products</span>.<span class="fn">find</span>({\n  <span class="op">$or</span>: [\n    { stock: <span class="num">0</span> },\n    { price: { <span class="op">$lte</span>: <span class="num">2000</span> } }\n  ]\n})`
+    },
+    {
+      n: 2, text: "Find all Electronics products with a rating >= 4.5 AND price below 70000. (Real use: 'Best value flagship filter')",
+      hint: "$and with comparison operators on two fields.",
+      ops: ["find", "$and", "$gte", "$lt"],
+      answer: `<span class="fn">db.products</span>.<span class="fn">find</span>({\n  <span class="op">$and</span>: [\n    { category: <span class="str">"Electronics"</span> },\n    { rating: { <span class="op">$gte</span>: <span class="num">4.5</span> } },\n    { price: { <span class="op">$lt</span>: <span class="num">70000</span> } }\n  ]\n})`
+    },
+    {
+      n: 3, text: "In the orders collection, find all delivered orders from Delhi OR Chennai with total > 5000. (Real use: 'High-value completed orders by region')",
+      hint: "Combine $and at the top level with $or for cities, and $gt for total.",
+      ops: ["find", "$and", "$or", "$gt"],
+      answer: `<span class="fn">db.orders</span>.<span class="fn">find</span>({\n  <span class="op">$and</span>: [\n    { status: <span class="str">"delivered"</span> },\n    { total: { <span class="op">$gt</span>: <span class="num">5000</span> } },\n    { <span class="op">$or</span>: [\n      { city: <span class="str">"Delhi"</span> },\n      { city: <span class="str">"Chennai"</span> }\n    ]}\n  ]\n})`
+    },
+    {
+      n: 4, text: "Update all pending orders to status 'processing' AND increment their total by 50 (handling fee). (Real use: 'Bulk order processing with fee')",
+      hint: "updateMany to hit all matches, $set and $inc together in one update.",
+      ops: ["updateMany", "$set", "$inc"],
+      answer: `<span class="fn">db.orders</span>.<span class="fn">updateMany</span>(\n  { status: <span class="str">"pending"</span> },\n  {\n    <span class="op">$set</span>: { status: <span class="str">"processing"</span> },\n    <span class="op">$inc</span>: { total: <span class="num">50</span> }\n  }\n)`
+    },
+    {
+      n: 5, text: "Find products that are NOT in Footwear or Clothing category (use $nor). (Real use: 'Show only tech & accessory products')",
+      hint: "$nor matches documents where NONE of the conditions are true.",
+      ops: ["find", "$nor"],
+      answer: `<span class="fn">db.products</span>.<span class="fn">find</span>({\n  <span class="op">$nor</span>: [\n    { category: <span class="str">"Footwear"</span> },\n    { category: <span class="str">"Clothing"</span> }\n  ]\n})`
+    },
+    {
+      n: 6, text: "Add the tag 'bestseller' to iPhone 15's tags array. (Real use: 'Admin marks trending product')",
+      hint: "Use $push to append to an existing array field.",
+      ops: ["updateOne", "$push"],
+      answer: `<span class="fn">db.products</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"iPhone 15"</span> },\n  { <span class="op">$push</span>: { tags: <span class="str">"bestseller"</span> } }\n)`
+    }
+  ];
+
+  const toughQs = [
+    {
+      n: 1, text: "Find all premium users (isPremium: true) from Delhi OR Mumbai whose wallet balance is greater than 0. Then set their wallet to 0 and add a field 'cashbackUsed: true'. (Real use: 'Redeem wallet cashback for premium users in metro cities')",
+      hint: "Use $or for cities inside an $and. updateMany with $set on two fields at once.",
+      ops: ["updateMany", "$and", "$or", "$gt", "$set"],
+      answer: `<span class="fn">db.users</span>.<span class="fn">updateMany</span>(\n  {\n    <span class="op">$and</span>: [\n      { isPremium: <span class="kw">true</span> },\n      { wallet: { <span class="op">$gt</span>: <span class="num">0</span> } },\n      { <span class="op">$or</span>: [\n        { city: <span class="str">"Delhi"</span> },\n        { city: <span class="str">"Mumbai"</span> }\n      ]}\n    ]\n  },\n  {\n    <span class="op">$set</span>: {\n      wallet: <span class="num">0</span>,\n      cashbackUsed: <span class="kw">true</span>\n    }\n  }\n)`
+    },
+    {
+      n: 2, text: "Find all users who have 'ORD003' in their orders array. Then rename their field 'email' to 'contactEmail'. (Real use: 'Schema migration — rename email field for users with a specific order')",
+      hint: "Use $in to check if a value exists inside an array field. Then $rename.",
+      ops: ["find + updateOne", "$in", "$rename"],
+      answer: `<span class="cmt">// Step 1: find them</span>\n<span class="fn">db.users</span>.<span class="fn">find</span>({ orders: { <span class="op">$in</span>: [<span class="str">"ORD003"</span>] } })\n\n<span class="cmt">// Step 2: rename the field</span>\n<span class="fn">db.users</span>.<span class="fn">updateMany</span>(\n  { orders: { <span class="op">$in</span>: [<span class="str">"ORD003"</span>] } },\n  { <span class="op">$rename</span>: { email: <span class="str">"contactEmail"</span> } }\n)`
+    },
+    {
+      n: 3, text: "For users in Chennai with isPremium: false and wallet < 100, add 200 to their wallet and push 'WELCOME200' into a new field called 'coupons'. (Real use: 'Targeted coupon campaign for low-wallet non-premium users in Chennai')",
+      hint: "Combine $and with $lt. Use $inc for wallet and $push for coupons array.",
+      ops: ["updateMany", "$and", "$lt", "$inc", "$push"],
+      answer: `<span class="fn">db.users</span>.<span class="fn">updateMany</span>(\n  {\n    <span class="op">$and</span>: [\n      { city: <span class="str">"Chennai"</span> },\n      { isPremium: <span class="kw">false</span> },\n      { wallet: { <span class="op">$lt</span>: <span class="num">100</span> } }\n    ]\n  },\n  {\n    <span class="op">$inc</span>: { wallet: <span class="num">200</span> },\n    <span class="op">$push</span>: { coupons: <span class="str">"WELCOME200"</span> }\n  }\n)`
+    },
+    {
+      n: 4, text: "Find users whose nested address.state is 'DL' AND who have more than 1 order in their orders array. (Real use: 'Find active Delhi-state users for a regional campaign')",
+      hint: "Use dot notation for nested fields: address.state. Use $gt on the array size... hint: check $where or use $expr with $size.",
+      ops: ["find", "$and", "$gt", "$size", "$expr", "dot notation"],
+      answer: `<span class="fn">db.users</span>.<span class="fn">find</span>({\n  <span class="op">$and</span>: [\n    { <span class="str">"address.state"</span>: <span class="str">"DL"</span> },\n    {\n      <span class="op">$expr</span>: {\n        <span class="op">$gt</span>: [\n          { <span class="op">$size</span>: <span class="str">"$orders"</span> },\n          <span class="num">1</span>\n        ]\n      }\n    }\n  ]\n})`
+    },
+    {
+      n: 5, text: "Remove 'ORD003' from john_d's orders array. Then set his isPremium to false and unset his wallet field entirely. (Real use: 'Cancel order and downgrade user account')",
+      hint: "Three operators in one update: $pull on array, $set on boolean, $unset on field.",
+      ops: ["updateOne", "$pull", "$set", "$unset"],
+      answer: `<span class="fn">db.users</span>.<span class="fn">updateOne</span>(\n  { username: <span class="str">"john_d"</span> },\n  {\n    <span class="op">$pull</span>: { orders: <span class="str">"ORD003"</span> },\n    <span class="op">$set</span>: { isPremium: <span class="kw">false</span> },\n    <span class="op">$unset</span>: { wallet: <span class="str">""</span> }\n  }\n)`
+    },
+    {
+      n: 6, text: "Find users who are NOR premium NOR from Mumbai, then update their address.pin using $set with dot notation, setting it to 000000. (Real use: 'Flag unknown addresses for non-premium non-metro users')",
+      hint: "$nor for filtering. Use dot notation inside $set: { 'address.pin': value }",
+      ops: ["updateMany", "$nor", "$set", "nested dot notation"],
+      answer: `<span class="fn">db.users</span>.<span class="fn">updateMany</span>(\n  {\n    <span class="op">$nor</span>: [\n      { isPremium: <span class="kw">true</span> },\n      { city: <span class="str">"Mumbai"</span> }\n    ]\n  },\n  {\n    <span class="op">$set</span>: { <span class="str">"address.pin"</span>: <span class="num">000000</span> }\n  }\n)`
+    }
+  ];
+
+  function buildCard(q, badge) {
+    const id = `q-${badge}-${q.n}`;
+    const pills = q.ops.map(o => `<span class="op-pill">${o}</span>`).join('');
+    return `<div class="q-card">
+    <div class="q-header">
+      <span class="q-num ${badge}-badge">Q${q.n}</span>
+      <div>
+        <div class="q-text">${q.text}</div>
+        <div class="q-hint">${q.hint}</div>
+        <div class="ops-used">${pills}</div>
+      </div>
+    </div>
+    <textarea id="ta-${id}" placeholder="Write your MongoDB query here..."></textarea>
+    <div class="btn-row">
+      <button class="check-btn" onclick="checkAnswer('${id}')">Check answer</button>
+      <button class="show-btn" onclick="toggleAnswer('${id}')">Show answer</button>
+    </div>
+    <div class="feedback" id="fb-${id}" style="display:none"></div>
+    <div class="answer-box" id="ans-${id}">
+      <div class="answer-label">Answer</div>
+      <div class="answer-code">${q.answer}</div>
+    </div>
+  </div>`;
+  }
+
+  const answers = {};
+  easyQs.forEach(q => {answers[`q-easy-${q.n}`] = q.answer.replace(/<[^>]+>/g, '').trim()});
+  interQs.forEach(q => {answers[`q-inter-${q.n}`] = q.answer.replace(/<[^>]+>/g, '').trim()});
+  toughQs.forEach(q => {answers[`q-tough-${q.n}`] = q.answer.replace(/<[^>]+>/g, '').trim()});
+
+  function normalize(s) {return s.replace(/\s+/g, ' ').replace(/\n/g, ' ').trim().toLowerCase();}
+
+  function checkAnswer(id) {
+    const ta = document.getElementById('ta-' + id);
+    const fb = document.getElementById('fb-' + id);
+    const user = normalize(ta.value);
+    const correct = normalize(answers[id] || '');
+    fb.style.display = 'block';
+    if (!user) {fb.className = 'feedback fb-no'; fb.textContent = 'Please write a query first.'; return;}
+    const keyOps = correct.match(/\$\w+/g) || [];
+    const userHasOps = keyOps.filter(op => user.includes(op));
+    const pct = Math.round((userHasOps.length / Math.max(keyOps.length, 1)) * 100);
+    if (pct >= 80) {
+      fb.className = 'feedback fb-ok';
+      fb.textContent = `Good job! Your query uses the right operators (${userHasOps.join(', ')}).`;
+    } else {
+      const missing = keyOps.filter(op => !user.includes(op));
+      fb.className = 'feedback fb-no';
+      fb.textContent = `Not quite. Missing operators: ${missing.join(', ')}. Try again or click Show Answer.`;
+    }
+  }
+
+  function toggleAnswer(id) {
+    const box = document.getElementById('ans-' + id);
+    box.classList.toggle('visible');
+  }
+
+  function switchLevel(level, el) {
+    document.querySelectorAll('.ltab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('panel-' + level).classList.add('active');
+  }
+
+  document.getElementById('easy-qs').innerHTML = easyQs.map(q => buildCard(q, 'easy')).join('');
+  document.getElementById('inter-qs').innerHTML = `<div class="section-head">Products &amp; Orders collection</div>` + interQs.map(q => buildCard(q, 'inter')).join('');
+  document.getElementById('tough-qs').innerHTML = `<div class="section-head">Users collection — nested documents &amp; arrays</div>` + toughQs.map(q => buildCard(q, 'tough')).join('');
+</script>

@@ -18,7 +18,8 @@
 		/* Card Container with Perspective */
 		.card-container {
 			perspective: 1000px;
-			animation: fadeIn 4s ease forwards;
+			/* creates a 3D camera depth Without perspective, the flip would look flat and amateur.*/
+			/* animation: fadeIn 4s ease forwards; */
 		}
 
 		/* Card Styles */
@@ -27,9 +28,12 @@
 			height: 380px;
 			position: relative;
 			transform-style: preserve-3d;
+			/* allows children to exist in 3D space */
 			transition: transform 0.8s ease;
+			/* smooth flip instead of instant jump */
 		}
 
+		/* flips the card on hover */
 		.card-container:hover .card {
 			transform: rotateY(180deg);
 		}

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+	<form id="myForm">
+		<input type="text" id="name" placeholder="Enter name">
+		<button type="submit">Submit</button>
+		<p id="error" style="color:red;"></p>
+	</form>
+
+	<script>
+		// Select form and input
+		let form = document.getElementById("myForm");
+		let nameInput = document.getElementById("name");
+		let errorMsg = document.getElementById("error");
+
+		// Listen for submit
+		form.addEventListener("submit", function (event) {
+
+			// Stop page reload
+			event.preventDefault();
+
+			// Check if empty
+			if (nameInput.value === "") {
+				errorMsg.textContent = "Name cannot be empty!";
+			} else {
+				errorMsg.textContent = "";
+				console.log("Form submitted successfully!");
+			}
+		});
+	</script>
+
+</body>
+
+</html>

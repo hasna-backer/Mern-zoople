@@ -2,7 +2,7 @@
 
 body {
 	font-family: Arial, sans-serif;
-	background-color: #faf8fa;
+	background-color: #aef4ae;
 	padding: 20px;
 	color: #333;
   }
@@ -11,7 +11,29 @@ body {
 	color: darkgreen;
 	text-align: center;
 	text-decoration: underline;
+	background-color: #007bff;
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   
   /* Targeting class "external" */
   .external {

@@ -1,0 +1,70 @@
+/* STRUCTURE BASED */
+/* Profile image styling */
+.profile-img {
+	width: 100px;
+	height: 100px;
+	margin-bottom: 15px;
+  }
+
+.students li:first-child {
+	color: red;
+  }
+  
+  .students li:last-child {
+	color: blue;
+  }
+  
+  .students li:nth-child(2) {
+	font-weight: bold;
+  }
+  
+  /* INTERACTION */
+  .card {
+	width: 200px;
+	padding: 10px;
+	border: 2px solid #ccc;
+	margin-top: 20px;
+  }
+  
+  .card:hover {
+	background-color: #e0f2fe;
+  }
+  
+  .card:hover .profile-img {
+	border: 3px solid #38bdf8;
+  }
+  
+  /* FORM STATES */
+  input:focus {
+	border: 25px solid green;
+  }
+  
+  input:required {
+	background-color: #fff9c4;
+  }
+  
+  input:valid {
+	border-color: rgb(11, 208, 11);
+  }
+  
+  input:invalid {
+	border-color: red;
+  }
+  
+  input:checked {
+	accent-color: purple;
+  }
+  
+  /* button:disabled {
+	background-color: gray;
+	cursor: not-allowed;
+  } */
+  
+  
+  
+  /* EMPTY */
+  .box:empty {
+	height: 50px;
+	background-color: lightgray;
+  }
+  

@@ -1,27 +1,36 @@
-<h1 class="fade">Hello world</h1>
-<style>
-	.fade {
-		opacity: 0;
-		animation: fadeIn 3s ease-in-out forwards infinite;
-	}
+<html>
 
-	@keyframes fadeIn {
-		to {
-			opacity: 1
+<head>
+	<title>Fade</title>
+	<style>
+		.fade {
+			opacity: 0;
+			animation: fadeIn 3s ease-in-out forwards infinite;
 		}
-	}
-</style>
 
-<div class="slide">Slideeeeeeeeeeeee</div>
-<style>
-	.slide {
-		transform: translateX(-100%);
-		animation: slideIn 1s forwards infinite alternate;
-	}
-
-	@keyframes slideIn {
-		to {
-			transform: translateX(0)
+		@keyframes fadeIn {
+			to {
+				opacity: 1
+			}
 		}
-	}
-</style>
+
+		.slide {
+			transform: translateX(-100%);
+			animation: slideIn 1s forwards infinite alternate;
+		}
+
+		@keyframes slideIn {
+			to {
+				transform: translateX(0)
+			}
+		}
+	</style>
+</head>
+
+<body>
+	<div class="slide">Slideeeeeeeeeeeee</div>
+	<h1 class="fade">Hello world</h1>
+
+</body>
+
+</html>

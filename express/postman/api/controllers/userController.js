@@ -11,7 +11,14 @@ export const createUser = (req, res) => {
 };
 
 export const editUser = (req, res) => {
+  console.log("hiiiiii");
+  
   const id = parseInt(req.params.id);
+
+  console.log("req.params.id:", req.params.id);
+  console.log("req.body:", req.body);
+  
+
   const { name } = req.body;
   const updated = updateUser(id, name);
 

@@ -1,0 +1,28 @@
+Task:1
+Store a word in a string and Count how many vowels it has
+Print:
+"Many vowels" if count > 3
+"Few vowels" otherwise
+
+example
+input => Word = "education"
+		Vowels → e, u, a, i, o = 5
+		output Many vowels
+----------------------------------------------------------------------------------------
+Task:2
+Store a name ,If length of name is less than 4 print "Invalid name"
+Otherwise print "Valid name"
+
+example
+Name = "Ali" Length = 3 (< 4)
+Invalid name
+---------------------------------------------------------------------------------------
+Task:3
+Store a password
+Conditions:
+Length ≥ 8
+Contains at least one number
+
+Task:4
+Given an array of words then Find the longest word 
+Print the word and its length

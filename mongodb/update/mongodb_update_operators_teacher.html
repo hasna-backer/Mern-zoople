@@ -1,0 +1,578 @@
+<style>
+  :root {
+    --font-sans: Arial, sans-serif;
+
+    --color-text-primary: #222;
+    --color-text-secondary: #050404;
+    --color-text-info: #0b5ed7;
+
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f5;
+    --color-background-info: #e7f1ff;
+    --color-background-warning: #fff3cd;
+
+    --color-border-primary: #161515;
+    --color-border-secondary: #ccc;
+    --color-border-tertiary: #121010;
+    --color-border-info: #133f81;
+
+    --border-radius-md: 6px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  .wrap {
+    padding: 1rem 0;
+    font-family: var(--font-sans)
+  }
+
+  .tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem
+  }
+
+  .tab {
+    padding: 6px 14px;
+    font-size: 13px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary)
+  }
+
+  .tab.active {
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    border-color: var(--color-border-info)
+  }
+
+  .panel {
+    display: none
+  }
+
+  .panel.active {
+    display: block
+  }
+
+  .explain {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border-left: 2.5px solid var(--color-border-info);
+    background: var(--color-background-info);
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0
+  }
+
+  .sub-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px
+  }
+
+  .sub-tab {
+    padding: 4px 11px;
+    font-size: 12px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary)
+  }
+
+  .sub-tab.active {
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border-primary)
+  }
+
+  .label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500
+  }
+
+  .query-box {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 12px 14px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text-primary);
+    white-space: pre-wrap;
+    line-height: 1.7
+  }
+
+  .kw {
+    color: #7F77DD
+  }
+
+  .str {
+    color: #0F6E56
+  }
+
+  .num {
+    color: #BA7517
+  }
+
+  .op {
+    color: #993C1D
+  }
+
+  .fn {
+    color: #185FA5
+  }
+
+  .run-btn {
+    margin-top: 10px;
+    padding: 7px 18px;
+    font-size: 13px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-primary)
+  }
+
+  .run-btn:hover {
+    background: var(--color-background-secondary)
+  }
+
+  .reset-btn {
+    margin-top: 10px;
+    margin-left: 8px;
+    padding: 7px 18px;
+    font-size: 13px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary)
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 14px
+  }
+
+  .col-head {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: .04em
+  }
+
+  .rec {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    margin-bottom: 6px;
+    font-size: 13px
+  }
+
+  .rec-name {
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--color-text-primary)
+  }
+
+  .field-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 2px 0;
+    font-size: 12px
+  }
+
+  .fk {
+    color: var(--color-text-secondary)
+  }
+
+  .fv {
+    color: var(--color-text-primary)
+  }
+
+  .changed {
+    background: var(--color-background-success);
+    color: var(--color-text-success);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 500
+  }
+
+  .added {
+    background: var(--color-background-warning);
+    color: var(--color-text-warning);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: 500
+  }
+
+  .removed {
+    background: var(--color-background-danger);
+    color: var(--color-text-danger);
+    padding: 1px 6px;
+    border-radius: 4px;
+    text-decoration: line-through;
+    font-size: 11px
+  }
+
+  .unchanged {
+    color: var(--color-text-primary)
+  }
+
+  .arrow {
+    text-align: center;
+    font-size: 18px;
+    color: var(--color-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 28px
+  }
+
+  .note {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: 10px;
+    font-style: italic
+  }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">MongoDB Update Operators</h2>
+
+  <div class="tabs" id="mainTabs">
+    <button class="tab active" onclick="switchTab('set')">$set</button>
+    <button class="tab" onclick="switchTab('unset')">$unset</button>
+    <button class="tab" onclick="switchTab('inc')">$inc</button>
+    <button class="tab" onclick="switchTab('rename')">$rename</button>
+    <button class="tab" onclick="switchTab('push')">$push</button>
+    <button class="tab" onclick="switchTab('pull')">$pull</button>
+    <button class="tab" onclick="switchTab('multi')">updateMany</button>
+  </div>
+
+  <!-- $set -->
+  <div class="panel active" id="panel-set">
+    <div class="explain"><code>$set</code> updates the value of a field. If the field does not exist, it creates it.
+    </div>
+    <div class="sub-tabs" id="setTabs">
+      <button class="sub-tab active" onclick="switchSub('set','existing')">update existing field</button>
+      <button class="sub-tab" onclick="switchSub('set','new')">add new field</button>
+    </div>
+    <div class="label">Query</div>
+    <div class="query-box" id="set-query"></div>
+    <button class="run-btn" onclick="runOp('set')">▶ Run update</button>
+    <button class="reset-btn" onclick="resetOp('set')">↺ Reset</button>
+    <div id="set-out"></div>
+  </div>
+
+  <!-- $unset -->
+  <div class="panel" id="panel-unset">
+    <div class="explain"><code>$unset</code> removes a field from the document entirely.</div>
+    <div class="label">Query</div>
+    <div class="query-box" id="unset-query"></div>
+    <button class="run-btn" onclick="runOp('unset')">▶ Run update</button>
+    <button class="reset-btn" onclick="resetOp('unset')">↺ Reset</button>
+    <div id="unset-out"></div>
+  </div>
+
+  <!-- $inc -->
+  <div class="panel" id="panel-inc">
+    <div class="explain"><code>$inc</code> increments (or decrements with a negative value) a numeric field by the given
+      amount.</div>
+    <div class="sub-tabs" id="incTabs">
+      <button class="sub-tab active" onclick="switchSub('inc','plus')">increment +1</button>
+      <button class="sub-tab" onclick="switchSub('inc','minus')">decrement -2</button>
+    </div>
+    <div class="label">Query</div>
+    <div class="query-box" id="inc-query"></div>
+    <button class="run-btn" onclick="runOp('inc')">▶ Run update</button>
+    <button class="reset-btn" onclick="resetOp('inc')">↺ Reset</button>
+    <div id="inc-out"></div>
+  </div>
+
+  <!-- $rename -->
+  <div class="panel" id="panel-rename">
+    <div class="explain"><code>$rename</code> renames a field. The old field is removed and a new field with the new
+      name holds the same value.</div>
+    <div class="label">Query</div>
+    <div class="query-box" id="rename-query"></div>
+    <button class="run-btn" onclick="runOp('rename')">▶ Run update</button>
+    <button class="reset-btn" onclick="resetOp('rename')">↺ Reset</button>
+    <div id="rename-out"></div>
+  </div>
+
+  <!-- $push -->
+  <div class="panel" id="panel-push">
+    <div class="explain"><code>$push</code> appends a value to an array field. If the field does not exist, it creates a
+      new array.</div>
+    <div class="label">Query</div>
+    <div class="query-box" id="push-query"></div>
+    <button class="run-btn" onclick="runOp('push')">▶ Run update</button>
+    <button class="reset-btn" onclick="resetOp('push')">↺ Reset</button>
+    <div id="push-out"></div>
+  </div>
+
+  <!-- $pull -->
+  <div class="panel" id="panel-pull">
+    <div class="explain"><code>$pull</code> removes all occurrences of a value from an array field.</div>
+    <div class="label">Query</div>
+    <div class="query-box" id="pull-query"></div>
+    <button class="run-btn" onclick="runOp('pull')">▶ Run update</button>
+    <button class="reset-btn" onclick="resetOp('pull')">↺ Reset</button>
+    <div id="pull-out"></div>
+  </div>
+
+  <!-- updateMany -->
+  <div class="panel" id="panel-multi">
+    <div class="explain"><code>updateOne</code> updates only the first matching document. <code>updateMany</code>
+      updates ALL matching documents at once.</div>
+    <div class="sub-tabs" id="multiTabs">
+      <button class="sub-tab active" onclick="switchSub('multi','one')">updateOne</button>
+      <button class="sub-tab" onclick="switchSub('multi','many')">updateMany</button>
+    </div>
+    <div class="label">Query</div>
+    <div class="query-box" id="multi-query"></div>
+    <button class="run-btn" onclick="runOp('multi')">▶ Run update</button>
+    <button class="reset-btn" onclick="resetOp('multi')">↺ Reset</button>
+    <div id="multi-out"></div>
+  </div>
+</div>
+
+<script>
+  const base = () => [
+    {name: "Ali", age: 20, course: "Math", grade: "A", city: "Delhi"},
+    {name: "Sara", age: 22, course: "Physics", grade: "B", city: "Mumbai"},
+    {name: "John", age: 21, course: "CS", grade: "A", city: "Delhi"},
+    {name: "Emma", age: 23, course: "Math", grade: "C", city: "Chennai"},
+    {name: "David", age: 22, course: "CS", grade: "B", city: "Mumbai"},
+    {name: "Lina", age: 24, course: "Physics", grade: "A", city: "Delhi"}
+  ];
+
+  let states = {set: base(), unset: base(), inc: base(), rename: base(), push: base(), pull: base(), multi: base()};
+  let activeSubs = {set: 'existing', inc: 'plus', multi: 'one'};
+
+  const ops = {
+    set: {
+      existing: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"Ali"</span> },\n  { <span class="op">$set</span>: { grade: <span class="str">"B"</span>, city: <span class="str">"Mumbai"</span> } }\n)`,
+        run(data) {
+          const i = data.findIndex(s => s.name === 'Ali');
+          if (i < 0) return {idx: -1};
+          const before = {...data[i]};
+          data[i] = {...data[i], grade: 'B', city: 'Mumbai'};
+          return {idx: i, before, after: {...data[i]}, changed: ['grade', 'city']};
+        }
+      },
+      new: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"John"</span> },\n  { <span class="op">$set</span>: { scholarship: <span class="kw">true</span> } }\n)`,
+        run(data) {
+          const i = data.findIndex(s => s.name === 'John');
+          if (i < 0) return {idx: -1};
+          const before = {...data[i]};
+          data[i] = {...data[i], scholarship: true};
+          return {idx: i, before, after: {...data[i]}, added: ['scholarship']};
+        }
+      }
+    },
+    unset: {
+      default: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"Emma"</span> },\n  { <span class="op">$unset</span>: { city: <span class="str">""</span> } }\n)`,
+        run(data) {
+          const i = data.findIndex(s => s.name === 'Emma');
+          if (i < 0) return {idx: -1};
+          const before = {...data[i]};
+          delete data[i].city;
+          return {idx: i, before, after: {...data[i]}, removed: ['city']};
+        }
+      }
+    },
+    inc: {
+      plus: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"Sara"</span> },\n  { <span class="op">$inc</span>: { age: <span class="num">1</span> } }\n)`,
+        run(data) {
+          const i = data.findIndex(s => s.name === 'Sara');
+          if (i < 0) return {idx: -1};
+          const before = {...data[i]};
+          data[i].age += 1;
+          return {idx: i, before, after: {...data[i]}, changed: ['age']};
+        }
+      },
+      minus: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"Lina"</span> },\n  { <span class="op">$inc</span>: { age: <span class="num">-2</span> } }\n)`,
+        run(data) {
+          const i = data.findIndex(s => s.name === 'Lina');
+          if (i < 0) return {idx: -1};
+          const before = {...data[i]};
+          data[i].age -= 2;
+          return {idx: i, before, after: {...data[i]}, changed: ['age']};
+        }
+      }
+    },
+    rename: {
+      default: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"David"</span> },\n  { <span class="op">$rename</span>: { city: <span class="str">"location"</span> } }\n)`,
+        run(data) {
+          const i = data.findIndex(s => s.name === 'David');
+          if (i < 0) return {idx: -1};
+          const before = {...data[i]};
+          data[i].location = data[i].city;
+          delete data[i].city;
+          return {idx: i, before, after: {...data[i]}, removed: ['city'], added: ['location']};
+        }
+      }
+    },
+    push: {
+      default: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"Ali"</span> },\n  { <span class="op">$push</span>: { hobbies: <span class="str">"chess"</span> } }\n)`,
+        run(data) {
+          const i = data.findIndex(s => s.name === 'Ali');
+          if (i < 0) return {idx: -1};
+          const before = {...data[i], hobbies: data[i].hobbies ? [...data[i].hobbies] : undefined};
+          if (!data[i].hobbies) data[i].hobbies = [];
+          data[i].hobbies.push('chess');
+          return {idx: i, before, after: {...data[i], hobbies: [...data[i].hobbies]}, added: ['hobbies']};
+        }
+      }
+    },
+    pull: {
+      default: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { name: <span class="str">"Ali"</span> },\n  { <span class="op">$pull</span>: { hobbies: <span class="str">"chess"</span> } }\n)`,
+        run(data) {
+          const i = data.findIndex(s => s.name === 'Ali');
+          if (i < 0) return {idx: -1};
+          if (!data[i].hobbies || !data[i].hobbies.includes('chess')) {
+            if (!data[i].hobbies) data[i].hobbies = ['chess', 'coding'];
+            const before = {...data[i], hobbies: [...data[i].hobbies]};
+            data[i].hobbies = data[i].hobbies.filter(h => h !== 'chess');
+            return {idx: i, before, after: {...data[i], hobbies: [...data[i].hobbies]}, changed: ['hobbies']};
+          }
+          const before = {...data[i], hobbies: [...data[i].hobbies]};
+          data[i].hobbies = data[i].hobbies.filter(h => h !== 'chess');
+          return {idx: i, before, after: {...data[i], hobbies: [...data[i].hobbies]}, changed: ['hobbies']};
+        }
+      }
+    },
+    multi: {
+      one: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateOne</span>(\n  { city: <span class="str">"Delhi"</span> },\n  { <span class="op">$set</span>: { verified: <span class="kw">true</span> } }\n)\n<span style="color:var(--color-text-secondary);font-size:12px">// Only FIRST Delhi student is updated</span>`,
+        run(data) {
+          const i = data.findIndex(s => s.city === 'Delhi');
+          if (i < 0) return {idx: -1};
+          const before = {...data[i]};
+          data[i].verified = true;
+          return {idx: i, before, after: {...data[i]}, added: ['verified'], note: 'Only Ali was updated — updateOne stops at the first match.'};
+        }
+      },
+      many: {
+        q: `<span class="fn">db.students</span>.<span class="fn">updateMany</span>(\n  { city: <span class="str">"Delhi"</span> },\n  { <span class="op">$set</span>: { verified: <span class="kw">true</span> } }\n)\n<span style="color:var(--color-text-secondary);font-size:12px">// ALL Delhi students are updated</span>`,
+        run(data) {
+          const idxs = [];
+          const befores = [];
+          data.forEach((s, i) => {if (s.city === 'Delhi') {befores.push({i, before: {...s}}); s.verified = true; idxs.push(i);} });
+          return {multiIdx: idxs, befores, data, added: ['verified'], note: `${idxs.length} documents updated — Ali, John, Lina all matched.`};
+        }
+      }
+    }
+  };
+
+  function getOp(group) {
+    const sub = activeSubs[group] || 'default';
+    return ops[group][sub] || ops[group]['default'];
+  }
+
+  function updateQuery(group) {
+    const op = getOp(group);
+    document.getElementById(group + '-query').innerHTML = op.q;
+  }
+
+  function renderField(key, val, type) {
+    const display = Array.isArray(val) ? `[${val.join(', ')}]` : String(val);
+    if (type === 'changed') return `<div class="field-row"><span class="fk">${key}:</span><span class="changed">${display}</span></div>`;
+    if (type === 'added') return `<div class="field-row"><span class="fk">${key}:</span><span class="added">${display} (new)</span></div>`;
+    if (type === 'removed') return `<div class="field-row"><span class="fk">${key}:</span><span class="removed">${display}</span></div>`;
+    return `<div class="field-row"><span class="fk">${key}:</span><span class="fv">${display}</span></div>`;
+  }
+
+  function renderDoc(doc, changes, removed, added) {
+    return Object.entries(doc).map(([k, v]) => {
+      if (added && added.includes(k)) return renderField(k, v, 'added');
+      if (changes && changes.includes(k)) return renderField(k, v, 'changed');
+      return renderField(k, v, 'normal');
+    }).join('') + (removed ? removed.map(k => `<div class="field-row"><span class="fk">${k}:</span><span class="removed">(removed)</span></div>`).join('') : '');
+  }
+
+  function runOp(group) {
+    const op = getOp(group);
+    const data = states[group];
+    const result = op.run(data);
+    const out = document.getElementById(group + '-out');
+
+    if (result.multiIdx) {
+      let html = `<div style="margin-top:14px">`;
+      html += `<div class="col-head" style="margin-bottom:8px">Updated documents (${result.multiIdx.length} matched)</div>`;
+      result.befores.forEach(({i, before}) => {
+        const after = data[i];
+        html += `<div style="display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;margin-bottom:10px">`;
+        html += `<div><div class="col-head">before</div><div class="rec"><div class="rec-name">${before.name}</div>${renderDoc(before, [], [], [])} </div></div>`;
+        html += `<div class="arrow">→</div>`;
+        html += `<div><div class="col-head">after</div><div class="rec"><div class="rec-name">${after.name}</div>${renderDoc(after, [], [], result.added || [])}</div></div>`;
+        html += `</div>`;
+      });
+      if (result.note) html += `<div class="note">${result.note}</div>`;
+      html += `</div>`;
+      out.innerHTML = html;
+      return;
+    }
+
+    if (result.idx < 0) {out.innerHTML = `<div class="note" style="margin-top:10px">No matching document found — already updated? Click Reset.</div>`; return;}
+
+    const before = result.before;
+    const after = result.after;
+    let html = `<div style="display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;margin-top:14px">`;
+    html += `<div><div class="col-head">before</div><div class="rec"><div class="rec-name">${before.name}</div>${renderDoc(before, [], result.removed || [], [])}</div></div>`;
+    html += `<div class="arrow">→</div>`;
+    html += `<div><div class="col-head">after</div><div class="rec"><div class="rec-name">${after.name}</div>${renderDoc(after, result.changed || [], [], result.added || [])}</div></div>`;
+    html += `</div>`;
+    if (result.note) html += `<div class="note">${result.note}</div>`;
+    out.innerHTML = html;
+  }
+
+  function resetOp(group) {
+    states[group] = base();
+    document.getElementById(group + '-out').innerHTML = '';
+  }
+
+  function switchTab(id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+  }
+
+  function switchSub(group, key) {
+    activeSubs[group] = key;
+    document.querySelectorAll(`#${group}Tabs .sub-tab`).forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    updateQuery(group);
+    document.getElementById(group + '-out').innerHTML = '';
+  }
+
+  ['set', 'unset', 'inc', 'rename', 'push', 'pull', 'multi'].forEach(g => updateQuery(g));
+</script>

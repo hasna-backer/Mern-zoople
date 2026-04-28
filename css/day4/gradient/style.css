@@ -1,14 +1,13 @@
 /* ---------- General Page Styles ---------- */
 body {
-	font-family: Arial, sans-serif;
 	background-color: #f9f9f9;
-	margin: 20px;
+	margin: 10px;
 	line-height: 1.6;
   }
   
   h1 {
 	text-align: center;
-	color: #2c3e50;
+	color: #177de4;
 	margin-bottom: 30px;
   }
   
@@ -17,13 +16,14 @@ body {
   }
   
   /* ---------- 1️⃣ Background Properties ---------- */
-  .background-section div {
+ div {
 	padding: 50px;
 	margin: 15px 0;
-	color: white;
+	color: rgb(18, 11, 11);
 	text-align: center;
 	border-radius: 8px;
 	font-weight: bold;
+	border: #e75608 2px solid;
   }
   
   /* Background color */
@@ -34,17 +34,11 @@ body {
   /* Background image */
   .bg-image {
 	background-image: url('bg.png');
-	/* background-size: cover;
-	background-position: center; */
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
   }
   
-  /* Background repeat */
-  .bg-repeat {
-	background-image: url('bg.png');
-	background-repeat: repeat;
-	color: black;
-	background-size: 100px;
-  }
   
   /* Background position & size */
   .bg-position {
@@ -74,12 +68,12 @@ body {
   
   /* Linear Gradient */
   .linear-gradient {
-	background: linear-gradient(90deg, #f34013, #1846df);
+	background: linear-gradient(10deg, #f34013,orange, #1846df, #74db34);
   }
-  
+
   /* Radial Gradient */
   .radial-gradient {
-	background: radial-gradient(circle, #b3069b, #085ae7);
+	background: radial-gradient(circle, #b3069b, #085ae7, #221e18);
   }
   
   /* ---------- 3️⃣ Shadows ---------- */
@@ -89,7 +83,7 @@ body {
 	padding: 30px;
 	text-align: center;
 	border-radius: 10px;
-	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+	box-shadow: 10px 8px 10px rgba(234, 17, 17,.9);
 	width: 250px;
 	margin: auto;
   }
@@ -99,12 +93,12 @@ body {
 	font-size: 24px;
 	font-weight: bold;
 	color: #2c3e50;
-	text-shadow: 2px 2px 5px rgba(255, 0, 0, 0.5);
+	text-shadow: 40px 20px 5px rgba(255, 0, 0, .4);
   }
   
   /* ---------- 4️⃣ Opacity & Transparency ---------- */
   .opacity-demo {
-	background-color: rgba(243, 58, 26, 0.7); /* tomato with transparency */
+	background-color: rgba(247, 48, 13,.3); /* tomato with transparency */
 	color: white;
 	padding: 40px;
 	text-align: center;

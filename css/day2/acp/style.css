@@ -15,7 +15,6 @@ body {
 	margin: 20px;
 	width: 250px;
 	text-align: center;
-	box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 	/* transition: all 0.3s ease; */
   }
   
@@ -23,10 +22,10 @@ body {
   .card:hover {
 	background-color: #e0f2fe;
 	border-color: #38bdf8;
-	box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+	box-shadow: 10px 6px 12px rgba(237, 22, 22, 0.9);
   }
   .card:hover .profile-img {
-	border-color: #38bdf8; /* or any color you like */
+	border-color: #0c0aa1; /* or any color you like */
   }
   
   /* Profile image styling */

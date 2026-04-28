@@ -1,0 +1,387 @@
+<style>
+  :root {
+    --font-sans: Arial, sans-serif;
+
+    --color-text-primary: #222;
+    --color-text-secondary: #050404;
+    --color-text-info: #0b5ed7;
+
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f5;
+    --color-background-info: #e7f1ff;
+    --color-background-warning: #fff3cd;
+
+    --color-border-primary: #333;
+    --color-border-secondary: #ccc;
+    --color-border-tertiary: #ddd;
+    --color-border-info: #0b5ed7;
+
+    --border-radius-md: 6px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  body {
+    font-family: var(--font-sans)
+  }
+
+  .wrap {
+    padding: 1rem 0
+  }
+
+  .tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem
+  }
+
+  .tab {
+    padding: 6px 14px;
+    font-size: 13px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary)
+  }
+
+  .tab.active {
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    border-color: var(--color-border-info)
+  }
+
+  .panel {
+    display: none
+  }
+
+  .panel.active {
+    display: block
+  }
+
+  .section {
+    margin-bottom: 1.5rem
+  }
+
+  .label {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+    font-weight: 500;
+    letter-spacing: .03em
+  }
+
+  .query-box {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 12px 14px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-text-primary);
+    white-space: pre-wrap;
+    line-height: 1.6
+  }
+
+  .kw {
+    color: #7F77DD
+  }
+
+  .str {
+    color: #0F6E56
+  }
+
+  .num {
+    color: #BA7517
+  }
+
+  .op {
+    color: #993C1D
+  }
+
+  .run-btn {
+    margin-top: 10px;
+    padding: 7px 18px;
+    font-size: 13px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-primary)
+  }
+
+  .run-btn:hover {
+    background: var(--color-background-secondary)
+  }
+
+  .results {
+    margin-top: 12px
+  }
+
+  .result-card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    margin-bottom: 6px;
+    font-size: 13px;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap
+  }
+
+  .field {
+    display: flex;
+    gap: 4px;
+    align-items: center
+  }
+
+  .field-key {
+    color: var(--color-text-secondary);
+    font-size: 12px
+  }
+
+  .field-val {
+    color: var(--color-text-primary);
+    font-weight: 500
+  }
+
+  .highlight {
+    background: var(--color-background-warning);
+    color: var(--color-text-warning);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-weight: 500
+  }
+
+  .empty {
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    font-style: italic;
+    padding: 8px 0
+  }
+
+  .explain {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 12px;
+    padding: 10px 14px;
+    border-left: 2.5px solid var(--color-border-info);
+    background: var(--color-background-info);
+    border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0
+  }
+
+  .count-badge {
+    font-size: 12px;
+    color: var(--color-text-secondary);
+    margin-top: 6px
+  }
+
+  .sub-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+    border: 1px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 4px 11px;
+  }
+
+  .sub-tab {
+    padding: 4px 11px;
+    font-size: 12px;
+    border: 0.5px solid var(--color-border-secondary);
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+    background: var(--color-background-primary);
+    color: var(--color-text-secondary)
+  }
+
+  .sub-tab.active {
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border-primary)
+  }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">MongoDB Query Operators </h2>
+
+  <div class="tabs" id="mainTabs">
+    <button class="tab active" onclick="switchTab('comparison')">Comparison</button>
+    <button class="tab" onclick="switchTab('logical')">Logical</button>
+    <button class="tab" onclick="switchTab('element')">Element</button>
+    <button class="tab" onclick="switchTab('array')">Array / $in</button>
+    <button class="tab" onclick="switchTab('regex')">Regex</button>
+  </div>
+
+  <!-- COMPARISON -->
+  <div class="panel active" id="panel-comparison">
+    <div class="explain">Comparison operators filter documents by comparing field values. Use <code>$eq</code>,
+      <code>$ne</code>, <code>$gt</code>, <code>$gte</code>, <code>$lt</code>, <code>$lte</code>.
+    </div>
+    <div class="sub-tabs" id="cmpTabs">
+      <button class="sub-tab active" onclick="switchSub('cmp','eq')">$eq</button>
+      <button class="sub-tab" onclick="switchSub('cmp','ne')">$ne</button>
+      <button class="sub-tab" onclick="switchSub('cmp','gt')">$gt</button>
+      <button class="sub-tab" onclick="switchSub('cmp','gte')">$gte</button>
+      <button class="sub-tab" onclick="switchSub('cmp','lt')">$lt</button>
+      <button class="sub-tab" onclick="switchSub('cmp','lte')">$lte</button>
+    </div>
+    <div class="label">Query</div>
+    <div class="query-box" id="cmp-query"></div>
+    <button class="run-btn" onclick="runCmp()">▶ Run query</button>
+    <div class="results" id="cmp-results"></div>
+  </div>
+
+  <!-- LOGICAL -->
+  <div class="panel" id="panel-logical">
+    <div class="explain">Logical operators combine multiple conditions. <code>$and</code> requires all conditions,
+      <code>$or</code> requires at least one, <code>$not</code> negates, <code>$nor</code> matches when none are true.
+    </div>
+    <div class="sub-tabs" id="logTabs">
+      <button class="sub-tab active" onclick="switchSub('log','and')">$and</button>
+      <button class="sub-tab" onclick="switchSub('log','or')">$or</button>
+      <button class="sub-tab" onclick="switchSub('log','not')">$not</button>
+      <button class="sub-tab" onclick="switchSub('log','nor')">$nor</button>
+    </div>
+    <div class="label">Query</div>
+    <div class="query-box" id="log-query"></div>
+    <button class="run-btn" onclick="runLog()">▶ Run query</button>
+    <div class="results" id="log-results"></div>
+  </div>
+
+  <!-- ELEMENT -->
+  <div class="panel" id="panel-element">
+    <div class="explain"><code>$exists</code> checks if a field is present. <code>$type</code> filters by BSON type
+      (e.g. "string", "int", "double").</div>
+    <div class="sub-tabs" id="elTabs">
+      <button class="sub-tab active" onclick="switchSub('el','exists')">$exists</button>
+      <button class="sub-tab" onclick="switchSub('el','type')">$type</button>
+    </div>
+    <div class="label">Query</div>
+    <div class="query-box" id="el-query"></div>
+    <button class="run-btn" onclick="runEl()">▶ Run query</button>
+    <div class="results" id="el-results"></div>
+  </div>
+
+  <!-- ARRAY -->
+  <div class="panel" id="panel-array">
+    <div class="explain"><code>$in</code> matches any value in an array. <code>$nin</code> matches values NOT in the
+      array.</div>
+    <div class="sub-tabs" id="arrTabs">
+      <button class="sub-tab active" onclick="switchSub('arr','in')">$in</button>
+      <button class="sub-tab" onclick="switchSub('arr','nin')">$nin</button>
+    </div>
+    <div class="label">Query</div>
+    <div class="query-box" id="arr-query"></div>
+    <button class="run-btn" onclick="runArr()">▶ Run query</button>
+    <div class="results" id="arr-results"></div>
+  </div>
+
+  <!-- REGEX -->
+  <div class="panel" id="panel-regex">
+    <div class="explain"><code>$regex</code> filters documents where a string field matches a regular expression.
+      Optionally use <code>$options: "i"</code> for case-insensitive matching.</div>
+    <div class="sub-tabs" id="rxTabs">
+      <button class="sub-tab active" onclick="switchSub('rx','starts')">starts with</button>
+      <button class="sub-tab" onclick="switchSub('rx','contains')">contains</button>
+      <button class="sub-tab" onclick="switchSub('rx','insensitive')">case-insensitive</button>
+    </div>
+    <div class="label">Query</div>
+    <div class="query-box" id="rx-query"></div>
+    <button class="run-btn" onclick="runRx()">▶ Run query</button>
+    <div class="results" id="rx-results"></div>
+  </div>
+</div>
+
+<script>
+  const students = [
+    {name: "Ali", age: 20, course: "Math", grade: "A", city: "Delhi"},
+    {name: "Sara", age: 22, course: "Physics", grade: "B", city: "Mumbai"},
+    {name: "John", age: 21, course: "CS", grade: "A", city: "Delhi"},
+    {name: "Emma", age: 23, course: "Math", grade: "C", city: "Chennai"},
+    {name: "David", age: 22, course: "CS", grade: "B", city: "Mumbai"},
+    {name: "Lina", age: 24, course: "Physics", grade: "A", city: "Delhi"}
+  ];
+
+  const queries = {
+    cmp: {
+      eq: {text: `db.students.find({\n  age: { <span class="op">$eq</span>: <span class="num">22</span> }\n})`, fn: s => s.age === 22, hl: 'age'},
+      ne: {text: `db.students.find({\n  grade: { <span class="op">$ne</span>: <span class="str">"A"</span> }\n})`, fn: s => s.grade !== 'A', hl: 'grade'},
+      gt: {text: `db.students.find({\n  age: { <span class="op">$gt</span>: <span class="num">21</span> }\n})`, fn: s => s.age > 21, hl: 'age'},
+      gte: {text: `db.students.find({\n  age: { <span class="op">$gte</span>: <span class="num">22</span> }\n})`, fn: s => s.age >= 22, hl: 'age'},
+      lt: {text: `db.students.find({\n  age: { <span class="op">$lt</span>: <span class="num">22</span> }\n})`, fn: s => s.age < 22, hl: 'age'},
+      lte: {text: `db.students.find({\n  age: { <span class="op">$lte</span>: <span class="num">21</span> }\n})`, fn: s => s.age <= 21, hl: 'age'},
+    },
+    log: {
+      and: {text: `db.students.find({\n  <span class="op">$and</span>: [\n    { city: <span class="str">"Delhi"</span> },\n    { grade: <span class="str">"A"</span> }\n  ]\n})`, fn: s => s.city === 'Delhi' && s.grade === 'A', hl: ['city', 'grade']},
+      or: {text: `db.students.find({\n  <span class="op">$or</span>: [\n    { course: <span class="str">"Math"</span> },\n    { city: <span class="str">"Chennai"</span> }\n  ]\n})`, fn: s => s.course === 'Math' || s.city === 'Chennai', hl: ['course', 'city']},
+      not: {text: `db.students.find({\n  age: { <span class="op">$not</span>: { $gt: <span class="num">22</span> } }\n})`, fn: s => !(s.age > 22), hl: 'age'},
+      nor: {text: `db.students.find({\n  <span class="op">$nor</span>: [\n    { course: <span class="str">"Math"</span> },\n    { city: <span class="str">"Mumbai"</span> }\n  ]\n})`, fn: s => s.course !== 'Math' && s.city !== 'Mumbai', hl: ['course', 'city']},
+    },
+    el: {
+      exists: {text: `db.students.find({\n  city: { <span class="op">$exists</span>: <span class="kw">true</span> }\n})`, fn: s => 'city' in s, hl: 'city'},
+      type: {text: `db.students.find({\n  age: { <span class="op">$type</span>: <span class="str">"int"</span> }\n})`, fn: s => typeof s.age === 'number', hl: 'age'},
+    },
+    arr: {
+      in: {text: `db.students.find({\n  city: { <span class="op">$in</span>: [<span class="str">"Delhi"</span>, <span class="str">"Chennai"</span>] }\n})`, fn: s => ['Delhi', 'Chennai'].includes(s.city), hl: 'city'},
+      nin: {text: `db.students.find({\n  grade: { <span class="op">$nin</span>: [<span class="str">"A"</span>, <span class="str">"B"</span>] }\n})`, fn: s => !['A', 'B'].includes(s.grade), hl: 'grade'},
+    },
+    rx: {
+      starts: {text: `db.students.find({\n  name: { <span class="op">$regex</span>: <span class="str">/^J/</span> }\n})`, fn: s => /^J/.test(s.name), hl: 'name'},
+      contains: {text: `db.students.find({\n  course: { <span class="op">$regex</span>: <span class="str">/cs/i</span> }\n})`, fn: s => /cs/i.test(s.course), hl: 'course'},
+      insensitive: {text: `db.students.find({\n  city: { <span class="op">$regex</span>: <span class="str">/delhi/</span>,\n          <span class="op">$options</span>: <span class="str">"i"</span> }\n})`, fn: s => /delhi/i.test(s.city), hl: 'city'},
+    }
+  };
+
+  let activeSubs = {cmp: 'eq', log: 'and', el: 'exists', arr: 'in', rx: 'starts'};
+
+  function switchTab(id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    event.target.classList.add('active');
+    document.getElementById('panel-' + id).classList.add('active');
+  }
+
+  function switchSub(group, key) {
+    const map = {cmp: 'cmp', log: 'log', el: 'el', arr: 'arr', rx: 'rx'};
+    activeSubs[group] = key;
+    document.querySelectorAll(`#${group}Tabs .sub-tab`).forEach(t => t.classList.remove('active'));
+    event.target.classList.add('active');
+    updateQuery(group);
+    document.getElementById(group + '-results').innerHTML = '';
+  }
+
+  function hl(html) {return `<span class="highlight">${html}</span>`}
+
+  function renderResults(containerId, results, hlField) {
+    const el = document.getElementById(containerId);
+    if (!results.length) {el.innerHTML = '<div class="empty">No documents matched.</div>'; return;}
+    const fields = Array.isArray(hlField) ? hlField : [hlField];
+    el.innerHTML = `<div class="count-badge">${results.length} document${results.length > 1 ? 's' : ''} matched</div>` +
+      results.map(s => `<div class="result-card">${Object.entries(s).map(([k, v]) => `<div class="field"><span class="field-key">${k}:</span> <span class="${fields.includes(k) ? 'highlight' : 'field-val'}">${v}</span></div>`).join('')
+        }</div>`).join('');
+  }
+
+  function updateQuery(group) {
+    const key = activeSubs[group];
+    const q = queries[group][key];
+    document.getElementById(group + '-query').innerHTML = q.text;
+  }
+
+  function runCmp() {const q = queries.cmp[activeSubs.cmp]; renderResults('cmp-results', students.filter(q.fn), q.hl);}
+  function runLog() {const q = queries.log[activeSubs.log]; renderResults('log-results', students.filter(q.fn), q.hl);}
+  function runEl() {const q = queries.el[activeSubs.el]; renderResults('el-results', students.filter(q.fn), q.hl);}
+  function runArr() {const q = queries.arr[activeSubs.arr]; renderResults('arr-results', students.filter(q.fn), q.hl);}
+  function runRx() {const q = queries.rx[activeSubs.rx]; renderResults('rx-results', students.filter(q.fn), q.hl);}
+
+  ['cmp', 'log', 'el', 'arr', 'rx'].forEach(g => updateQuery(g));
+</script>

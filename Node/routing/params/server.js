@@ -13,7 +13,6 @@ const server = http.createServer((req, res) => {
 //   }
   
   
-
   // Step 2: Check which route it is
   if (parsedUrl.pathname === "/greet") {
     // Step 3: Extract query param 'name'

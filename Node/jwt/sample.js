@@ -4,12 +4,6 @@ const jwt = require('jsonwebtoken');
 // Secret key used for signing and verifying JWTs
 const secretKey = 'your-secret-key'; // Replace this with a strong secret key in production
 
-// Sample user data (this can be fetched from a database in a real application)
-const sampleUser = {
-  id: '123456789',
-  username: 'john_doe',
-  role: 'user',
-};
 
 // Function to generate a JWT
 function generateJWT(user) {
@@ -44,6 +38,12 @@ function verifyJWT(token) {
   }
 }
 
+// Sample user data (this can be fetched from a database in a real application)
+const sampleUser = {
+  id: '123456789',
+  username: 'john_doe',
+  role: 'user',
+};
 // Example usage:
 const userToken = generateJWT(sampleUser);
 console.log('Generated JWT:', userToken);

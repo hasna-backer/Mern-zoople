@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		.container {
+			position: relative;
+			width: 400px;
+			height: 300px;
+			background: lightgray;
+		}
+
+		.absolute-box {
+			position: absolute;
+			top: 20px;
+			right: 20px;
+			width: 100px;
+			height: 100px;
+			background: red;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="container">
+		<div class="absolute-box"></div>
+	</div>
+
+</body>
+
+</html>
+
+
+
+
+
+<!-- Absolute Positioning
+What It Actually Does
+
+Removed from normal document flow
+
+Other elements ignore it
+
+Positioned relative to:
+
+The nearest positioned parent (relative, absolute, fixed)
+
+OR the viewport if none exists -->
+
+
+<!-- 
+The red box is positioned inside the container
+
+It is removed from normal flow
+
+It does NOT push anything
+
+It ignores siblings
+
+Think:
+👉 “I don’t care about layout. I go exactly where I’m told.” -->

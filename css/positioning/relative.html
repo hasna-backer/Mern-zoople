@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		.box {
+			width: 150px;
+			height: 150px;
+			background: lightblue;
+			margin: 20px;
+		}
+
+		.relative-box {
+			position: relative;
+			top: 40px;
+			left: 40px;
+			background: orange;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="box"></div>
+	<div class="box relative-box"></div>
+	<div class="box"></div>
+
+</body>
+
+</html>
+
+
+
+<!-- Relative Positioning
+What It Actually Does
+
+The element stays in the normal document flow.
+
+It moves relative to its original position.
+
+The space it originally occupied is still reserved. -->
+
+
+
+<!-- The orange box moves 40px down and 40px right
+
+But the space it originally occupied remains empty
+
+Other boxes do NOT move up -->

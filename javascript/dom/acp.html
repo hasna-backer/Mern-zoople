@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<style>
+		.card {
+			padding: 20px;
+			border: 1px solid gray;
+			width: 300px;
+		}
+
+		.dark {
+			background-color: black;
+			color: white;
+		}
+
+		.highlight {
+			border: 3px solid red;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="card" id="profileCard">
+		<h2 id="name">John Doe</h2>
+		<p id="desc">Web Developer</p>
+	</div>
+
+	<button id="changeName">Change Name</button>
+	<button id="toggleTheme">Toggle Theme</button>
+	<button id="highlightCard">Highlight</button>
+
+	<script>
+		// Select elements
+		let name = document.getElementById("name");
+		let desc = document.getElementById("desc");
+		let card = document.getElementById("profileCard");
+
+		// Button selections
+		let btnName = document.getElementById("changeName");
+		let btnTheme = document.getElementById("toggleTheme");
+		let btnHighlight = document.getElementById("highlightCard");
+
+		// Change name
+		btnName.addEventListener("click", function () {
+			name.textContent = "Jane Smith";
+			desc.textContent = "Full Stack Developer";
+			console.log("Profile updated");
+		});
+
+		// Toggle theme
+		btnTheme.addEventListener("click", function () {
+			card.classList.toggle("dark");
+			console.log("Theme toggled");
+		});
+
+		// Highlight card
+		btnHighlight.addEventListener("click", function () {
+			card.classList.toggle("highlight");
+			console.log("Highlight toggled");
+		});
+	</script>
+
+</body>
+
+</html>
