@@ -31,7 +31,7 @@ body {
 	outline: 3px dashed #ff9f43; /* temporary visual aid */
 	outline-offset: 5px; /* gap between outline and border */
   
-	box-shadow: 0px 50px 50px rgba(225, 6, 6, 1);
+	box-shadow: 0px 50px 100px rgba(6, 6, 195, .9);
   }
   
   /* Optional text inside card */

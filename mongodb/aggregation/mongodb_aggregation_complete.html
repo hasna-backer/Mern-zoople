@@ -1,0 +1,1508 @@
+<style>
+  :root {
+    --font-sans: Arial, sans-serif;
+
+    --color-text-primary: #222;
+    --color-text-secondary: #050404;
+    --color-text-info: #0b5ed7;
+
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f5;
+    --color-background-info: #e7f1ff;
+    --color-background-warning: #fff3cd;
+
+    --color-border-primary: #161515;
+    --color-border-secondary: #ccc;
+    --color-border-tertiary: #121010;
+    --color-border-info: #133f81;
+
+    --border-radius-md: 6px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+  }
+
+  .wrap {
+    padding: 1rem 0
+  }
+
+  .top-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem
+  }
+
+  .top-tab {
+    padding: 6px 14px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    font-size: 13px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-text-secondary);
+    transition: all .15s
+  }
+
+  .top-tab.active {
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    border-color: var(--color-border-primary);
+    font-weight: 500
+  }
+
+  .section {
+    display: none
+  }
+
+  .section.visible {
+    display: block
+  }
+
+  .card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-lg);
+    padding: 1.1rem 1.25rem;
+    margin-bottom: .85rem
+  }
+
+  .stage-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 9px
+  }
+
+  .pill-purple {
+    background: #EEEDFE;
+    color: #3C3489
+  }
+
+  .pill-teal {
+    background: #E1F5EE;
+    color: #085041
+  }
+
+  .pill-amber {
+    background: #FAEEDA;
+    color: #633806
+  }
+
+  .pill-blue {
+    background: #E6F1FB;
+    color: #0C447C
+  }
+
+  .pill-coral {
+    background: #FAECE7;
+    color: #712B13
+  }
+
+  .pill-green {
+    background: #EAF3DE;
+    color: #27500A
+  }
+
+  .pill-pink {
+    background: #FBEAF0;
+    color: #72243E
+  }
+
+  .pill-gray {
+    background: #F1EFE8;
+    color: #444441
+  }
+
+  .explain {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 9px 13px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: .85rem;
+    line-height: 1.6;
+    border-left: 2px solid #7F77DD;
+    border-radius: 0
+  }
+
+  .code {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: .7rem 1rem;
+    font-family: var(--font-mono, monospace);
+    font-size: 12px;
+    color: var(--color-text-primary);
+    white-space: pre;
+    overflow-x: auto;
+    margin-bottom: .85rem;
+    line-height: 1.65;
+    border: 0.5px solid var(--color-border-tertiary)
+  }
+
+  .kw {
+    color: #7F77DD
+  }
+
+  .op {
+    color: #1D9E75
+  }
+
+  .str {
+    color: #D85A30
+  }
+
+  .num {
+    color: #BA7517
+  }
+
+  .cm {
+    color: var(--color-text-tertiary);
+    font-style: italic
+  }
+
+  .rt {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px
+  }
+
+  .rt th {
+    text-align: left;
+    padding: 6px 10px;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    font-size: 12px
+  }
+
+  .rt td {
+    padding: 7px 10px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+    color: var(--color-text-primary)
+  }
+
+  .rt tr:last-child td {
+    border-bottom: none
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 500
+  }
+
+  .bm {
+    background: #CECBF6;
+    color: #3C3489
+  }
+
+  .bl {
+    background: #B5D4F4;
+    color: #0C447C
+  }
+
+  .ba {
+    background: #C0DD97;
+    color: #3B6D11
+  }
+
+  .bw {
+    background: #FAC775;
+    color: #633806
+  }
+
+  .sec-lbl {
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--color-text-tertiary);
+    margin-bottom: 7px
+  }
+
+  .op-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+    gap: 8px;
+    margin-bottom: .85rem
+  }
+
+  .op-card {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 9px 12px;
+    cursor: pointer;
+    border: 0.5px solid var(--color-border-tertiary);
+    transition: border-color .15s
+  }
+
+  .op-card:hover {
+    border-color: var(--color-border-secondary)
+  }
+
+  .op-card.sel {
+    border-color: #7F77DD;
+    background: #EEEDFE
+  }
+
+  .op-name {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    font-family: var(--font-mono, monospace)
+  }
+
+  .op-desc {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    margin-top: 3px;
+    line-height: 1.4
+  }
+
+  .sub-tabs {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem
+  }
+
+  .sub-tab {
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 0.5px solid var(--color-border-secondary);
+    font-size: 12px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-text-secondary)
+  }
+
+  .sub-tab.active {
+    background: var(--color-background-secondary);
+    color: var(--color-text-primary);
+    font-weight: 500
+  }
+
+  .sub-sec {
+    display: none
+  }
+
+  .sub-sec.visible {
+    display: block
+  }
+
+  .pipe-flow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: .85rem
+  }
+
+  .ps {
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    border: 0.5px solid
+  }
+
+  .arr-sep {
+    color: var(--color-text-tertiary);
+    font-size: 14px
+  }
+</style>
+
+<div class="wrap">
+  <h2 class="sr-only">MongoDB aggregation pipeline <br>
+  </h2>
+
+  <div class="top-tabs">
+    <button class="top-tab active" onclick="showTop('match',this)">$match</button>
+    <button class="top-tab" onclick="showTop('group',this)">$group</button>
+    <button class="top-tab" onclick="showTop('sort',this)">$sort</button>
+    <button class="top-tab" onclick="showTop('project',this)">$project</button>
+    <button class="top-tab" onclick="showTop('limit',this)">$limit / $skip</button>
+    <button class="top-tab" onclick="showTop('unwind',this)">$unwind</button>
+    <button class="top-tab" onclick="showTop('lookup',this)">$lookup</button>
+    <button class="top-tab" onclick="showTop('addfields',this)">$addFields</button>
+    <button class="top-tab" onclick="showTop('replaceroot',this)">$replaceRoot</button>
+    <button class="top-tab" onclick="showTop('bucket',this)">$bucket</button>
+    <button class="top-tab" onclick="showTop('facet',this)">$facet</button>
+    <button class="top-tab" onclick="showTop('count',this)">$count</button>
+    <button class="top-tab" onclick="showTop('out',this)">$out / $merge</button>
+    <button class="top-tab" onclick="showTop('pipeline',this)">Full pipeline</button>
+  </div>
+
+  <!-- $match -->
+  <div class="section visible" id="s-match">
+    <div class="card">
+      <div class="stage-pill pill-purple">$match — filter documents</div>
+      <div class="explain">Filters the collection. Only documents passing the condition move to the next stage.
+        Equivalent to SQL WHERE. Always place $match early to reduce data volume.</div>
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSub('match',0,this)">Exact value</button>
+        <button class="sub-tab" onclick="showSub('match',1,this)">Comparison</button>
+        <button class="sub-tab" onclick="showSub('match',2,this)">Logical</button>
+        <button class="sub-tab" onclick="showSub('match',3,this)">Regex</button>
+        <button class="sub-tab" onclick="showSub('match',4,this)">Combined</button>
+      </div>
+      <div id="match-0" class="sub-sec visible">
+        <div class="code"><span class="cm">// Only mobile products</span>
+          { <span class="kw">$match</span>: { <span class="str">category</span>: <span class="str">"mobile"</span> } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>price</th>
+              <th>category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apple iPhone 14</td>
+              <td>₹80,000</td>
+              <td><span class="badge bm">mobile</span></td>
+            </tr>
+            <tr>
+              <td>Samsung Galaxy S23</td>
+              <td>₹75,000</td>
+              <td><span class="badge bm">mobile</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="match-1" class="sub-sec">
+        <div class="code"><span class="cm">// Price between 10,000 and 90,000</span>
+          { <span class="kw">$match</span>: { <span class="str">price</span>: { <span class="op">$gte</span>: <span
+            class="num">10000</span>, <span class="op">$lte</span>: <span class="num">90000</span> } } }
+          <span class="cm">// Operators: $gt $gte $lt $lte $ne $eq $in $nin</span>
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Samsung Galaxy S23</td>
+              <td>₹75,000</td>
+            </tr>
+            <tr>
+              <td>Apple iPhone 14</td>
+              <td>₹80,000</td>
+            </tr>
+            <tr>
+              <td>Asus ZenBook</td>
+              <td>₹90,000</td>
+            </tr>
+            <tr>
+              <td>Apple Watch</td>
+              <td>₹35,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="match-2" class="sub-sec">
+        <div class="code"><span class="cm">// Mobile OR laptop over ₹70,000</span>
+          { <span class="kw">$match</span>: {
+          <span class="op">$and</span>: [
+          { <span class="str">price</span>: { <span class="op">$gt</span>: <span class="num">70000</span> } },
+          { <span class="str">category</span>: { <span class="op">$in</span>: [<span class="str">"mobile"</span>, <span
+            class="str">"laptop"</span>] } }
+          ]
+          } }
+          <span class="cm">// Logical: $and $or $nor $not</span>
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>price</th>
+              <th>category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apple iPhone 14</td>
+              <td>₹80,000</td>
+              <td><span class="badge bm">mobile</span></td>
+            </tr>
+            <tr>
+              <td>Samsung Galaxy S23</td>
+              <td>₹75,000</td>
+              <td><span class="badge bm">mobile</span></td>
+            </tr>
+            <tr>
+              <td>Apple MacBook Air</td>
+              <td>₹1,20,000</td>
+              <td><span class="badge bl">laptop</span></td>
+            </tr>
+            <tr>
+              <td>Asus ZenBook</td>
+              <td>₹90,000</td>
+              <td><span class="badge bl">laptop</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="match-3" class="sub-sec">
+        <div class="code"><span class="cm">// Products whose name starts with "Apple"</span>
+          { <span class="kw">$match</span>: { <span class="str">name</span>: { <span class="op">$regex</span>: <span
+            class="str">/^Apple/</span>, <span class="op">$options</span>: <span class="str">"i"</span> } } }</div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apple iPhone 14</td>
+              <td>₹80,000</td>
+            </tr>
+            <tr>
+              <td>Apple MacBook Air</td>
+              <td>₹1,20,000</td>
+            </tr>
+            <tr>
+              <td>Apple Watch</td>
+              <td>₹35,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="match-4" class="sub-sec">
+        <div class="code">
+          <span class="cm">// Mobile products between ₹10,000 and ₹90,000</span>
+          { <span class="kw">$match</span>: {
+          <span class="str">category</span>: <span class="str">"mobile"</span>,
+          <span class="str">price</span>: {
+          <span class="op">$gte</span>: <span class="num">10000</span>,
+          <span class="op">$lte</span>: <span class="num">90000</span>
+          }
+          } }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- $group -->
+  <div class="section" id="s-group">
+    <div class="card">
+      <div class="stage-pill pill-teal">$group — aggregate by field</div>
+      <div class="explain">Groups documents by _id key and applies accumulators. The _id can be a field, expression, or
+        null (to group everything). All accumulator operators are shown below.</div>
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSub('group',0,this)">$sum / $avg</button>
+        <button class="sub-tab" onclick="showSub('group',1,this)">$min / $max</button>
+        <button class="sub-tab" onclick="showSub('group',2,this)">$push / $addToSet</button>
+        <button class="sub-tab" onclick="showSub('group',3,this)">$first / $last</button>
+        <button class="sub-tab" onclick="showSub('group',4,this)">$stdDevPop</button>
+        <button class="sub-tab" onclick="showSub('group',5,this)">null group</button>
+      </div>
+      <div id="group-0" class="sub-sec visible">
+        <div class="code">{ <span class="kw">$group</span>: {
+          <span class="str">_id</span>: <span class="str">"$category"</span>,
+          <span class="str">totalProducts</span>: { <span class="op">$sum</span>: <span class="num">1</span> },
+          <span class="str">totalRevenue</span>: { <span class="op">$sum</span>: <span class="str">"$price"</span> },
+          <span class="str">avgPrice</span>: { <span class="op">$avg</span>: <span class="str">"$price"</span> }
+          } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>totalProducts</th>
+              <th>totalRevenue</th>
+              <th>avgPrice</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge bm">mobile</span></td>
+              <td>2</td>
+              <td>₹1,55,000</td>
+              <td>₹77,500</td>
+            </tr>
+            <tr>
+              <td><span class="badge bl">laptop</span></td>
+              <td>2</td>
+              <td>₹2,10,000</td>
+              <td>₹1,05,000</td>
+            </tr>
+            <tr>
+              <td><span class="badge ba">accessory</span></td>
+              <td>1</td>
+              <td>₹2,500</td>
+              <td>₹2,500</td>
+            </tr>
+            <tr>
+              <td><span class="badge bw">wearable</span></td>
+              <td>1</td>
+              <td>₹35,000</td>
+              <td>₹35,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="group-1" class="sub-sec">
+        <div class="code">{ <span class="kw">$group</span>: {
+          <span class="str">_id</span>: <span class="str">"$category"</span>,
+          <span class="str">cheapest</span>: { <span class="op">$min</span>: <span class="str">"$price"</span> },
+          <span class="str">costliest</span>: { <span class="op">$max</span>: <span class="str">"$price"</span> }
+          } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>cheapest</th>
+              <th>costliest</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge bm">mobile</span></td>
+              <td>₹75,000</td>
+              <td>₹80,000</td>
+            </tr>
+            <tr>
+              <td><span class="badge bl">laptop</span></td>
+              <td>₹90,000</td>
+              <td>₹1,20,000</td>
+            </tr>
+            <tr>
+              <td><span class="badge ba">accessory</span></td>
+              <td>₹2,500</td>
+              <td>₹2,500</td>
+            </tr>
+            <tr>
+              <td><span class="badge bw">wearable</span></td>
+              <td>₹35,000</td>
+              <td>₹35,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="group-2" class="sub-sec">
+        <div class="code">{ <span class="kw">$group</span>: {
+          <span class="str">_id</span>: <span class="str">"$category"</span>,
+          <span class="str">allNames</span>: { <span class="op">$push</span>: <span class="str">"$name"</span> }, <span
+            class="cm">// duplicates allowed</span>
+          <span class="str">uniqueNames</span>: { <span class="op">$addToSet</span>: <span class="str">"$name"</span> }
+          <span class="cm">// no duplicates</span>
+          } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>allNames (array)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge bm">mobile</span></td>
+              <td>["Apple iPhone 14", "Samsung Galaxy S23"]</td>
+            </tr>
+            <tr>
+              <td><span class="badge bl">laptop</span></td>
+              <td>["Apple MacBook Air", "Asus ZenBook"]</td>
+            </tr>
+            <tr>
+              <td><span class="badge ba">accessory</span></td>
+              <td>["Boat Headphones"]</td>
+            </tr>
+            <tr>
+              <td><span class="badge bw">wearable</span></td>
+              <td>["Apple Watch"]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="group-3" class="sub-sec">
+        <div class="code"><span class="cm">// Requires a preceding $sort to be meaningful</span>
+          { <span class="kw">$sort</span>: { <span class="str">price</span>: <span class="num">1</span> } },
+          { <span class="kw">$group</span>: {
+          <span class="str">_id</span>: <span class="str">"$category"</span>,
+          <span class="str">cheapestProduct</span>: { <span class="op">$first</span>: <span class="str">"$name"</span>
+          },
+          <span class="str">costliestProduct</span>: { <span class="op">$last</span>: <span class="str">"$name"</span> }
+          } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>cheapestProduct</th>
+              <th>costliestProduct</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge bm">mobile</span></td>
+              <td>Samsung Galaxy S23</td>
+              <td>Apple iPhone 14</td>
+            </tr>
+            <tr>
+              <td><span class="badge bl">laptop</span></td>
+              <td>Asus ZenBook</td>
+              <td>Apple MacBook Air</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="group-4" class="sub-sec">
+        <div class="code">{ <span class="kw">$group</span>: {
+          <span class="str">_id</span>: <span class="str">"$category"</span>,
+          <span class="str">priceStdDev</span>: { <span class="op">$stdDevPop</span>: <span class="str">"$price"</span>
+          },
+          <span class="cm">// $stdDevSamp — sample std deviation</span>
+          <span class="str">variance</span>: { <span class="op">$stdDevSamp</span>: <span class="str">"$price"</span> }
+          } }
+        </div>
+        <div class="explain">$stdDevPop = population std dev (all docs). $stdDevSamp = sample std dev (subset). Used in
+          analytics to measure price spread.</div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>priceStdDev</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="badge bm">mobile</span></td>
+              <td>₹2,500</td>
+            </tr>
+            <tr>
+              <td><span class="badge bl">laptop</span></td>
+              <td>₹15,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="group-5" class="sub-sec">
+        <div class="code"><span class="cm">// _id: null → treat entire collection as one group</span>
+          { <span class="kw">$group</span>: {
+          <span class="str">_id</span>: <span class="kw">null</span>,
+          <span class="str">grandTotal</span>: { <span class="op">$sum</span>: <span class="str">"$price"</span> },
+          <span class="str">overallAvg</span>: { <span class="op">$avg</span>: <span class="str">"$price"</span> },
+          <span class="str">productCount</span>: { <span class="op">$sum</span>: <span class="num">1</span> }
+          } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>_id</th>
+              <th>grandTotal</th>
+              <th>overallAvg</th>
+              <th>productCount</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>null</td>
+              <td>₹4,02,500</td>
+              <td>₹67,083</td>
+              <td>6</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- $sort -->
+  <div class="section" id="s-sort">
+    <div class="card">
+      <div class="stage-pill pill-amber">$sort — order documents</div>
+      <div class="explain">Sorts documents. 1 = ascending (A→Z, low→high), -1 = descending. Can sort by multiple fields
+        — order of fields matters.</div>
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSub('sort',0,this)">Single field</button>
+        <button class="sub-tab" onclick="showSub('sort',1,this)">Multi-field</button>
+      </div>
+      <div id="sort-0" class="sub-sec visible">
+        <div class="code">{ <span class="kw">$sort</span>: { <span class="str">price</span>: <span class="num">-1</span>
+          } } <span class="cm">// high to low</span></div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apple MacBook Air</td>
+              <td>₹1,20,000</td>
+            </tr>
+            <tr>
+              <td>Asus ZenBook</td>
+              <td>₹90,000</td>
+            </tr>
+            <tr>
+              <td>Apple iPhone 14</td>
+              <td>₹80,000</td>
+            </tr>
+            <tr>
+              <td>Samsung Galaxy S23</td>
+              <td>₹75,000</td>
+            </tr>
+            <tr>
+              <td>Apple Watch</td>
+              <td>₹35,000</td>
+            </tr>
+            <tr>
+              <td>Boat Headphones</td>
+              <td>₹2,500</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="sort-1" class="sub-sec">
+        <div class="code"><span class="cm">// Sort by category A→Z, then price high→low within</span>
+          { <span class="kw">$sort</span>: { <span class="str">category</span>: <span class="num">1</span>, <span
+            class="str">price</span>: <span class="num">-1</span> } }</div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>category</th>
+              <th>price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Boat Headphones</td>
+              <td><span class="badge ba">accessory</span></td>
+              <td>₹2,500</td>
+            </tr>
+            <tr>
+              <td>Apple MacBook Air</td>
+              <td><span class="badge bl">laptop</span></td>
+              <td>₹1,20,000</td>
+            </tr>
+            <tr>
+              <td>Asus ZenBook</td>
+              <td><span class="badge bl">laptop</span></td>
+              <td>₹90,000</td>
+            </tr>
+            <tr>
+              <td>Apple iPhone 14</td>
+              <td><span class="badge bm">mobile</span></td>
+              <td>₹80,000</td>
+            </tr>
+            <tr>
+              <td>Samsung Galaxy S23</td>
+              <td><span class="badge bm">mobile</span></td>
+              <td>₹75,000</td>
+            </tr>
+            <tr>
+              <td>Apple Watch</td>
+              <td><span class="badge bw">wearable</span></td>
+              <td>₹35,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- $project -->
+  <div class="section" id="s-project">
+    <div class="card">
+      <div class="stage-pill pill-blue">$project — shape output fields</div>
+      <div class="explain">Includes/excludes fields and creates computed fields using expressions. 1 = include, 0 =
+        exclude. _id is included by default unless set to 0.</div>
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSub('project',0,this)">Include/exclude</button>
+        <button class="sub-tab" onclick="showSub('project',1,this)">Computed fields</button>
+        <button class="sub-tab" onclick="showSub('project',2,this)">String ops</button>
+        <button class="sub-tab" onclick="showSub('project',3,this)">Conditional</button>
+      </div>
+      <div id="project-0" class="sub-sec visible">
+        <div class="code">{ <span class="kw">$project</span>: { <span class="str">_id</span>: <span
+            class="num">0</span>, <span class="str">name</span>: <span class="num">1</span>, <span
+            class="str">price</span>: <span class="num">1</span> } }</div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apple iPhone 14</td>
+              <td>₹80,000</td>
+            </tr>
+            <tr>
+              <td>Samsung Galaxy S23</td>
+              <td>₹75,000</td>
+            </tr>
+            <tr>
+              <td>Apple MacBook Air</td>
+              <td>₹1,20,000</td>
+            </tr>
+            <tr>
+              <td>Asus ZenBook</td>
+              <td>₹90,000</td>
+            </tr>
+            <tr>
+              <td>Boat Headphones</td>
+              <td>₹2,500</td>
+            </tr>
+            <tr>
+              <td>Apple Watch</td>
+              <td>₹35,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="project-1" class="sub-sec">
+        <div class="code">{ <span class="kw">$project</span>: {
+          <span class="str">name</span>: <span class="num">1</span>, <span class="str">_id</span>: <span
+            class="num">0</span>,
+          <span class="str">priceUSD</span>: { <span class="op">$round</span>: [{ <span class="op">$divide</span>:
+          [<span class="str">"$price"</span>, <span class="num">83</span>] }, <span class="num">0</span>] },
+          <span class="str">discounted</span>: { <span class="op">$subtract</span>: [<span class="str">"$price"</span>,
+          { <span class="op">$multiply</span>: [<span class="str">"$price"</span>, <span class="num">0.1</span>] }] }
+          <span class="cm">// Math: $add $subtract $multiply $divide $mod $abs $ceil $floor $round $sqrt $pow $ln $log
+            $exp $trunc</span>
+          } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>priceUSD</th>
+              <th>discounted (10% off)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apple iPhone 14</td>
+              <td>$964</td>
+              <td>₹72,000</td>
+            </tr>
+            <tr>
+              <td>Apple MacBook Air</td>
+              <td>$1,446</td>
+              <td>₹1,08,000</td>
+            </tr>
+            <tr>
+              <td>Boat Headphones</td>
+              <td>$30</td>
+              <td>₹2,250</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="project-2" class="sub-sec">
+        <div class="code">{ <span class="kw">$project</span>: {
+          <span class="str">upper</span>: { <span class="op">$toUpper</span>: <span class="str">"$category"</span> },
+          <span class="str">substr</span>: { <span class="op">$substr</span>: [<span class="str">"$name"</span>, <span
+            class="num">0</span>, <span class="num">5</span>] },
+          <span class="str">concat</span>: { <span class="op">$concat</span>: [<span class="str">"$name"</span>, <span
+            class="str">" - "</span>, <span class="str">"$category"</span>] },
+          <span class="str">len</span>: { <span class="op">$strLenCP</span>: <span class="str">"$name"</span> }
+          <span class="cm">// More: $toLower $trim $ltrim $rtrim $split $indexOfCP $replaceOne $replaceAll</span>
+          } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>upper</th>
+              <th>substr</th>
+              <th>concat</th>
+              <th>len</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>MOBILE</td>
+              <td>Apple</td>
+              <td>Apple iPhone 14 - mobile</td>
+              <td>14</td>
+            </tr>
+            <tr>
+              <td>LAPTOP</td>
+              <td>Apple</td>
+              <td>Apple MacBook Air - laptop</td>
+              <td>15</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="project-3" class="sub-sec">
+        <div class="code">{ <span class="kw">$project</span>: {
+          <span class="str">name</span>: <span class="num">1</span>, <span class="str">price</span>: <span
+            class="num">1</span>,
+          <span class="str">priceTag</span>: { <span class="op">$cond</span>: {
+          <span class="str">if</span>: { <span class="op">$gte</span>: [<span class="str">"$price"</span>, <span
+            class="num">50000</span>] },
+          <span class="str">then</span>: <span class="str">"Premium"</span>,
+          <span class="str">else</span>: <span class="str">"Budget"</span>
+          }},
+          <span class="str">label</span>: { <span class="op">$switch</span>: { <span class="str">branches</span>: [
+          { <span class="str">case</span>: { <span class="op">$gte</span>: [<span class="str">"$price"</span>, <span
+            class="num">100000</span>] }, <span class="str">then</span>: <span class="str">"High-end"</span> },
+          { <span class="str">case</span>: { <span class="op">$gte</span>: [<span class="str">"$price"</span>, <span
+            class="num">50000</span>] }, <span class="str">then</span>: <span class="str">"Mid-range"</span> }
+          ], <span class="str">default</span>: <span class="str">"Entry"</span> }}
+          <span class="cm">// Also: $ifNull — returns alternate if field is null/missing</span>
+          } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>price</th>
+              <th>priceTag</th>
+              <th>label</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Apple MacBook Air</td>
+              <td>₹1,20,000</td>
+              <td>Premium</td>
+              <td>High-end</td>
+            </tr>
+            <tr>
+              <td>Apple iPhone 14</td>
+              <td>₹80,000</td>
+              <td>Premium</td>
+              <td>Mid-range</td>
+            </tr>
+            <tr>
+              <td>Boat Headphones</td>
+              <td>₹2,500</td>
+              <td>Budget</td>
+              <td>Entry</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- $limit / $skip -->
+  <div class="section" id="s-limit">
+    <div class="card">
+      <div class="stage-pill pill-coral">$limit &amp; $skip — pagination</div>
+      <div class="explain">$limit restricts how many documents pass through. $skip discards the first N documents.
+        Together they implement pagination.</div>
+      <div class="code"><span class="cm">// Page 2 of results (2 per page), sorted by price desc</span>
+        { <span class="kw">$sort</span>: { <span class="str">price</span>: <span class="num">-1</span> } },
+        { <span class="kw">$skip</span>: <span class="num">2</span> }, <span class="cm">// skip first 2 (page 1)</span>
+        { <span class="kw">$limit</span>: <span class="num">2</span> } <span class="cm">// take next 2 (page 2)</span>
+      </div>
+      <table class="rt">
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Apple iPhone 14</td>
+            <td>₹80,000</td>
+          </tr>
+          <tr>
+            <td>Samsung Galaxy S23</td>
+            <td>₹75,000</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="explain" style="margin-top:.85rem">Page formula: skip = (pageNumber - 1) × pageSize</div>
+    </div>
+  </div>
+
+  <!-- $unwind -->
+  <div class="section" id="s-unwind">
+    <div class="card">
+      <div class="stage-pill pill-green">$unwind — flatten arrays</div>
+      <div class="explain">Deconstructs an array field into individual documents — one document per array element.
+        Essential before grouping on array values.</div>
+      <div class="code"><span class="cm">// Imagine products have a tags array:</span>
+        <span class="cm">// { name: "Apple iPhone 14", tags: ["5G","OLED","iOS"] }</span>
+
+        { <span class="kw">$unwind</span>: <span class="str">"$tags"</span> }
+        <span class="cm">// Extended syntax (preserve nulls):</span>
+        { <span class="kw">$unwind</span>: {
+        <span class="str">path</span>: <span class="str">"$tags"</span>,
+        <span class="str">includeArrayIndex</span>: <span class="str">"tagIndex"</span>,
+        <span class="str">preserveNullAndEmptyArrays</span>: <span class="kw">true</span>
+        } }
+      </div>
+      <div class="explain">One input doc with 3 tags → 3 output docs, each with a single tag value. Use with $group
+        after to count tag frequencies.</div>
+      <table class="rt">
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>tags (after unwind)</th>
+            <th>tagIndex</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Apple iPhone 14</td>
+            <td>5G</td>
+            <td>0</td>
+          </tr>
+          <tr>
+            <td>Apple iPhone 14</td>
+            <td>OLED</td>
+            <td>1</td>
+          </tr>
+          <tr>
+            <td>Apple iPhone 14</td>
+            <td>iOS</td>
+            <td>2</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- $lookup -->
+  <div class="section" id="s-lookup">
+    <div class="card">
+      <div class="stage-pill pill-pink">$lookup — join collections</div>
+      <div class="explain">Performs a left outer join with another collection. Equivalent to SQL LEFT JOIN. The matched
+        documents are added as an array field.</div>
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSub('lookup',0,this)">Basic join</button>
+        <button class="sub-tab" onclick="showSub('lookup',1,this)">Pipeline join</button>
+      </div>
+      <div id="lookup-0" class="sub-sec visible">
+        <div class="code"><span class="cm">// Join products → orders collection</span>
+          { <span class="kw">$lookup</span>: {
+          <span class="str">from</span>: <span class="str">"orders"</span>,
+          <span class="str">localField</span>: <span class="str">"_id"</span>,
+          <span class="str">foreignField</span>: <span class="str">"productId"</span>,
+          <span class="str">as</span>: <span class="str">"productOrders"</span>
+          } }
+        </div>
+        <div class="explain">Each product document gets a "productOrders" array containing all matching orders. Empty
+          array [] if no matches (left outer join).</div>
+      </div>
+      <div id="lookup-1" class="sub-sec">
+        <div class="code"><span class="cm">// Pipeline join — more control, can filter joined docs</span>
+          { <span class="kw">$lookup</span>: {
+          <span class="str">from</span>: <span class="str">"orders"</span>,
+          <span class="str">let</span>: { <span class="str">prodId</span>: <span class="str">"$_id"</span> },
+          <span class="str">pipeline</span>: [
+          { <span class="op">$match</span>: { <span class="op">$expr</span>: { <span class="op">$eq</span>: [<span
+            class="str">"$productId"</span>, <span class="str">"$$prodId"</span>] } } },
+          { <span class="op">$sort</span>: { <span class="str">orderDate</span>: <span class="num">-1</span> } },
+          { <span class="op">$limit</span>: <span class="num">5</span> }
+          ],
+          <span class="str">as</span>: <span class="str">"recentOrders"</span>
+          } }
+        </div>
+        <div class="explain">Pipeline join lets you filter, sort and limit the joined documents before attaching them.
+          More powerful than the basic form.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- $addFields -->
+  <div class="section" id="s-addfields">
+    <div class="card">
+      <div class="stage-pill pill-teal">$addFields / $set — add new fields</div>
+      <div class="explain">Adds new fields (or overwrites existing ones) without touching other fields. $set is an alias
+        for $addFields introduced in MongoDB 4.2.</div>
+      <div class="code">{ <span class="kw">$addFields</span>: {
+        <span class="str">gstPrice</span>: { <span class="op">$multiply</span>: [<span class="str">"$price"</span>,
+        <span class="num">1.18</span>] },
+        <span class="str">priceInUSD</span>: { <span class="op">$round</span>: [{ <span class="op">$divide</span>:
+        [<span class="str">"$price"</span>, <span class="num">83</span>] }, <span class="num">2</span>] },
+        <span class="str">isBudget</span>: { <span class="op">$lt</span>: [<span class="str">"$price"</span>, <span
+          class="num">10000</span>] }
+        } }
+        <span class="cm">// Same as: { $set: { ... } }</span>
+      </div>
+      <table class="rt">
+        <thead>
+          <tr>
+            <th>name</th>
+            <th>price</th>
+            <th>gstPrice</th>
+            <th>priceInUSD</th>
+            <th>isBudget</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Apple iPhone 14</td>
+            <td>₹80,000</td>
+            <td>₹94,400</td>
+            <td>$964.00</td>
+            <td>false</td>
+          </tr>
+          <tr>
+            <td>Boat Headphones</td>
+            <td>₹2,500</td>
+            <td>₹2,950</td>
+            <td>$30.12</td>
+            <td>true</td>
+          </tr>
+          <tr>
+            <td>Apple Watch</td>
+            <td>₹35,000</td>
+            <td>₹41,300</td>
+            <td>$421.69</td>
+            <td>false</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="explain" style="margin-top:.85rem">Unlike $project, $addFields keeps ALL original fields and just adds
+        the new ones on top.</div>
+    </div>
+  </div>
+
+  <!-- $replaceRoot -->
+  <div class="section" id="s-replaceroot">
+    <div class="card">
+      <div class="stage-pill pill-gray">$replaceRoot / $replaceWith — promote embedded doc</div>
+      <div class="explain">Replaces the document with a specified sub-document or expression. Useful when a nested
+        object should become the top-level document.</div>
+      <div class="code"><span class="cm">// Imagine products have: { specs: { ram: "8GB", storage: "256GB" } }</span>
+
+        { <span class="kw">$replaceRoot</span>: { <span class="str">newRoot</span>: <span class="str">"$specs"</span> }
+        }
+        <span class="cm">// Shorthand alias:</span>
+        { <span class="kw">$replaceWith</span>: <span class="str">"$specs"</span> }
+        <span class="cm">// Merge with original to keep both:</span>
+        { <span class="kw">$replaceRoot</span>: {
+        <span class="str">newRoot</span>: { <span class="op">$mergeObjects</span>: [<span class="str">"$$ROOT"</span>,
+        <span class="str">"$specs"</span>] }
+        } }
+      </div>
+      <div class="explain">$$ROOT refers to the current top-level document. $mergeObjects is useful to promote nested
+        fields while keeping the parent fields too.</div>
+    </div>
+  </div>
+
+  <!-- $bucket -->
+  <div class="section" id="s-bucket">
+    <div class="card">
+      <div class="stage-pill pill-amber">$bucket / $bucketAuto — histogram grouping</div>
+      <div class="explain">Groups documents into ranges (buckets). $bucket uses manual boundaries. $bucketAuto
+        distributes evenly into N buckets automatically.</div>
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSub('bucket',0,this)">$bucket</button>
+        <button class="sub-tab" onclick="showSub('bucket',1,this)">$bucketAuto</button>
+      </div>
+      <div id="bucket-0" class="sub-sec visible">
+        <div class="code">{ <span class="kw">$bucket</span>: {
+          <span class="str">groupBy</span>: <span class="str">"$price"</span>,
+          <span class="str">boundaries</span>: [<span class="num">0</span>, <span class="num">10000</span>, <span
+            class="num">50000</span>, <span class="num">100000</span>, <span class="num">200000</span>],
+          <span class="str">default</span>: <span class="str">"Other"</span>,
+          <span class="str">output</span>: {
+          <span class="str">count</span>: { <span class="op">$sum</span>: <span class="num">1</span> },
+          <span class="str">products</span>: { <span class="op">$push</span>: <span class="str">"$name"</span> }
+          }
+          } }
+        </div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>_id (range start)</th>
+              <th>count</th>
+              <th>products</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>0 (₹0–9,999)</td>
+              <td>1</td>
+              <td>["Boat Headphones"]</td>
+            </tr>
+            <tr>
+              <td>10000 (₹10k–49,999)</td>
+              <td>1</td>
+              <td>["Apple Watch"]</td>
+            </tr>
+            <tr>
+              <td>50000 (₹50k–99,999)</td>
+              <td>3</td>
+              <td>["iPhone 14","Galaxy S23","ZenBook"]</td>
+            </tr>
+            <tr>
+              <td>100000 (₹1L+)</td>
+              <td>1</td>
+              <td>["Apple MacBook Air"]</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="bucket-1" class="sub-sec">
+        <div class="code">{ <span class="kw">$bucketAuto</span>: {
+          <span class="str">groupBy</span>: <span class="str">"$price"</span>,
+          <span class="str">buckets</span>: <span class="num">3</span>,
+          <span class="str">output</span>: { <span class="str">count</span>: { <span class="op">$sum</span>: <span
+            class="num">1</span> }, <span class="str">avg</span>: { <span class="op">$avg</span>: <span
+            class="str">"$price"</span> } }
+          } }
+        </div>
+        <div class="explain">MongoDB automatically calculates boundaries to distribute ~equally. The _id contains {min,
+          max} of each bucket.</div>
+        <table class="rt">
+          <thead>
+            <tr>
+              <th>_id.min</th>
+              <th>_id.max</th>
+              <th>count</th>
+              <th>avg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>₹2,500</td>
+              <td>₹75,000</td>
+              <td>2</td>
+              <td>₹38,750</td>
+            </tr>
+            <tr>
+              <td>₹75,000</td>
+              <td>₹90,000</td>
+              <td>2</td>
+              <td>₹82,500</td>
+            </tr>
+            <tr>
+              <td>₹90,000</td>
+              <td>₹1,20,000</td>
+              <td>2</td>
+              <td>₹1,05,000</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- $facet -->
+  <div class="section" id="s-facet">
+    <div class="card">
+      <div class="stage-pill pill-purple">$facet — multiple pipelines in one</div>
+      <div class="explain">Runs multiple sub-pipelines on the same input documents simultaneously. Returns a single
+        document where each key is the result of one sub-pipeline. Perfect for search facets, dashboards.</div>
+      <div class="code">{ <span class="kw">$facet</span>: {
+        <span class="str">byCategory</span>: [
+        { <span class="op">$group</span>: { <span class="str">_id</span>: <span class="str">"$category"</span>, <span
+          class="str">count</span>: { <span class="op">$sum</span>: <span class="num">1</span> } } }
+        ],
+        <span class="str">priceStats</span>: [
+        { <span class="op">$group</span>: { <span class="str">_id</span>: <span class="kw">null</span>,
+        <span class="str">min</span>: { <span class="op">$min</span>: <span class="str">"$price"</span> },
+        <span class="str">max</span>: { <span class="op">$max</span>: <span class="str">"$price"</span> },
+        <span class="str">avg</span>: { <span class="op">$avg</span>: <span class="str">"$price"</span> }
+        } }
+        ],
+        <span class="str">topProducts</span>: [
+        { <span class="op">$sort</span>: { <span class="str">price</span>: <span class="num">-1</span> } },
+        { <span class="op">$limit</span>: <span class="num">3</span> },
+        { <span class="op">$project</span>: { <span class="str">name</span>: <span class="num">1</span>, <span
+          class="str">price</span>: <span class="num">1</span>, <span class="str">_id</span>: <span class="num">0</span>
+        } }
+        ]
+        } }
+      </div>
+      <div class="explain">Output is one document with three keys: byCategory[], priceStats[], topProducts[]. All three
+        run on the same 6 products in parallel.</div>
+    </div>
+  </div>
+
+  <!-- $count -->
+  <div class="section" id="s-count">
+    <div class="card">
+      <div class="stage-pill pill-blue">$count — count documents</div>
+      <div class="explain">Counts the number of documents at that stage and returns a single document with the count.
+        Simpler than $group with $sum:1.</div>
+      <div class="code"><span class="cm">// Count products over ₹50,000</span>
+        { <span class="kw">$match</span>: { <span class="str">price</span>: { <span class="op">$gt</span>: <span
+          class="num">50000</span> } } },
+        { <span class="kw">$count</span>: <span class="str">"premiumCount"</span> }</div>
+      <table class="rt">
+        <thead>
+          <tr>
+            <th>premiumCount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>4</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="explain" style="margin-top:.85rem">Also useful: <code>$sample</code> — randomly select N documents
+        from collection.<br>
+        <code>{ $sample: { size: 2 } }</code> → returns 2 random products.
+      </div>
+    </div>
+  </div>
+
+  <!-- $out / $merge -->
+  <div class="section" id="s-out">
+    <div class="card">
+      <div class="stage-pill pill-coral">$out / $merge — write results</div>
+      <div class="explain">Write the pipeline result to a collection. $out replaces the target collection entirely.
+        $merge is more flexible — can insert, merge, or replace individual documents.</div>
+      <div class="sub-tabs">
+        <button class="sub-tab active" onclick="showSub('out',0,this)">$out</button>
+        <button class="sub-tab" onclick="showSub('out',1,this)">$merge</button>
+      </div>
+      <div id="out-0" class="sub-sec visible">
+        <div class="code"><span class="cm">// Save category summary to a new collection</span>
+          { <span class="kw">$group</span>: {
+          <span class="str">_id</span>: <span class="str">"$category"</span>,
+          <span class="str">avg</span>: { <span class="op">$avg</span>: <span class="str">"$price"</span> },
+          <span class="str">count</span>: { <span class="op">$sum</span>: <span class="num">1</span> }
+          } },
+          { <span class="kw">$out</span>: <span class="str">"category_summary"</span> }
+          <span class="cm">// Drops & recreates "category_summary" collection</span>
+        </div>
+      </div>
+      <div id="out-1" class="sub-sec">
+        <div class="code">{ <span class="kw">$merge</span>: {
+          <span class="str">into</span>: <span class="str">"category_summary"</span>,
+          <span class="str">on</span>: <span class="str">"_id"</span>,
+          <span class="str">whenMatched</span>: <span class="str">"merge"</span>, <span class="cm">// merge | replace |
+            keepExisting | fail</span>
+          <span class="str">whenNotMatched</span>: <span class="str">"insert"</span> <span class="cm">// insert |
+            discard | fail</span>
+          } }
+          <span class="cm">// Upserts: updates existing docs, inserts new ones</span>
+        </div>
+        <div class="explain">$merge is safer than $out for incremental updates — it won't delete existing data that
+          doesn't match your pipeline output.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Full pipeline -->
+  <div class="section" id="s-pipeline">
+    <div class="card">
+      <div class="stage-pill pill-purple">Full pipeline — 7 stages combined</div>
+      <div class="pipe-flow">
+        <span class="ps" style="background:#EEEDFE;color:#3C3489;border-color:#AFA9EC">$match</span>
+        <span class="arr-sep">→</span>
+        <span class="ps" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">$addFields</span>
+        <span class="arr-sep">→</span>
+        <span class="ps" style="background:#E1F5EE;color:#085041;border-color:#5DCAA5">$group</span>
+        <span class="arr-sep">→</span>
+        <span class="ps" style="background:#FAEEDA;color:#633806;border-color:#EF9F27">$sort</span>
+        <span class="arr-sep">→</span>
+        <span class="ps" style="background:#E6F1FB;color:#0C447C;border-color:#85B7EB">$project</span>
+        <span class="arr-sep">→</span>
+        <span class="ps" style="background:#FAECE7;color:#712B13;border-color:#F0997B">$skip</span>
+        <span class="arr-sep">→</span>
+        <span class="ps" style="background:#FAECE7;color:#712B13;border-color:#F0997B">$limit</span>
+      </div>
+      <div class="explain">Business goal: "Show the top 2 categories (excluding accessories) sorted by avg GST-inclusive
+        price, with product count."</div>
+      <div class="code">db.products.<span class="op">aggregate</span>([
+
+        <span class="cm">// 1. Exclude accessories</span>
+        { <span class="kw">$match</span>: { <span class="str">category</span>: { <span class="op">$ne</span>: <span
+          class="str">"accessory"</span> } } },
+
+        <span class="cm">// 2. Compute GST price per product</span>
+        { <span class="kw">$addFields</span>: {
+        <span class="str">gstPrice</span>: { <span class="op">$multiply</span>: [<span class="str">"$price"</span>,
+        <span class="num">1.18</span>] }
+        }},
+
+        <span class="cm">// 3. Group by category</span>
+        { <span class="kw">$group</span>: {
+        <span class="str">_id</span>: <span class="str">"$category"</span>,
+        <span class="str">count</span>: { <span class="op">$sum</span>: <span class="num">1</span> },
+        <span class="str">avgGST</span>: { <span class="op">$avg</span>: <span class="str">"$gstPrice"</span> },
+        <span class="str">maxPrice</span>: { <span class="op">$max</span>: <span class="str">"$price"</span> }
+        }},
+
+        <span class="cm">// 4. Sort by avgGST descending</span>
+        { <span class="kw">$sort</span>: { <span class="str">avgGST</span>: <span class="num">-1</span> } },
+
+        <span class="cm">// 5. Rename _id → category, round avgGST</span>
+        { <span class="kw">$project</span>: {
+        <span class="str">_id</span>: <span class="num">0</span>,
+        <span class="str">category</span>: <span class="str">"$_id"</span>,
+        <span class="str">count</span>: <span class="num">1</span>,
+        <span class="str">avgGST</span>: { <span class="op">$round</span>: [<span class="str">"$avgGST"</span>, <span
+          class="num">0</span>] },
+        <span class="str">maxPrice</span>: <span class="num">1</span>
+        }},
+
+        <span class="cm">// 6. Skip 0 (page 1), limit 2</span>
+        { <span class="kw">$skip</span>: <span class="num">0</span> },
+        { <span class="kw">$limit</span>: <span class="num">2</span> }
+        ])
+      </div>
+      <div class="sec-lbl" style="margin-top:.85rem">Result</div>
+      <table class="rt">
+        <thead>
+          <tr>
+            <th>category</th>
+            <th>count</th>
+            <th>avgGST</th>
+            <th>maxPrice</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="badge bl">laptop</span></td>
+            <td>2</td>
+            <td>₹1,23,900</td>
+            <td>₹1,20,000</td>
+          </tr>
+          <tr>
+            <td><span class="badge bm">mobile</span></td>
+            <td>2</td>
+            <td>₹91,450</td>
+            <td>₹80,000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showTop(key, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
+    document.querySelectorAll('.top-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('s-' + key).classList.add('visible');
+    btn.classList.add('active');
+  }
+  function showSub(prefix, idx, btn) {
+    const parent = btn.closest('.card');
+    parent.querySelectorAll('.sub-sec').forEach(s => s.classList.remove('visible'));
+    parent.querySelectorAll('.sub-tab').forEach(t => t.classList.remove('active'));
+    const el = document.getElementById(prefix + '-' + idx);
+    if (el) el.classList.add('visible');
+    btn.classList.add('active');
+  }
+</script>

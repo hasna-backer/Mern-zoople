@@ -1,0 +1,619 @@
+<style>
+  :root {
+    --font-sans: Arial, sans-serif;
+
+    --color-text-primary: #222;
+    --color-text-secondary: #050404;
+    --color-text-info: #0b5ed7;
+
+    --color-background-primary: #ffffff;
+    --color-background-secondary: #f5f5f5;
+    --color-background-info: #e7f1ff;
+    --color-background-warning: #fff3cd;
+
+    --color-border-primary: #161515;
+    --color-border-secondary: #ccc;
+    --color-border-tertiary: #121010;
+    --color-border-info: #133f81;
+
+    --border-radius-md: 6px;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 10;
+    padding: 0;
+  }
+
+  body {
+    font-family: var(--font-sans);
+  }
+
+  .wrap {
+    padding: 1rem 0;
+  }
+
+  .tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    padding: 6px 16px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: transparent;
+    color: var(--color-text-secondary);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+
+  .tab.active {
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+    border-color: transparent;
+    font-weight: 500;
+  }
+
+  .section {
+    display: none;
+  }
+
+  .section.active {
+    display: block;
+  }
+
+  .student-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  .card {
+    background: var(--color-background-primary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 12px;
+    font-size: 13px;
+    transition: all .2s;
+  }
+
+  .card.deleted {
+    opacity: 0.25;
+    text-decoration: line-through;
+    border-color: var(--color-border-tertiary);
+  }
+
+  .card.highlight {
+    border-color: var(--color-border-warning);
+    background: var(--color-background-warning);
+  }
+
+  .card .name {
+    font-weight: 500;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: var(--color-text-primary);
+  }
+
+  .card .detail {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+
+  .badge-a {
+    background: var(--color-background-success);
+    color: var(--color-text-success);
+  }
+
+  .badge-b {
+    background: var(--color-background-info);
+    color: var(--color-text-info);
+  }
+
+  .badge-c {
+    background: var(--color-background-warning);
+    color: var(--color-text-warning);
+  }
+
+  .code-block {
+    background: var(--color-background-secondary);
+    border: 0.5px solid var(--color-border-tertiary);
+    border-radius: var(--border-radius-md);
+    padding: 14px 16px;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--color-text-primary);
+    white-space: pre-wrap;
+  }
+
+  .kw {
+    color: #7c6ef5;
+  }
+
+  .str {
+    color: #3e9b6f;
+  }
+
+  .num {
+    color: #d47b0f;
+  }
+
+  .comment {
+    color: var(--color-text-tertiary);
+    font-style: italic;
+  }
+
+  .explain {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+  }
+
+  .explain strong {
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+
+  .run-btn {
+    padding: 7px 18px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: transparent;
+    color: var(--color-text-primary);
+    font-size: 13px;
+    cursor: pointer;
+    margin-bottom: 1rem;
+  }
+
+  .run-btn:hover {
+    background: var(--color-background-secondary);
+  }
+
+  .run-btn:disabled {
+    opacity: .4;
+    cursor: default;
+  }
+
+  .result-box {
+    background: var(--color-background-secondary);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.2rem;
+    font-family: var(--font-mono);
+    min-height: 36px;
+  }
+
+  .result-box.ok {
+    color: var(--color-text-success);
+  }
+
+  .result-box.warn {
+    color: var(--color-text-warning);
+  }
+
+  .label {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 6px;
+  }
+
+  .divider {
+    border: none;
+    border-top: 0.5px solid var(--color-border-tertiary);
+    margin: 1.2rem 0;
+  }
+
+  .tip {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    margin-top: .5rem;
+  }
+
+  .quiz-q {
+    font-size: 14px;
+    color: var(--color-text-primary);
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+
+  .quiz-opts {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+
+  .quiz-opt {
+    padding: 8px 14px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    font-size: 13px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--color-text-primary);
+    text-align: left;
+  }
+
+  .quiz-opt:hover {
+    background: var(--color-background-secondary);
+  }
+
+  .quiz-opt.correct {
+    background: var(--color-background-success);
+    border-color: transparent;
+    color: var(--color-text-success);
+  }
+
+  .quiz-opt.wrong {
+    background: var(--color-background-danger);
+    border-color: transparent;
+    color: var(--color-text-danger);
+  }
+
+  .quiz-fb {
+    font-size: 13px;
+    margin-top: 4px;
+    color: var(--color-text-secondary);
+  }
+
+  .next-btn {
+    padding: 6px 16px;
+    border-radius: var(--border-radius-md);
+    border: 0.5px solid var(--color-border-secondary);
+    background: transparent;
+    font-size: 13px;
+    cursor: pointer;
+    margin-top: 8px;
+    color: var(--color-text-primary);
+  }
+
+  .warn-box {
+    background: var(--color-background-danger);
+    border: 0.5px solid var(--color-border-danger, #f09595);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--color-text-danger);
+    margin-bottom: 1rem;
+  }
+
+  .info-box {
+    background: var(--color-background-info);
+    border-radius: var(--border-radius-md);
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--color-text-info);
+    margin-bottom: 1rem;
+  }
+
+  .compare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+
+  .compare-table th,
+  .compare-table td {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 0.5px solid var(--color-border-tertiary);
+  }
+
+  .compare-table th {
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    font-size: 12px;
+  }
+
+  .compare-table td {
+    color: var(--color-text-primary);
+  }
+</style>
+
+<div class="wrap">
+
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('intro')">Intro</button>
+    <button class="tab" onclick="showTab('deleteOne')">deleteOne</button>
+    <button class="tab" onclick="showTab('deleteMany')">deleteMany</button>
+    <button class="tab" onclick="showTab('drop')">drop()</button>
+    <button class="tab" onclick="showTab('compare')">Compare</button>
+    <button class="tab" onclick="showTab('quiz')">Quiz</button>
+  </div>
+
+  <!-- INTRO -->
+  <div class="section active" id="tab-intro">
+    <p class="explain">We have a <strong>students</strong> collection with these 6 documents. Each card below represents
+      one student. Use the tabs above to learn how to delete them one by one, in bulk, or drop the whole collection.</p>
+    <div class="student-grid" id="intro-cards"></div>
+    <div class="info-box">MongoDB gives you 3 main ways to remove data:<br>
+      <strong>deleteOne()</strong> — remove exactly 1 matching document<br>
+      <strong>deleteMany()</strong> — remove all matching documents<br>
+      <strong>drop()</strong> — delete the entire collection
+    </div>
+  </div>
+
+  <!-- DELETE ONE -->
+  <div class="section" id="tab-deleteOne">
+    <p class="label">deleteOne()</p>
+    <p class="explain">Removes the <strong>first document</strong> that matches the filter. Only one document is deleted
+      even if many match.</p>
+
+    <div class="label">Example 1 — delete by name</div>
+    <div class="code-block"><span class="kw">db</span>.students.<span class="kw">deleteOne</span>({ <span
+        class="str">name</span>: <span class="str">"Sara"</span> })
+      <span class="comment">// Finds Sara and removes her document</span>
+    </div>
+    <div class="student-grid" id="d1-cards-1"></div>
+    <button class="run-btn" id="btn-d1-1" onclick="runDeleteOne1()">▶ Run</button>
+    <div class="result-box" id="res-d1-1">Result will appear here…</div>
+
+    <hr class="divider">
+    <div class="label">Example 2 — delete by grade</div>
+    <div class="code-block"><span class="kw">db</span>.students.<span class="kw">deleteOne</span>({ <span
+        class="str">grade</span>: <span class="str">"C"</span> })
+      <span class="comment">// Deletes only ONE student with grade C (Emma)</span>
+    </div>
+    <div class="student-grid" id="d1-cards-2"></div>
+    <button class="run-btn" id="btn-d1-2" onclick="runDeleteOne2()">▶ Run</button>
+    <div class="result-box" id="res-d1-2">Result will appear here…</div>
+    <p class="tip">Even if multiple documents match, deleteOne() stops after the first.</p>
+  </div>
+
+  <!-- DELETE MANY -->
+  <div class="section" id="tab-deleteMany">
+    <p class="label">deleteMany()</p>
+    <p class="explain">Removes <strong>all documents</strong> that match the filter. If you pass <code>{}</code> as the
+      filter, it clears the entire collection (but keeps the collection itself).</p>
+
+    <div class="label">Example 1 — delete all CS students</div>
+    <div class="code-block"><span class="kw">db</span>.students.<span class="kw">deleteMany</span>({ <span
+        class="str">course</span>: <span class="str">"CS"</span> })
+      <span class="comment">// John and David both get deleted</span>
+    </div>
+    <div class="student-grid" id="dm-cards-1"></div>
+    <button class="run-btn" id="btn-dm-1" onclick="runDeleteMany1()">▶ Run</button>
+    <div class="result-box" id="res-dm-1">Result will appear here…</div>
+
+    <hr class="divider">
+    <div class="label">Example 2 — delete all students from Delhi</div>
+    <div class="code-block"><span class="kw">db</span>.students.<span class="kw">deleteMany</span>({ <span
+        class="str">city</span>: <span class="str">"Delhi"</span> })
+      <span class="comment">// Ali and John are from Delhi → both deleted</span>
+    </div>
+    <div class="student-grid" id="dm-cards-2"></div>
+    <button class="run-btn" id="btn-dm-2" onclick="runDeleteMany2()">▶ Run</button>
+    <div class="result-box" id="res-dm-2">Result will appear here…</div>
+
+    <hr class="divider">
+    <div class="label">Example 3 — delete all documents</div>
+    <div class="code-block"><span class="kw">db</span>.students.<span class="kw">deleteMany</span>({})
+      <span class="comment">// Empty filter → deletes every document</span>
+      <span class="comment">// Collection still exists, just empty</span>
+    </div>
+    <div class="student-grid" id="dm-cards-3"></div>
+    <button class="run-btn" id="btn-dm-3" onclick="runDeleteMany3()">▶ Run</button>
+    <div class="result-box" id="res-dm-3">Result will appear here…</div>
+    <p class="tip">deleteMany({}) empties the collection but does NOT remove it from the database.</p>
+  </div>
+
+  <!-- DROP -->
+  <div class="section" id="tab-drop">
+    <p class="label">drop()</p>
+    <p class="explain">Removes the <strong>entire collection</strong> — all documents AND the collection itself. This
+      cannot be undone.</p>
+    <div class="warn-box">⚠ drop() is irreversible. The collection, its documents, and all its indexes are permanently
+      gone.</div>
+
+    <div class="code-block"><span class="kw">db</span>.students.<span class="kw">drop</span>()
+      <span class="comment">// Returns true if collection existed and was dropped</span>
+      <span class="comment">// Returns false if collection did not exist</span>
+    </div>
+
+    <div class="student-grid" id="drop-cards"></div>
+    <button class="run-btn" id="btn-drop" onclick="runDrop()">▶ Run drop()</button>
+    <div class="result-box" id="res-drop">Result will appear here…</div>
+
+    <hr class="divider">
+    <p class="explain"><strong>Verify it's gone:</strong></p>
+    <div class="code-block"><span class="kw">db</span>.<span class="kw">getCollectionNames</span>()
+      <span class="comment">// "students" will no longer appear in the list</span>
+    </div>
+  </div>
+
+  <!-- COMPARE -->
+  <div class="section" id="tab-compare">
+    <p class="explain">Quick reference — when to use each operation:</p>
+    <table class="compare-table">
+      <tr>
+        <th>Operation</th>
+        <th>What it removes</th>
+        <th>Collection survives?</th>
+        <th>Indexes survive?</th>
+      </tr>
+      <tr>
+        <td><code>deleteOne(filter)</code></td>
+        <td>First matching document</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><code>deleteMany(filter)</code></td>
+        <td>All matching documents</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><code>deleteMany({})</code></td>
+        <td>All documents</td>
+        <td>Yes (empty)</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td><code>drop()</code></td>
+        <td>Entire collection</td>
+        <td>No</td>
+        <td>No</td>
+      </tr>
+    </table>
+    <hr class="divider">
+    <p class="explain"><strong>Return values:</strong><br>
+      <code>deleteOne</code> / <code>deleteMany</code> → <code>{ acknowledged: true, deletedCount: N }</code><br>
+      <code>drop()</code> → <code>true</code> or <code>false</code>
+    </p>
+    <hr class="divider">
+    <p class="explain"><strong>Use case guide:</strong><br>
+      Remove one specific record (e.g. a student who left) → <strong>deleteOne</strong><br>
+      Remove a group (e.g. all failed students) → <strong>deleteMany</strong><br>
+      Wipe all data but keep the collection → <strong>deleteMany({})</strong><br>
+      Completely remove the collection → <strong>drop()</strong>
+    </p>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="tab-quiz">
+    <div id="quiz-container"></div>
+  </div>
+
+</div>
+
+<script>
+  const students = [
+    {name: "Ali", age: 20, course: "Math", grade: "A", city: "Delhi"},
+    {name: "Sara", age: 22, course: "Physics", grade: "B"},
+    {name: "John", age: 21, course: "CS", grade: "A", city: "Delhi"},
+    {name: "Emma", age: 23, course: "Math", grade: "C"},
+    {name: "David", age: 22, course: "CS", grade: "B", city: "Mumbai"},
+    {name: "Lina", age: 24, course: "Physics", grade: "A", city: "Chennai"},
+  ];
+
+  function badgeClass(g) {return g === "A" ? "badge-a" : g === "B" ? "badge-b" : "badge-c";}
+
+  function makeCards(containerID, deletedNames, highlightNames) {
+    const el = document.getElementById(containerID);
+    if (!el) return;
+    el.innerHTML = students.map(s => {
+      const isDeleted = deletedNames && deletedNames.includes(s.name);
+      const isHighlight = highlightNames && highlightNames.includes(s.name);
+      return `<div class="card${isDeleted ? " deleted" : ""}${isHighlight ? " highlight" : ""}">
+      <div class="name">${s.name}</div>
+      <div class="detail">Age: ${s.age}<br>Course: ${s.course}${s.city ? `<br>City: ${s.city}` : ""}</div>
+      <span class="badge ${badgeClass(s.grade)}">${s.grade}</span>
+    </div>`;
+    }).join("");
+  }
+
+  // Initial setup
+  makeCards("intro-cards");
+  makeCards("d1-cards-1", [], ["Sara"]);
+  makeCards("d1-cards-2", [], ["Emma"]);
+  makeCards("dm-cards-1", [], ["John", "David"]);
+  makeCards("dm-cards-2", [], ["Ali", "John"]);
+  makeCards("dm-cards-3", [], students.map(s => s.name));
+  makeCards("drop-cards");
+
+  function runDeleteOne1() {
+    makeCards("d1-cards-1", ["Sara"]);
+    const r = document.getElementById("res-d1-1");
+    r.className = "result-box ok";
+    r.textContent = '{ acknowledged: true, deletedCount: 1 }';
+    document.getElementById("btn-d1-1").disabled = true;
+  }
+  function runDeleteOne2() {
+    makeCards("d1-cards-2", ["Emma"]);
+    const r = document.getElementById("res-d1-2");
+    r.className = "result-box ok";
+    r.textContent = '{ acknowledged: true, deletedCount: 1 }';
+    document.getElementById("btn-d1-2").disabled = true;
+  }
+  function runDeleteMany1() {
+    makeCards("dm-cards-1", ["John", "David"]);
+    const r = document.getElementById("res-dm-1");
+    r.className = "result-box ok";
+    r.textContent = '{ acknowledged: true, deletedCount: 2 }';
+    document.getElementById("btn-dm-1").disabled = true;
+  }
+  function runDeleteMany2() {
+    makeCards("dm-cards-2", ["Ali", "John"]);
+    const r = document.getElementById("res-dm-2");
+    r.className = "result-box ok";
+    r.textContent = '{ acknowledged: true, deletedCount: 2 }';
+    document.getElementById("btn-dm-2").disabled = true;
+  }
+  function runDeleteMany3() {
+    makeCards("dm-cards-3", students.map(s => s.name));
+    const r = document.getElementById("res-dm-3");
+    r.className = "result-box ok";
+    r.textContent = '{ acknowledged: true, deletedCount: 6 }  ← collection is now empty';
+    document.getElementById("btn-dm-3").disabled = true;
+  }
+  function runDrop() {
+    const el = document.getElementById("drop-cards");
+    el.innerHTML = `<div style="grid-column:1/-1;padding:16px;text-align:center;font-size:13px;color:var(--color-text-tertiary);border:0.5px dashed var(--color-border-tertiary);border-radius:var(--border-radius-md)">Collection no longer exists</div>`;
+    const r = document.getElementById("res-drop");
+    r.className = "result-box warn";
+    r.textContent = 'true  ← collection "students" has been dropped';
+    document.getElementById("btn-drop").disabled = true;
+  }
+
+  function showTab(id) {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
+    document.getElementById("tab-" + id).classList.add("active");
+    event.target.classList.add("active");
+  }
+
+  // Quiz
+  const questions = [
+    {q: "Which command removes only ONE matching document?", opts: ["deleteMany()", "deleteOne()", "drop()", "remove()"], ans: 1, fb: "deleteOne() always removes just the first match, even if multiple documents qualify."},
+    {q: "You want to delete all students with grade 'B'. Which is correct?", opts: ["db.students.deleteOne({grade:'B'})", "db.students.drop({grade:'B'})", "db.students.deleteMany({grade:'B'})", "db.students.deleteAll({grade:'B'})"], ans: 2, fb: "deleteMany() with a filter removes all matching documents — John and David in this case."},
+    {q: "After db.students.drop(), what happens?", opts: ["All documents are deleted but the collection remains", "Only A-grade students are deleted", "The collection and all its documents are permanently removed", "Nothing — drop() only works on databases"], ans: 2, fb: "drop() removes the entire collection including indexes. The collection no longer exists in the database."},
+    {q: "What does db.students.deleteMany({}) do?", opts: ["Deletes the collection", "Does nothing — empty filter is invalid", "Deletes all documents but keeps the empty collection", "Deletes only the first document"], ans: 2, fb: "An empty filter {} matches every document. The collection itself still exists — just empty."},
+    {q: "deleteMany({course:'CS'}) on our data. What is deletedCount?", opts: ["1", "2", "3", "6"], ans: 1, fb: "John and David both study CS, so exactly 2 documents are deleted."},
+  ];
+
+  let qi = 0, score = 0;
+  function renderQuiz() {
+    const c = document.getElementById("quiz-container");
+    if (qi >= questions.length) {
+      c.innerHTML = `<p class="quiz-q">Quiz complete! Score: ${score}/${questions.length}</p><button class="next-btn" onclick="qi=0;score=0;renderQuiz()">Restart ↺</button>`;
+      return;
+    }
+    const q = questions[qi];
+    c.innerHTML = `<p class="label">Question ${qi + 1} of ${questions.length}</p>
+    <p class="quiz-q">${q.q}</p>
+    <div class="quiz-opts">${q.opts.map((o, i) => `<button class="quiz-opt" onclick="answer(${i})">${o}</button>`).join("")}</div>
+    <div class="quiz-fb" id="qfb"></div>`;
+  }
+  function answer(i) {
+    const q = questions[qi];
+    const btns = document.querySelectorAll(".quiz-opt");
+    btns.forEach(b => b.disabled = true);
+    btns[i].classList.add(i === q.ans ? "correct" : "wrong");
+    btns[q.ans].classList.add("correct");
+    if (i === q.ans) score++;
+    document.getElementById("qfb").innerHTML = `${i === q.ans ? "✓ Correct!" : "✗ Not quite."} ${q.fb}<br><button class="next-btn" onclick="qi++;renderQuiz()">${qi + 1 < questions.length ? "Next →" : "See Results →"}</button>`;
+  }
+  renderQuiz();
+</script>
